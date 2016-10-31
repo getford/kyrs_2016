@@ -1,0 +1,2 @@
+D:\3 курс\5 (1 семестр)\Курсовик\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe.config
+D:\3 курс\5 (1 семестр)\Курсовик\Repos\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe.config
