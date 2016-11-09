@@ -8,3 +8,12 @@ D:\3 курс\5 (1 семестр)\Курсовик\Repos\kyrsovik\kyrsovik\obj\
 D:\3 курс\5 (1 семестр)\Курсовик\Repos\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csproj.GenerateResource.Cache
 D:\3 курс\5 (1 семестр)\Курсовик\Repos\kyrsovik\kyrsovik\obj\Debug\kyrsovik.exe
 D:\3 курс\5 (1 семестр)\Курсовик\Repos\kyrsovik\kyrsovik\obj\Debug\kyrsovik.pdb
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe.config
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.exe
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.pdb
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\kyrsovik.pdb
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csprojResolveAssemblyReference.cache
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Main.resources
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Properties.Resources.resources
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csproj.GenerateResource.Cache
