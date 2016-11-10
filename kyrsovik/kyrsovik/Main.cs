@@ -61,11 +61,11 @@ namespace kyrsovik
         {
             listView_place.GridLines = true;
             listView_place.AllowColumnReorder = true;
-            listView_place.LabelEdit = true;
+            listView_place.LabelEdit = false;
             listView_place.FullRowSelect = true;
             listView_place.View = View.Details;// стиль вывода в таблицу
         }// инициализация listview
-        private void Initialize_List()
+        private void Initialize_List_event()
         {
             listView_event.GridLines = true;
             listView_event.AllowColumnReorder = true;
@@ -75,7 +75,7 @@ namespace kyrsovik
         }       // инициализация listview
         private void fill_ListView_event()
         {
-            Initialize_List();
+            Initialize_List_event();
             try
             {
                 listView_event.Columns.Add("id", listView_event.Width / 6);
@@ -90,7 +90,7 @@ namespace kyrsovik
 
         private void fill_ListView_place()
         {
-            Initialize_List();
+            Initialize_List_place();
             try
             {
                 listView_place.Columns.Add("id", listView_place.Width / 7);
@@ -319,5 +319,39 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }       // count из таблиц
+
+        private void listView_place_MouseClick(object sender, MouseEventArgs e)
+        {
+            label_ip_form.Text = listView_place.FocusedItem.SubItems[0].Text;
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "InfoPlace")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            InfoPlace ip = new InfoPlace();
+            ip.Owner = this;
+            ip.Show();
+
+        }
+
+        private void listView_event_MouseClick(object sender, MouseEventArgs e)
+        {
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "InfoEvent")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            InfoEvent ie = new InfoEvent();
+            ie.Owner = this;
+            ie.Show();
+
+        }
     }
 }
+

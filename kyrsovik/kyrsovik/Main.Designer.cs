@@ -33,6 +33,17 @@
             this.listView_place = new System.Windows.Forms.ListView();
             this.groupBox_event = new System.Windows.Forms.GroupBox();
             this.groupBox_add_event = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker_event = new System.Windows.Forms.DateTimePicker();
+            this.button_add_event = new System.Windows.Forms.Button();
+            this.label_age_event = new System.Windows.Forms.Label();
+            this.comboBox_age = new System.Windows.Forms.ComboBox();
+            this.label_date_event = new System.Windows.Forms.Label();
+            this.label_place = new System.Windows.Forms.Label();
+            this.comboBox_event_place = new System.Windows.Forms.ComboBox();
+            this.label_type_event = new System.Windows.Forms.Label();
+            this.comboBox_type_event = new System.Windows.Forms.ComboBox();
+            this.textBox_name_event = new System.Windows.Forms.TextBox();
+            this.label_name_event = new System.Windows.Forms.Label();
             this.groupBox_place = new System.Windows.Forms.GroupBox();
             this.groupBox_add_place = new System.Windows.Forms.GroupBox();
             this.label_street = new System.Windows.Forms.Label();
@@ -52,17 +63,10 @@
             this.textBox_street = new System.Windows.Forms.TextBox();
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
-            this.textBox_name_event = new System.Windows.Forms.TextBox();
-            this.label_name_event = new System.Windows.Forms.Label();
-            this.label_type_event = new System.Windows.Forms.Label();
-            this.comboBox_type_event = new System.Windows.Forms.ComboBox();
-            this.label_place = new System.Windows.Forms.Label();
-            this.comboBox_event_place = new System.Windows.Forms.ComboBox();
-            this.label_date_event = new System.Windows.Forms.Label();
-            this.label_age_event = new System.Windows.Forms.Label();
-            this.comboBox_age = new System.Windows.Forms.ComboBox();
-            this.button_add_event = new System.Windows.Forms.Button();
-            this.dateTimePicker_event = new System.Windows.Forms.DateTimePicker();
+            this.label_ip_form = new System.Windows.Forms.Label();
+            this.label_name_pl = new System.Windows.Forms.Label();
+            this.label_parking_pl = new System.Windows.Forms.Label();
+            this.label_card_pl = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -77,6 +81,7 @@
             this.listView_event.TabIndex = 2;
             this.listView_event.UseCompatibleStateImageBehavior = false;
             this.listView_event.View = System.Windows.Forms.View.Details;
+            this.listView_event.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_event_MouseClick);
             // 
             // listView_place
             // 
@@ -86,6 +91,7 @@
             this.listView_place.TabIndex = 3;
             this.listView_place.UseCompatibleStateImageBehavior = false;
             this.listView_place.View = System.Windows.Forms.View.Details;
+            this.listView_place.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_place_MouseClick);
             // 
             // groupBox_event
             // 
@@ -116,6 +122,102 @@
             this.groupBox_add_event.TabIndex = 0;
             this.groupBox_add_event.TabStop = false;
             this.groupBox_add_event.Text = "Add event";
+            // 
+            // dateTimePicker_event
+            // 
+            this.dateTimePicker_event.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_event.Location = new System.Drawing.Point(459, 40);
+            this.dateTimePicker_event.Name = "dateTimePicker_event";
+            this.dateTimePicker_event.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dateTimePicker_event.Size = new System.Drawing.Size(143, 20);
+            this.dateTimePicker_event.TabIndex = 18;
+            this.dateTimePicker_event.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            // 
+            // button_add_event
+            // 
+            this.button_add_event.Location = new System.Drawing.Point(6, 66);
+            this.button_add_event.Name = "button_add_event";
+            this.button_add_event.Size = new System.Drawing.Size(745, 20);
+            this.button_add_event.TabIndex = 11;
+            this.button_add_event.Text = "OK";
+            this.button_add_event.UseVisualStyleBackColor = true;
+            this.button_add_event.Click += new System.EventHandler(this.button_add_event_Click);
+            // 
+            // label_age_event
+            // 
+            this.label_age_event.AutoSize = true;
+            this.label_age_event.Location = new System.Drawing.Point(605, 24);
+            this.label_age_event.Name = "label_age_event";
+            this.label_age_event.Size = new System.Drawing.Size(26, 13);
+            this.label_age_event.TabIndex = 17;
+            this.label_age_event.Text = "Age";
+            // 
+            // comboBox_age
+            // 
+            this.comboBox_age.FormattingEnabled = true;
+            this.comboBox_age.Location = new System.Drawing.Point(608, 40);
+            this.comboBox_age.Name = "comboBox_age";
+            this.comboBox_age.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_age.TabIndex = 16;
+            // 
+            // label_date_event
+            // 
+            this.label_date_event.AutoSize = true;
+            this.label_date_event.Location = new System.Drawing.Point(461, 23);
+            this.label_date_event.Name = "label_date_event";
+            this.label_date_event.Size = new System.Drawing.Size(30, 13);
+            this.label_date_event.TabIndex = 14;
+            this.label_date_event.Text = "Date";
+            // 
+            // label_place
+            // 
+            this.label_place.AutoSize = true;
+            this.label_place.Location = new System.Drawing.Point(157, 23);
+            this.label_place.Name = "label_place";
+            this.label_place.Size = new System.Drawing.Size(34, 13);
+            this.label_place.TabIndex = 13;
+            this.label_place.Text = "Place";
+            // 
+            // comboBox_event_place
+            // 
+            this.comboBox_event_place.FormattingEnabled = true;
+            this.comboBox_event_place.Location = new System.Drawing.Point(157, 40);
+            this.comboBox_event_place.Name = "comboBox_event_place";
+            this.comboBox_event_place.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_event_place.TabIndex = 12;
+            // 
+            // label_type_event
+            // 
+            this.label_type_event.AutoSize = true;
+            this.label_type_event.Location = new System.Drawing.Point(309, 24);
+            this.label_type_event.Name = "label_type_event";
+            this.label_type_event.Size = new System.Drawing.Size(31, 13);
+            this.label_type_event.TabIndex = 11;
+            this.label_type_event.Text = "Type";
+            // 
+            // comboBox_type_event
+            // 
+            this.comboBox_type_event.FormattingEnabled = true;
+            this.comboBox_type_event.Location = new System.Drawing.Point(309, 40);
+            this.comboBox_type_event.Name = "comboBox_type_event";
+            this.comboBox_type_event.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_type_event.TabIndex = 10;
+            // 
+            // textBox_name_event
+            // 
+            this.textBox_name_event.Location = new System.Drawing.Point(6, 40);
+            this.textBox_name_event.Name = "textBox_name_event";
+            this.textBox_name_event.Size = new System.Drawing.Size(143, 20);
+            this.textBox_name_event.TabIndex = 9;
+            // 
+            // label_name_event
+            // 
+            this.label_name_event.AutoSize = true;
+            this.label_name_event.Location = new System.Drawing.Point(8, 23);
+            this.label_name_event.Name = "label_name_event";
+            this.label_name_event.Size = new System.Drawing.Size(35, 13);
+            this.label_name_event.TabIndex = 8;
+            this.label_name_event.Text = "Name";
             // 
             // groupBox_place
             // 
@@ -294,107 +396,51 @@
             this.textBox_tel.Size = new System.Drawing.Size(143, 20);
             this.textBox_tel.TabIndex = 2;
             // 
-            // textBox_name_event
+            // label_ip_form
             // 
-            this.textBox_name_event.Location = new System.Drawing.Point(6, 40);
-            this.textBox_name_event.Name = "textBox_name_event";
-            this.textBox_name_event.Size = new System.Drawing.Size(143, 20);
-            this.textBox_name_event.TabIndex = 9;
+            this.label_ip_form.AutoSize = true;
+            this.label_ip_form.Location = new System.Drawing.Point(12, 593);
+            this.label_ip_form.Name = "label_ip_form";
+            this.label_ip_form.Size = new System.Drawing.Size(47, 13);
+            this.label_ip_form.TabIndex = 6;
+            this.label_ip_form.Text = "id_place";
             // 
-            // label_name_event
+            // label_name_pl
             // 
-            this.label_name_event.AutoSize = true;
-            this.label_name_event.Location = new System.Drawing.Point(8, 23);
-            this.label_name_event.Name = "label_name_event";
-            this.label_name_event.Size = new System.Drawing.Size(35, 13);
-            this.label_name_event.TabIndex = 8;
-            this.label_name_event.Text = "Name";
+            this.label_name_pl.AutoSize = true;
+            this.label_name_pl.Location = new System.Drawing.Point(91, 593);
+            this.label_name_pl.Name = "label_name_pl";
+            this.label_name_pl.Size = new System.Drawing.Size(33, 13);
+            this.label_name_pl.TabIndex = 7;
+            this.label_name_pl.Text = "name";
             // 
-            // label_type_event
+            // label_parking_pl
             // 
-            this.label_type_event.AutoSize = true;
-            this.label_type_event.Location = new System.Drawing.Point(309, 24);
-            this.label_type_event.Name = "label_type_event";
-            this.label_type_event.Size = new System.Drawing.Size(31, 13);
-            this.label_type_event.TabIndex = 11;
-            this.label_type_event.Text = "Type";
+            this.label_parking_pl.AutoSize = true;
+            this.label_parking_pl.Location = new System.Drawing.Point(437, 593);
+            this.label_parking_pl.Name = "label_parking_pl";
+            this.label_parking_pl.Size = new System.Drawing.Size(42, 13);
+            this.label_parking_pl.TabIndex = 8;
+            this.label_parking_pl.Text = "parking";
             // 
-            // comboBox_type_event
+            // label_card_pl
             // 
-            this.comboBox_type_event.FormattingEnabled = true;
-            this.comboBox_type_event.Location = new System.Drawing.Point(309, 40);
-            this.comboBox_type_event.Name = "comboBox_type_event";
-            this.comboBox_type_event.Size = new System.Drawing.Size(143, 21);
-            this.comboBox_type_event.TabIndex = 10;
-            // 
-            // label_place
-            // 
-            this.label_place.AutoSize = true;
-            this.label_place.Location = new System.Drawing.Point(157, 23);
-            this.label_place.Name = "label_place";
-            this.label_place.Size = new System.Drawing.Size(34, 13);
-            this.label_place.TabIndex = 13;
-            this.label_place.Text = "Place";
-            // 
-            // comboBox_event_place
-            // 
-            this.comboBox_event_place.FormattingEnabled = true;
-            this.comboBox_event_place.Location = new System.Drawing.Point(157, 40);
-            this.comboBox_event_place.Name = "comboBox_event_place";
-            this.comboBox_event_place.Size = new System.Drawing.Size(143, 21);
-            this.comboBox_event_place.TabIndex = 12;
-            // 
-            // label_date_event
-            // 
-            this.label_date_event.AutoSize = true;
-            this.label_date_event.Location = new System.Drawing.Point(461, 23);
-            this.label_date_event.Name = "label_date_event";
-            this.label_date_event.Size = new System.Drawing.Size(30, 13);
-            this.label_date_event.TabIndex = 14;
-            this.label_date_event.Text = "Date";
-            // 
-            // label_age_event
-            // 
-            this.label_age_event.AutoSize = true;
-            this.label_age_event.Location = new System.Drawing.Point(605, 24);
-            this.label_age_event.Name = "label_age_event";
-            this.label_age_event.Size = new System.Drawing.Size(26, 13);
-            this.label_age_event.TabIndex = 17;
-            this.label_age_event.Text = "Age";
-            // 
-            // comboBox_age
-            // 
-            this.comboBox_age.FormattingEnabled = true;
-            this.comboBox_age.Location = new System.Drawing.Point(608, 40);
-            this.comboBox_age.Name = "comboBox_age";
-            this.comboBox_age.Size = new System.Drawing.Size(143, 21);
-            this.comboBox_age.TabIndex = 16;
-            // 
-            // button_add_event
-            // 
-            this.button_add_event.Location = new System.Drawing.Point(6, 66);
-            this.button_add_event.Name = "button_add_event";
-            this.button_add_event.Size = new System.Drawing.Size(745, 20);
-            this.button_add_event.TabIndex = 11;
-            this.button_add_event.Text = "OK";
-            this.button_add_event.UseVisualStyleBackColor = true;
-            this.button_add_event.Click += new System.EventHandler(this.button_add_event_Click);
-            // 
-            // dateTimePicker_event
-            // 
-            this.dateTimePicker_event.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker_event.Location = new System.Drawing.Point(459, 40);
-            this.dateTimePicker_event.Name = "dateTimePicker_event";
-            this.dateTimePicker_event.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dateTimePicker_event.Size = new System.Drawing.Size(143, 20);
-            this.dateTimePicker_event.TabIndex = 18;
-            this.dateTimePicker_event.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            this.label_card_pl.AutoSize = true;
+            this.label_card_pl.Location = new System.Drawing.Point(230, 596);
+            this.label_card_pl.Name = "label_card_pl";
+            this.label_card_pl.Size = new System.Drawing.Size(60, 13);
+            this.label_card_pl.TabIndex = 9;
+            this.label_card_pl.Text = "place_card";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 587);
+            this.ClientSize = new System.Drawing.Size(1196, 618);
+            this.Controls.Add(this.label_card_pl);
+            this.Controls.Add(this.label_parking_pl);
+            this.Controls.Add(this.label_name_pl);
+            this.Controls.Add(this.label_ip_form);
             this.Controls.Add(this.groupBox_place);
             this.Controls.Add(this.groupBox_event);
             this.Controls.Add(this.listView_place);
@@ -410,33 +456,16 @@
             this.groupBox_add_place.ResumeLayout(false);
             this.groupBox_add_place.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ListView listView_event;
-        private System.Windows.Forms.ListView listView_place;
         private System.Windows.Forms.GroupBox groupBox_event;
         private System.Windows.Forms.GroupBox groupBox_place;
         private System.Windows.Forms.GroupBox groupBox_add_place;
         private System.Windows.Forms.GroupBox groupBox_add_event;
-        public System.Windows.Forms.Label label_house;
-        public System.Windows.Forms.Label label_tel;
-        public System.Windows.Forms.Label label_name_place;
-        public System.Windows.Forms.TextBox textBox_tel;
-        public System.Windows.Forms.TextBox textBox_house;
-        public System.Windows.Forms.TextBox textBox_street;
-        public System.Windows.Forms.Label label_parking;
-        public System.Windows.Forms.Label label_type_place;
-        public System.Windows.Forms.Label label_pay_card;
-        public System.Windows.Forms.ComboBox comboBox_parking;
-        public System.Windows.Forms.ComboBox comboBox_pay_card;
-        public System.Windows.Forms.ComboBox comboBox_type_place;
-        public System.Windows.Forms.Button button_add_place;
-        public System.Windows.Forms.TextBox textBox_name_palce;
-        public System.Windows.Forms.Label label_street;
-        public System.Windows.Forms.Label label_time_working;
-        public System.Windows.Forms.TextBox textBox_time_work;
         public System.Windows.Forms.Label label_age_event;
         public System.Windows.Forms.ComboBox comboBox_age;
         public System.Windows.Forms.Label label_date_event;
@@ -448,6 +477,28 @@
         public System.Windows.Forms.Label label_name_event;
         public System.Windows.Forms.Button button_add_event;
         private System.Windows.Forms.DateTimePicker dateTimePicker_event;
+        public System.Windows.Forms.Label label_ip_form;
+        public System.Windows.Forms.Label label_name_pl;
+        public System.Windows.Forms.Label label_parking_pl;
+        public System.Windows.Forms.Label label_card_pl;
+        public System.Windows.Forms.ListView listView_place;
+        private System.Windows.Forms.Label label_house;
+        private System.Windows.Forms.Label label_tel;
+        private System.Windows.Forms.Label label_name_place;
+        private System.Windows.Forms.TextBox textBox_tel;
+        private System.Windows.Forms.TextBox textBox_house;
+        private System.Windows.Forms.TextBox textBox_street;
+        private System.Windows.Forms.Label label_parking;
+        private System.Windows.Forms.Label label_type_place;
+        private System.Windows.Forms.Label label_pay_card;
+        private System.Windows.Forms.ComboBox comboBox_parking;
+        private System.Windows.Forms.ComboBox comboBox_pay_card;
+        private System.Windows.Forms.ComboBox comboBox_type_place;
+        private System.Windows.Forms.Button button_add_place;
+        private System.Windows.Forms.TextBox textBox_name_palce;
+        private System.Windows.Forms.Label label_street;
+        private System.Windows.Forms.Label label_time_working;
+        private System.Windows.Forms.TextBox textBox_time_work;
     }
 }
 
