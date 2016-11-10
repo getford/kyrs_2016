@@ -132,7 +132,7 @@ namespace kyrsovik
                 MessageBox.Show(ex.Message);
             }
             finally { connect.Close(); }
-        }
+        }               // выборка из Place
 
         private void getDataEvent()
         {
@@ -167,7 +167,7 @@ namespace kyrsovik
                 MessageBox.Show(ex.Message);
             }
             finally { connect.Close(); }
-        }
+        }               // выборка из Event
 
         private void button_add_place_Click(object sender, EventArgs e)
         {
@@ -237,6 +237,7 @@ namespace kyrsovik
         private void button_add_event_Click(object sender, EventArgs e)             // добавление ивента
         {
             SqlConnection connect = new SqlConnection(@"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True");
+
             try
             {
                 connect.Open();
@@ -244,7 +245,7 @@ namespace kyrsovik
                 SqlCommand cmd_id = new SqlCommand(sql_max_id, connect);
                 maxIdEvent = (int)cmd_id.ExecuteScalar();
 
-                string sql_insert_event = string.Format($"insert into address ([id], [id_place], [name_event], [id_type], [date_event], [age_control]) values (@id, @id_place, @name_event, @id_type, @date_event, @age_control)");
+                string sql_insert_event = string.Format($"insert into event ([id], [id_place], [name_event], [id_type], [date_event], [age_control]) values (@id, @id_place, @name_event, @id_type, @date_event, @age_control)");
 
                 SqlCommand cmd_insert_event = new SqlCommand(sql_insert_event, connect);
 
@@ -257,11 +258,11 @@ namespace kyrsovik
                 cmd_insert_event.Parameters.AddWithValue("@name_event", textBox_name_event.Text);
                 cmd_insert_event.Parameters.AddWithValue("@id_type", select_cb_id_type_event);
                 cmd_insert_event.Parameters.AddWithValue("@date_event", dateTimePicker_event.Value);
-                cmd_insert_event.Parameters.AddWithValue("@age_control", comboBox_age.SelectedText.ToString());
-                //         MessageBox.Show($"{maxIdEvent++} \t {select_cb_id_place.ToString()} \t {textBox_name_event.Text} \t {select_cb_id_type_event} \t {dateTimePicker_event.Value.ToString()} \t {comboBox_age.ToString()}");
+                cmd_insert_event.Parameters.AddWithValue("@age_control", select_cb_age.ToString());
                 cmd_insert_event.ExecuteNonQuery();
                 getDataEvent();
                 clearInput();
+                MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex)
             {
