@@ -13,9 +13,13 @@ namespace kyrsovik
 {
     public partial class Main : Form
     {
+        public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
 
         private int maxIdPlaceAddress = 0;         // Максимальный id place == id addres
         private int maxIdEvent = 0;
+
+        public int countPlace;
+        public int countEvent;
 
         public Main()
         {
@@ -49,6 +53,7 @@ namespace kyrsovik
 
         private void Main_Load(object sender, EventArgs e)
         {
+            getCount();
             getDataEvent();
             getDataPlace();
         }
@@ -101,7 +106,7 @@ namespace kyrsovik
 
         private void getDataPlace()
         {
-            SqlConnection connect = new SqlConnection(@"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True");
+            SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
@@ -136,7 +141,7 @@ namespace kyrsovik
 
         private void getDataEvent()
         {
-            SqlConnection connect = new SqlConnection(@"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True");
+            SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
@@ -171,13 +176,10 @@ namespace kyrsovik
 
         private void button_add_place_Click(object sender, EventArgs e)
         {
-            SqlConnection connect = new SqlConnection(@"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True");
+            SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
-                string sql_max_id = $"select MAX(id) from place";
-                SqlCommand cmd_id = new SqlCommand(sql_max_id, connect);
-                maxIdPlaceAddress = (int)cmd_id.ExecuteScalar();
                 /*
                                 string sql_insert_address = string.Format($"insert into address ([id], [country], [city], [street], [house], [tel]) values (@id, @country, @city, @street, @house, @tel)");
                                 string sql_insert = string.Format($"insert into place ([id], [id_address], [name_place], [id_type], [pay_card], [parking], [time_work]) values (@id, @id_address, @name_place, @id_type, @pay_card, @parking, @time_work)");
@@ -236,14 +238,11 @@ namespace kyrsovik
 
         private void button_add_event_Click(object sender, EventArgs e)             // добавление ивента
         {
-            SqlConnection connect = new SqlConnection(@"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True");
+            SqlConnection connect = new SqlConnection(connection);
 
             try
             {
                 connect.Open();
-                string sql_max_id = $"select MAX(id) from event";
-                SqlCommand cmd_id = new SqlCommand(sql_max_id, connect);
-                maxIdEvent = (int)cmd_id.ExecuteScalar();
 
                 string sql_insert_event = string.Format($"insert into event ([id], [id_place], [name_event], [id_type], [date_event], [age_control]) values (@id, @id_place, @name_event, @id_type, @date_event, @age_control)");
 
@@ -288,6 +287,37 @@ namespace kyrsovik
             comboBox_type_event.ResetText();
             comboBox_type_place.ResetText();
 
-        }
+        }       // очистка полей ввода
+
+        private void getCount()
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+                string sql_count_place = $"select count(*) from place";
+                string sql_count_event = $"select count(*) from event";
+
+                string sql_max_id_place = $"select MAX(id) from place";
+                string sql_max_id_event = $"select MAX(id) from event";
+
+                SqlCommand cmd_place = new SqlCommand(sql_count_place, connect);
+                SqlCommand cmd_event = new SqlCommand(sql_count_event, connect);
+
+                SqlCommand cmd_id_place = new SqlCommand(sql_max_id_place, connect);
+                SqlCommand cmd_id_event = new SqlCommand(sql_max_id_event, connect);
+
+                countPlace = (int)cmd_place.ExecuteScalar();
+                countEvent = (int)cmd_event.ExecuteScalar();
+
+                maxIdPlaceAddress = (int)cmd_id_place.ExecuteScalar();
+                maxIdEvent = (int)cmd_id_event.ExecuteScalar();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }       // count из таблиц
     }
 }

@@ -47,6 +47,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDataBase.cs" />
+    <Compile Include="FeedBack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FeedBack.Designer.cs">
+      <DependentUpon>FeedBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoEvent.Designer.cs">
+      <DependentUpon>InfoEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoPlace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoPlace.Designer.cs">
+      <DependentUpon>InfoPlace.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
