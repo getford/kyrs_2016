@@ -15,6 +15,8 @@ namespace kyrsovik
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         public int id;
+        private string typePlace;
+
         public InfoPlace()
         {
             InitializeComponent();
@@ -22,6 +24,8 @@ namespace kyrsovik
 
         private void InfoPlace_Load(object sender, EventArgs e)
         {
+            getCountFeedBack();
+            getTypePlace();
             getInfo();
         }
 
@@ -36,9 +40,11 @@ namespace kyrsovik
                 label_id.Text = $"ID места: {m.listView_place.FocusedItem.SubItems[0].Text}";
                 label_name_place.Text = $"Название места проведения:\n{m.listView_place.FocusedItem.SubItems[2].Text}";
 
-                if (m.listView_place.FocusedItem.SubItems[4].Text == "true") { label_pay_card.Text = $"Оплата картой: Есть"; }
-                if (m.listView_place.FocusedItem.SubItems[4].Text == "false") { label_pay_card.Text = $"Оплата картой: Нет"; }
+                //if (m.listView_place.FocusedItem.SubItems[4].Text == "true") { label_pay_card.Text = $"Оплата картой: Есть"; }
+                //if (m.listView_place.FocusedItem.SubItems[4].Text == "false") { label_pay_card.Text = $"Оплата картой: Нет"; }
 
+                label_type_place.Text = $"Тип места: {typePlace}";
+                label_pay_card.Text = $"Оплата картой: {m.listView_place.FocusedItem.SubItems[4].Text}";
                 label_parking.Text = $"Парковка: {m.listView_place.FocusedItem.SubItems[5].Text}";
                 label_working_time.Text = $"Время работы: {m.listView_place.FocusedItem.SubItems[6].Text}";
                 selectAddress();
@@ -47,7 +53,7 @@ namespace kyrsovik
             {
                 MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }               // информация о заведении
 
         private void selectAddress()
         {
@@ -75,7 +81,7 @@ namespace kyrsovik
                 MessageBox.Show(ex.Message);
             }
             finally { connect.Close(); }
-        }
+        }       // адрес заведения
 
         private void linkLabel_feedback_place_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -87,9 +93,52 @@ namespace kyrsovik
                     return;
                 }
             }
-            FeedBack fb = new FeedBack();
+            FeedBackPlace fb = new FeedBackPlace();
             fb.Owner = this;
             fb.Show();
         }
+
+        private void getCountFeedBack()
+        {
+            SqlConnection connect = new SqlConnection(connection);
+
+            string sql_max_id = $"select count(*) from feedback_place where id_place = '{id.ToString()}'";
+
+            try
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(sql_max_id, connect);
+                label_count_feedback.Text = $"Количество отзывов: {cmd.ExecuteScalar().ToString()}";
+            }
+
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally
+            {
+                connect.Close();
+            }
+        }       // число отзывов
+
+        private void getTypePlace()
+        {
+            Main m = this.Owner as Main;
+
+            SqlConnection connect = new SqlConnection(connection);
+
+            string sql_type_place = $"select name_type from type_place where id = '{m.listView_place.FocusedItem.SubItems[3].Text.ToString()}'";
+
+            try
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(sql_type_place, connect);
+                typePlace = (string)cmd.ExecuteScalar();
+            }
+
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally
+            {
+                connect.Close();
+            }
+        }
+
     }
 }

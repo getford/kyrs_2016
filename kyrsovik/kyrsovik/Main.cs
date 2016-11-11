@@ -350,7 +350,7 @@ namespace kyrsovik
             ie.Owner = this;
             ie.Show();
 
-        }
+        }       // просмотр инфы о мероприятии
     }
 }
 

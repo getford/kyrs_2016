@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace kyrsovik
 {
-    public partial class FeedBack : Form
+    public partial class FeedBackPlace : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
         private int maxIdFeedBack;
 
-        public FeedBack()
+        public FeedBackPlace()
         {
             InitializeComponent();
 
@@ -30,6 +30,8 @@ namespace kyrsovik
 
         private void FeedBack_Load(object sender, EventArgs e)
         {
+            InfoPlace ip = this.Owner as InfoPlace;
+            label_name_place.Text = ip.label_name_place.Text.ToString();
             getAuthors();
         }
 

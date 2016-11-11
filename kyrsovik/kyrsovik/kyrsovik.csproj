@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDataBase.cs" />
-    <Compile Include="FeedBack.cs">
+    <Compile Include="FeedBackPlace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FeedBack.Designer.cs">
-      <DependentUpon>FeedBack.cs</DependentUpon>
+    <Compile Include="FeedBackPlace.Designer.cs">
+      <DependentUpon>FeedBackPlace.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoEvent.cs">
       <SubType>Form</SubType>
@@ -73,8 +73,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FeedBack.resx">
-      <DependentUpon>FeedBack.cs</DependentUpon>
+    <EmbeddedResource Include="FeedBackPlace.resx">
+      <DependentUpon>FeedBackPlace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoPlace.resx">
       <DependentUpon>InfoPlace.cs</DependentUpon>

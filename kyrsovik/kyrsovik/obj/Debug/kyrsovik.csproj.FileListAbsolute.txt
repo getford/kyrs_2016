@@ -18,4 +18,4 @@ C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Mai
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Properties.Resources.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csproj.GenerateResource.Cache
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.InfoPlace.resources
-C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBack.resources
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackPlace.resources
