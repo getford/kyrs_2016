@@ -20,3 +20,4 @@ C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csp
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.InfoPlace.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackPlace.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.InfoEvent.resources
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Start.resources
