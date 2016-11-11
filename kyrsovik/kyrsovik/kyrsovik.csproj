@@ -73,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FeedBack.resx">
+      <DependentUpon>FeedBack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfoPlace.resx">
       <DependentUpon>InfoPlace.cs</DependentUpon>
     </EmbeddedResource>

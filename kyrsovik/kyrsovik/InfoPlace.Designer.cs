@@ -41,6 +41,8 @@
             this.label_house = new System.Windows.Forms.Label();
             this.label_street = new System.Windows.Forms.Label();
             this.groupBox_info = new System.Windows.Forms.GroupBox();
+            this.linkLabel_events_here = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_feedback_place = new System.Windows.Forms.LinkLabel();
             this.groupBox_address_place.SuspendLayout();
             this.groupBox_info.SuspendLayout();
             this.SuspendLayout();
@@ -173,11 +175,35 @@
             this.groupBox_info.TabStop = false;
             this.groupBox_info.Text = "Информация";
             // 
+            // linkLabel_events_here
+            // 
+            this.linkLabel_events_here.AutoSize = true;
+            this.linkLabel_events_here.Location = new System.Drawing.Point(280, 243);
+            this.linkLabel_events_here.Name = "linkLabel_events_here";
+            this.linkLabel_events_here.Size = new System.Drawing.Size(169, 13);
+            this.linkLabel_events_here.TabIndex = 8;
+            this.linkLabel_events_here.TabStop = true;
+            this.linkLabel_events_here.Text = "Мероприятия в этом заведении";
+            // 
+            // linkLabel_feedback_place
+            // 
+            this.linkLabel_feedback_place.AutoSize = true;
+            this.linkLabel_feedback_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.linkLabel_feedback_place.Location = new System.Drawing.Point(511, 243);
+            this.linkLabel_feedback_place.Name = "linkLabel_feedback_place";
+            this.linkLabel_feedback_place.Size = new System.Drawing.Size(45, 15);
+            this.linkLabel_feedback_place.TabIndex = 9;
+            this.linkLabel_feedback_place.TabStop = true;
+            this.linkLabel_feedback_place.Text = "Отзыв";
+            this.linkLabel_feedback_place.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_feedback_place_LinkClicked);
+            // 
             // InfoPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 265);
+            this.Controls.Add(this.linkLabel_feedback_place);
+            this.Controls.Add(this.linkLabel_events_here);
             this.Controls.Add(this.label_tel);
             this.Controls.Add(this.groupBox_info);
             this.Controls.Add(this.groupBox_address_place);
@@ -196,8 +222,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_count;
         private System.Windows.Forms.Label label_pay_card;
         private System.Windows.Forms.Label label_parking;
@@ -210,5 +234,8 @@
         private System.Windows.Forms.Label label_house;
         private System.Windows.Forms.Label label_street;
         private System.Windows.Forms.GroupBox groupBox_info;
+        private System.Windows.Forms.LinkLabel linkLabel_events_here;
+        private System.Windows.Forms.LinkLabel linkLabel_feedback_place;
+        public System.Windows.Forms.Label label_id;
     }
 }

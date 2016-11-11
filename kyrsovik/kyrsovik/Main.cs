@@ -320,9 +320,8 @@ namespace kyrsovik
             finally { connect.Close(); }
         }       // count из таблиц
 
-        private void listView_place_MouseClick(object sender, MouseEventArgs e)
+        private void listView_place_MouseClick(object sender, MouseEventArgs e)         // просмотр инфы о месте
         {
-            label_ip_form.Text = listView_place.FocusedItem.SubItems[0].Text;
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
             {
                 if (f.Name == "InfoPlace")

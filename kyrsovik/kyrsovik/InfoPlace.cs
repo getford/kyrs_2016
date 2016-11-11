@@ -14,7 +14,7 @@ namespace kyrsovik
     public partial class InfoPlace : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
-        private int id;
+        public int id;
         public InfoPlace()
         {
             InitializeComponent();
@@ -75,6 +75,21 @@ namespace kyrsovik
                 MessageBox.Show(ex.Message);
             }
             finally { connect.Close(); }
+        }
+
+        private void linkLabel_feedback_place_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "FeedBack")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            FeedBack fb = new FeedBack();
+            fb.Owner = this;
+            fb.Show();
         }
     }
 }

@@ -63,10 +63,6 @@
             this.textBox_street = new System.Windows.Forms.TextBox();
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
-            this.label_ip_form = new System.Windows.Forms.Label();
-            this.label_name_pl = new System.Windows.Forms.Label();
-            this.label_parking_pl = new System.Windows.Forms.Label();
-            this.label_card_pl = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -396,51 +392,11 @@
             this.textBox_tel.Size = new System.Drawing.Size(143, 20);
             this.textBox_tel.TabIndex = 2;
             // 
-            // label_ip_form
-            // 
-            this.label_ip_form.AutoSize = true;
-            this.label_ip_form.Location = new System.Drawing.Point(12, 593);
-            this.label_ip_form.Name = "label_ip_form";
-            this.label_ip_form.Size = new System.Drawing.Size(47, 13);
-            this.label_ip_form.TabIndex = 6;
-            this.label_ip_form.Text = "id_place";
-            // 
-            // label_name_pl
-            // 
-            this.label_name_pl.AutoSize = true;
-            this.label_name_pl.Location = new System.Drawing.Point(91, 593);
-            this.label_name_pl.Name = "label_name_pl";
-            this.label_name_pl.Size = new System.Drawing.Size(33, 13);
-            this.label_name_pl.TabIndex = 7;
-            this.label_name_pl.Text = "name";
-            // 
-            // label_parking_pl
-            // 
-            this.label_parking_pl.AutoSize = true;
-            this.label_parking_pl.Location = new System.Drawing.Point(437, 593);
-            this.label_parking_pl.Name = "label_parking_pl";
-            this.label_parking_pl.Size = new System.Drawing.Size(42, 13);
-            this.label_parking_pl.TabIndex = 8;
-            this.label_parking_pl.Text = "parking";
-            // 
-            // label_card_pl
-            // 
-            this.label_card_pl.AutoSize = true;
-            this.label_card_pl.Location = new System.Drawing.Point(230, 596);
-            this.label_card_pl.Name = "label_card_pl";
-            this.label_card_pl.Size = new System.Drawing.Size(60, 13);
-            this.label_card_pl.TabIndex = 9;
-            this.label_card_pl.Text = "place_card";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 618);
-            this.Controls.Add(this.label_card_pl);
-            this.Controls.Add(this.label_parking_pl);
-            this.Controls.Add(this.label_name_pl);
-            this.Controls.Add(this.label_ip_form);
+            this.ClientSize = new System.Drawing.Size(1196, 594);
             this.Controls.Add(this.groupBox_place);
             this.Controls.Add(this.groupBox_event);
             this.Controls.Add(this.listView_place);
@@ -456,7 +412,6 @@
             this.groupBox_add_place.ResumeLayout(false);
             this.groupBox_add_place.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -477,10 +432,6 @@
         public System.Windows.Forms.Label label_name_event;
         public System.Windows.Forms.Button button_add_event;
         private System.Windows.Forms.DateTimePicker dateTimePicker_event;
-        public System.Windows.Forms.Label label_ip_form;
-        public System.Windows.Forms.Label label_name_pl;
-        public System.Windows.Forms.Label label_parking_pl;
-        public System.Windows.Forms.Label label_card_pl;
         public System.Windows.Forms.ListView listView_place;
         private System.Windows.Forms.Label label_house;
         private System.Windows.Forms.Label label_tel;
