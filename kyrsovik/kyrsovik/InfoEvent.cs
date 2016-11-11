@@ -14,8 +14,8 @@ namespace kyrsovik
     public partial class InfoEvent : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
-        private string typeEvent;
-        private string avgRateEvent;
+        private string typeEvent;       // тип ивента
+        private decimal avgRateEvent;   // ср значение
 
         public InfoEvent()
         {
@@ -45,7 +45,7 @@ namespace kyrsovik
                 label_feedback_count.Text = $"";
             }
             else { MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
+        }       // информация об ивенте
 
         private void getTypeEvent()
         {
@@ -60,22 +60,39 @@ namespace kyrsovik
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
-        }
+        }           // получаем тип ивента
 
         private void getAVGRateEvent()
         {
             Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
-            string sql_avg_event = $"select AVG(rating_event) from feedback_event where id_event = '{m.listView_event.FocusedItem.SubItems[0].Text}'";
+
+            string sql_avg_event = $"select CAST(AVG(rating_event*1.0) AS NUMERIC(4,1)) from feedback_event where id_event = '{m.listView_event.FocusedItem.SubItems[0].Text}'";
+            string sql_count_feedback = $"select count(rating_event) from feedback_event where id_event = '{m.listView_event.FocusedItem.SubItems[0].Text}'";
+
+            int tmp = 0;
             try
             {
                 connect.Open();
-                SqlCommand cmd = new SqlCommand(sql_avg_event, connect);
-                avgRateEvent = (string)cmd.ExecuteScalar();
-
+                SqlCommand cmd_count = new SqlCommand(sql_count_feedback, connect);
+                tmp = (int)cmd_count.ExecuteScalar();
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
-        }
+
+            if (tmp != 0)
+            {
+                try
+                {
+
+                    connect.Open();
+                    SqlCommand cmd = new SqlCommand(sql_avg_event, connect);
+                    avgRateEvent = (decimal)cmd.ExecuteScalar();
+                }
+                catch (SqlException ex) { MessageBox.Show(ex.Message); }
+                finally { connect.Close(); }
+            }
+            else { avgRateEvent = 0; }
+        }       // Средний рейтинг ивента
     }
 }

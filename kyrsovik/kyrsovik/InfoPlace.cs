@@ -14,9 +14,9 @@ namespace kyrsovik
     public partial class InfoPlace : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
-        private string typePlace;
-        private int avgRatePlace;
-        public string id;
+        private string typePlace;       // тип места
+        private decimal avgRatePlace;   //ср значение рейтинга
+        public string id;           // id места
 
         public InfoPlace()
         {
@@ -100,7 +100,7 @@ namespace kyrsovik
             FeedBackPlace fb = new FeedBackPlace();
             fb.Owner = this;
             fb.Show();
-        }
+        }       // отзыв
 
         private void getCountFeedBack()
         {
@@ -143,22 +143,44 @@ namespace kyrsovik
             {
                 connect.Close();
             }
-        }
+        }           // тип места
+
         private void getAVGRatePlace()
         {
             Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
-            string sql_avg_place = $"select AVG(rating_place) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
+            string sql_avg_place = $"select CAST(AVG(rating_place*1.0) AS NUMERIC(4,1)) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
+            string sql_count_feedback = $"select count(rating_place) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
+
+            int tmp = 0;
             try
             {
                 connect.Open();
-                SqlCommand cmd = new SqlCommand(sql_avg_place, connect);
-                avgRatePlace = (int)cmd.ExecuteScalar();
-
+                SqlCommand cmd_count = new SqlCommand(sql_count_feedback, connect);
+                tmp = (int)cmd_count.ExecuteScalar();
             }
+
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
-        }
 
+            if (tmp != 0)
+            {
+                try
+                {
+                    connect.Open();
+                    SqlCommand cmd = new SqlCommand(sql_avg_place, connect);
+                    avgRatePlace = (decimal)cmd.ExecuteScalar();
+
+                }
+                catch (SqlException ex) { MessageBox.Show(ex.Message); }
+                finally { connect.Close(); }
+            }
+            else { avgRatePlace = 0; }
+        }       // средний рейтинг места
+
+        private void linkLabel_events_here_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }       // мероприятия в выбранном месте
     }
 }

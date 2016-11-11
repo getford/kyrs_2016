@@ -191,18 +191,19 @@
             // linkLabel_events_here
             // 
             this.linkLabel_events_here.AutoSize = true;
-            this.linkLabel_events_here.Location = new System.Drawing.Point(328, 245);
+            this.linkLabel_events_here.Location = new System.Drawing.Point(280, 245);
             this.linkLabel_events_here.Name = "linkLabel_events_here";
             this.linkLabel_events_here.Size = new System.Drawing.Size(169, 13);
             this.linkLabel_events_here.TabIndex = 8;
             this.linkLabel_events_here.TabStop = true;
             this.linkLabel_events_here.Text = "Мероприятия в этом заведении";
+            this.linkLabel_events_here.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_events_here_LinkClicked);
             // 
             // linkLabel_feedback_place
             // 
             this.linkLabel_feedback_place.AutoSize = true;
             this.linkLabel_feedback_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel_feedback_place.Location = new System.Drawing.Point(511, 243);
+            this.linkLabel_feedback_place.Location = new System.Drawing.Point(506, 243);
             this.linkLabel_feedback_place.Name = "linkLabel_feedback_place";
             this.linkLabel_feedback_place.Size = new System.Drawing.Size(45, 15);
             this.linkLabel_feedback_place.TabIndex = 9;
@@ -222,7 +223,7 @@
             // label_avg_rate
             // 
             this.label_avg_rate.AutoSize = true;
-            this.label_avg_rate.Location = new System.Drawing.Point(179, 243);
+            this.label_avg_rate.Location = new System.Drawing.Point(411, 40);
             this.label_avg_rate.Name = "label_avg_rate";
             this.label_avg_rate.Size = new System.Drawing.Size(72, 13);
             this.label_avg_rate.TabIndex = 12;
