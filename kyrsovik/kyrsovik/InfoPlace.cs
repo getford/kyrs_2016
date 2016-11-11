@@ -24,9 +24,9 @@ namespace kyrsovik
 
         private void InfoPlace_Load(object sender, EventArgs e)
         {
-            getCountFeedBack();
             getTypePlace();
             getInfo();
+            getCountFeedBack();
         }
 
         private void getInfo()
