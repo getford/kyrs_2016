@@ -41,10 +41,11 @@
             this.label_street = new System.Windows.Forms.Label();
             this.label_tel = new System.Windows.Forms.Label();
             this.groupBox_info = new System.Windows.Forms.GroupBox();
+            this.label_type_place = new System.Windows.Forms.Label();
             this.linkLabel_events_here = new System.Windows.Forms.LinkLabel();
             this.linkLabel_feedback_place = new System.Windows.Forms.LinkLabel();
             this.label_count_feedback = new System.Windows.Forms.Label();
-            this.label_type_place = new System.Windows.Forms.Label();
+            this.label_avg_rate = new System.Windows.Forms.Label();
             this.groupBox_address_place.SuspendLayout();
             this.groupBox_info.SuspendLayout();
             this.SuspendLayout();
@@ -178,10 +179,19 @@
             this.groupBox_info.TabStop = false;
             this.groupBox_info.Text = "Информация";
             // 
+            // label_type_place
+            // 
+            this.label_type_place.AutoSize = true;
+            this.label_type_place.Location = new System.Drawing.Point(6, 54);
+            this.label_type_place.Name = "label_type_place";
+            this.label_type_place.Size = new System.Drawing.Size(38, 13);
+            this.label_type_place.TabIndex = 5;
+            this.label_type_place.Text = "id type";
+            // 
             // linkLabel_events_here
             // 
             this.linkLabel_events_here.AutoSize = true;
-            this.linkLabel_events_here.Location = new System.Drawing.Point(280, 243);
+            this.linkLabel_events_here.Location = new System.Drawing.Point(328, 245);
             this.linkLabel_events_here.Name = "linkLabel_events_here";
             this.linkLabel_events_here.Size = new System.Drawing.Size(169, 13);
             this.linkLabel_events_here.TabIndex = 8;
@@ -209,20 +219,21 @@
             this.label_count_feedback.TabIndex = 10;
             this.label_count_feedback.Text = "Количество отзывов";
             // 
-            // label_type_place
+            // label_avg_rate
             // 
-            this.label_type_place.AutoSize = true;
-            this.label_type_place.Location = new System.Drawing.Point(6, 54);
-            this.label_type_place.Name = "label_type_place";
-            this.label_type_place.Size = new System.Drawing.Size(38, 13);
-            this.label_type_place.TabIndex = 5;
-            this.label_type_place.Text = "id type";
+            this.label_avg_rate.AutoSize = true;
+            this.label_avg_rate.Location = new System.Drawing.Point(179, 243);
+            this.label_avg_rate.Name = "label_avg_rate";
+            this.label_avg_rate.Size = new System.Drawing.Size(72, 13);
+            this.label_avg_rate.TabIndex = 12;
+            this.label_avg_rate.Text = "AVG рейтинг";
             // 
             // InfoPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 265);
+            this.Controls.Add(this.label_avg_rate);
             this.Controls.Add(this.label_count_feedback);
             this.Controls.Add(this.linkLabel_feedback_place);
             this.Controls.Add(this.linkLabel_events_here);
@@ -261,5 +272,6 @@
         private System.Windows.Forms.Label label_count_feedback;
         public System.Windows.Forms.Label label_name_place;
         public System.Windows.Forms.Label label_type_place;
+        private System.Windows.Forms.Label label_avg_rate;
     }
 }

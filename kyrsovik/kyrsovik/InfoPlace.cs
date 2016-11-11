@@ -14,8 +14,9 @@ namespace kyrsovik
     public partial class InfoPlace : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
-        public int id;
         private string typePlace;
+        private int avgRatePlace;
+        public string id;
 
         public InfoPlace()
         {
@@ -25,6 +26,7 @@ namespace kyrsovik
         private void InfoPlace_Load(object sender, EventArgs e)
         {
             getTypePlace();
+            getAVGRatePlace();
             getInfo();
             getCountFeedBack();
         }
@@ -32,11 +34,11 @@ namespace kyrsovik
         private void getInfo()
         {
             Main m = this.Owner as Main;
-            id = Convert.ToInt16(m.listView_place.FocusedItem.SubItems[0].Text);
 
             if (m != null)
             {
-                label_count.Text = $"Количество мест проведения в базе: {m.countPlace.ToString()}";
+                id = m.listView_place.FocusedItem.SubItems[0].Text;
+                label_count.Text = $"Число мест проведения в базе данных: {m.countPlace.ToString()}";
                 label_id.Text = $"ID места: {m.listView_place.FocusedItem.SubItems[0].Text}";
                 label_name_place.Text = $"Название места проведения:\n{m.listView_place.FocusedItem.SubItems[2].Text}";
 
@@ -47,6 +49,7 @@ namespace kyrsovik
                 label_pay_card.Text = $"Оплата картой: {m.listView_place.FocusedItem.SubItems[4].Text}";
                 label_parking.Text = $"Парковка: {m.listView_place.FocusedItem.SubItems[5].Text}";
                 label_working_time.Text = $"Время работы: {m.listView_place.FocusedItem.SubItems[6].Text}";
+                label_avg_rate.Text = $"Рейтинг: {avgRatePlace.ToString()}";
                 selectAddress();
             }
             else
@@ -57,9 +60,10 @@ namespace kyrsovik
 
         private void selectAddress()
         {
+            Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
 
-            string sql_select = $"select country, city, street, house, tel from address where id = '{id}'";
+            string sql_select = $"select country, city, street, house, tel from address where id = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
 
             try
             {
@@ -100,9 +104,10 @@ namespace kyrsovik
 
         private void getCountFeedBack()
         {
+            Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
 
-            string sql_max_id = $"select count(*) from feedback_place where id_place = '{id.ToString()}'";
+            string sql_max_id = $"select count(*) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
 
             try
             {
@@ -138,6 +143,21 @@ namespace kyrsovik
             {
                 connect.Close();
             }
+        }
+        private void getAVGRatePlace()
+        {
+            Main m = this.Owner as Main;
+            SqlConnection connect = new SqlConnection(connection);
+            string sql_avg_place = $"select AVG(rating_place) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
+            try
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(sql_avg_place, connect);
+                avgRatePlace = (int)cmd.ExecuteScalar();
+
+            }
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connect.Close(); }
         }
 
     }

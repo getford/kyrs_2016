@@ -416,7 +416,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView listView_event;
         private System.Windows.Forms.GroupBox groupBox_event;
         private System.Windows.Forms.GroupBox groupBox_place;
         private System.Windows.Forms.GroupBox groupBox_add_place;
@@ -450,6 +449,7 @@
         private System.Windows.Forms.Label label_street;
         private System.Windows.Forms.Label label_time_working;
         private System.Windows.Forms.TextBox textBox_time_work;
+        public System.Windows.Forms.ListView listView_event;
     }
 }
 

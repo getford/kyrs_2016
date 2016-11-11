@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDataBase.cs" />
+    <Compile Include="FeedBackEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FeedBackEvent.Designer.cs">
+      <DependentUpon>FeedBackEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeedBackPlace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FeedBackPlace.resx">
       <DependentUpon>FeedBackPlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoEvent.resx">
+      <DependentUpon>InfoEvent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoPlace.resx">
       <DependentUpon>InfoPlace.cs</DependentUpon>
