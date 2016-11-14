@@ -62,6 +62,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectDataBase.cs" />
+    <Compile Include="EditEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditEvent.Designer.cs">
+      <DependentUpon>EditEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditPlace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPlace.Designer.cs">
+      <DependentUpon>EditPlace.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeedBackEvent.cs">
       <SubType>Form</SubType>
     </Compile>
