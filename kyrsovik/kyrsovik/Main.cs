@@ -44,21 +44,12 @@ namespace kyrsovik
             comboBox_age.Items.Add("16");
             comboBox_age.Items.Add("18");
             /*-----------------------------------------------*/
-            comboBox_type_event.Items.Add("Вечеринка");
-            comboBox_type_event.Items.Add("Концерт");
-            comboBox_type_event.Items.Add("Спектакль");
-            comboBox_type_event.Items.Add("Представление");
-            /*-----------------------------------------------*/
+
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            getCount();
-            getDataEvent();
-            getDataPlace();
-
-            /*-------- Запишем данные в id place --------*/
-            for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
+            refreshAllData();
         }
         private void Initialize_List_place()
         {
@@ -375,15 +366,39 @@ namespace kyrsovik
 
         public void refreshAllData()        // перезагрузка всей инфы
         {
+            comboBox_event_place.Items.Clear();
+            comboBox_type_event.Items.Clear();
+            comboBox_type_for_select.Items.Clear();
+
+            clearInput();
+
             getCount();
             getDataEvent();
             getDataPlace();
-            clearInput();
+            getTypeEvent();
 
-            /*-------- Запишем данные в id place --------*/
-            comboBox_event_place.Items.Clear();
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
+        }
+
+        private void getTypeEvent()     // заполняем список тип мероприятия
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            string sql = $"select name_type from type_event";
+            try
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(sql, connect);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    comboBox_type_for_select.Items.Add(dr.GetString(0));
+                    comboBox_type_event.Items.Add(dr.GetString(0));
+                }
+                dr.Close();
+            }
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connect.Close(); }
         }
     }
 }
-

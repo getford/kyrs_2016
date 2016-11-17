@@ -63,17 +63,21 @@
             this.textBox_street = new System.Windows.Forms.TextBox();
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
+            this.groupBox_select_event = new System.Windows.Forms.GroupBox();
+            this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
+            this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
             this.groupBox_add_place.SuspendLayout();
+            this.groupBox_select_event.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView_event
             // 
-            this.listView_event.Location = new System.Drawing.Point(797, 12);
+            this.listView_event.Location = new System.Drawing.Point(12, 300);
             this.listView_event.Name = "listView_event";
-            this.listView_event.Size = new System.Drawing.Size(386, 565);
+            this.listView_event.Size = new System.Drawing.Size(779, 294);
             this.listView_event.TabIndex = 2;
             this.listView_event.UseCompatibleStateImageBehavior = false;
             this.listView_event.View = System.Windows.Forms.View.Details;
@@ -81,9 +85,9 @@
             // 
             // listView_place
             // 
-            this.listView_place.Location = new System.Drawing.Point(12, 300);
+            this.listView_place.Location = new System.Drawing.Point(797, 300);
             this.listView_place.Name = "listView_place";
-            this.listView_place.Size = new System.Drawing.Size(779, 277);
+            this.listView_place.Size = new System.Drawing.Size(387, 294);
             this.listView_place.TabIndex = 3;
             this.listView_place.UseCompatibleStateImageBehavior = false;
             this.listView_place.View = System.Windows.Forms.View.Details;
@@ -392,11 +396,42 @@
             this.textBox_tel.Size = new System.Drawing.Size(143, 20);
             this.textBox_tel.TabIndex = 2;
             // 
+            // groupBox_select_event
+            // 
+            this.groupBox_select_event.Controls.Add(this.comboBox_type_for_select);
+            this.groupBox_select_event.Controls.Add(this.radioButton_bestEvent);
+            this.groupBox_select_event.Location = new System.Drawing.Point(798, 13);
+            this.groupBox_select_event.Name = "groupBox_select_event";
+            this.groupBox_select_event.Size = new System.Drawing.Size(386, 281);
+            this.groupBox_select_event.TabIndex = 6;
+            this.groupBox_select_event.TabStop = false;
+            this.groupBox_select_event.Text = "Выборка";
+            // 
+            // radioButton_bestEvent
+            // 
+            this.radioButton_bestEvent.AutoSize = true;
+            this.radioButton_bestEvent.Location = new System.Drawing.Point(7, 20);
+            this.radioButton_bestEvent.Name = "radioButton_bestEvent";
+            this.radioButton_bestEvent.Size = new System.Drawing.Size(133, 17);
+            this.radioButton_bestEvent.TabIndex = 0;
+            this.radioButton_bestEvent.TabStop = true;
+            this.radioButton_bestEvent.Text = "Лучшие мероприятия";
+            this.radioButton_bestEvent.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_type_for_select
+            // 
+            this.comboBox_type_for_select.FormattingEnabled = true;
+            this.comboBox_type_for_select.Location = new System.Drawing.Point(6, 60);
+            this.comboBox_type_for_select.Name = "comboBox_type_for_select";
+            this.comboBox_type_for_select.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_type_for_select.TabIndex = 11;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 594);
+            this.ClientSize = new System.Drawing.Size(1198, 610);
+            this.Controls.Add(this.groupBox_select_event);
             this.Controls.Add(this.groupBox_place);
             this.Controls.Add(this.groupBox_event);
             this.Controls.Add(this.listView_place);
@@ -411,6 +446,8 @@
             this.groupBox_place.ResumeLayout(false);
             this.groupBox_add_place.ResumeLayout(false);
             this.groupBox_add_place.PerformLayout();
+            this.groupBox_select_event.ResumeLayout(false);
+            this.groupBox_select_event.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -450,6 +487,9 @@
         private System.Windows.Forms.Label label_time_working;
         private System.Windows.Forms.TextBox textBox_time_work;
         public System.Windows.Forms.ListView listView_event;
+        private System.Windows.Forms.GroupBox groupBox_select_event;
+        private System.Windows.Forms.RadioButton radioButton_bestEvent;
+        public System.Windows.Forms.ComboBox comboBox_type_for_select;
     }
 }
 
