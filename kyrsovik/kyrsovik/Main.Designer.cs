@@ -63,19 +63,17 @@
             this.textBox_street = new System.Windows.Forms.TextBox();
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
-            this.pictureBox_refresh = new System.Windows.Forms.PictureBox();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
             this.groupBox_add_place.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_refresh)).BeginInit();
             this.SuspendLayout();
             // 
             // listView_event
             // 
-            this.listView_event.Location = new System.Drawing.Point(797, 57);
+            this.listView_event.Location = new System.Drawing.Point(797, 12);
             this.listView_event.Name = "listView_event";
-            this.listView_event.Size = new System.Drawing.Size(386, 520);
+            this.listView_event.Size = new System.Drawing.Size(386, 565);
             this.listView_event.TabIndex = 2;
             this.listView_event.UseCompatibleStateImageBehavior = false;
             this.listView_event.View = System.Windows.Forms.View.Details;
@@ -394,23 +392,11 @@
             this.textBox_tel.Size = new System.Drawing.Size(143, 20);
             this.textBox_tel.TabIndex = 2;
             // 
-            // pictureBox_refresh
-            // 
-            this.pictureBox_refresh.Image = global::kyrsovik.Properties.Resources.refresh;
-            this.pictureBox_refresh.Location = new System.Drawing.Point(797, 12);
-            this.pictureBox_refresh.Name = "pictureBox_refresh";
-            this.pictureBox_refresh.Size = new System.Drawing.Size(39, 39);
-            this.pictureBox_refresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_refresh.TabIndex = 6;
-            this.pictureBox_refresh.TabStop = false;
-            this.pictureBox_refresh.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_refresh_MouseClick);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1196, 594);
-            this.Controls.Add(this.pictureBox_refresh);
             this.Controls.Add(this.groupBox_place);
             this.Controls.Add(this.groupBox_event);
             this.Controls.Add(this.listView_place);
@@ -425,7 +411,6 @@
             this.groupBox_place.ResumeLayout(false);
             this.groupBox_add_place.ResumeLayout(false);
             this.groupBox_add_place.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_refresh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -465,7 +450,6 @@
         private System.Windows.Forms.Label label_time_working;
         private System.Windows.Forms.TextBox textBox_time_work;
         public System.Windows.Forms.ListView listView_event;
-        private System.Windows.Forms.PictureBox pictureBox_refresh;
     }
 }
 

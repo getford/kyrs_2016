@@ -132,6 +132,9 @@
     <EmbeddedResource Include="EventInPlace.resx">
       <DependentUpon>EventInPlace.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FeedBackEvent.resx">
+      <DependentUpon>FeedBackEvent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FeedBackPlace.resx">
       <DependentUpon>FeedBackPlace.cs</DependentUpon>
     </EmbeddedResource>

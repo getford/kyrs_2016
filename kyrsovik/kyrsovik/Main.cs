@@ -373,11 +373,6 @@ namespace kyrsovik
 
         }       // просмотр инфы о мероприятии
 
-        private void pictureBox_refresh_MouseClick(object sender, MouseEventArgs e)     // перезагрузка инфы по нажатию кнопки
-        {
-            refreshAllData();
-        }
-
         public void refreshAllData()        // перезагрузка всей инфы
         {
             getCount();

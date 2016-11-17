@@ -151,7 +151,7 @@ namespace kyrsovik
             Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
             string sql_avg_place = $"select CAST(AVG(rating_place*1.0) AS NUMERIC(4,1)) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
-            string sql_count_feedback = $"select count(rating_place) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
+            string sql_count_feedback = $"select count(*) from feedback_place where id_place = '{m.listView_place.FocusedItem.SubItems[0].Text}'";
 
             int tmp = 0;
             try

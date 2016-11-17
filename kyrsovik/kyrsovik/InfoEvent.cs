@@ -14,8 +14,10 @@ namespace kyrsovik
     public partial class InfoEvent : Form
     {
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
-        private string typeEvent;       // тип ивента
+        private string typeEvent = string.Empty;       // тип ивента
         private decimal avgRateEvent;   // ср значение
+        private int countFeedBack = 0;        // количество отзывов
+        public string id = string.Empty; // id мероприятия
 
         public InfoEvent()
         {
@@ -24,17 +26,24 @@ namespace kyrsovik
 
         private void InfoEvent_Load(object sender, EventArgs e)
         {
+            Main m = this.Owner as Main;
+            id = m.listView_event.FocusedItem.SubItems[0].Text;
+
+            /*-------------------------------*/
+
             getTypeEvent();
             getAVGRateEvent();
             getInfoEvent();
+
         }
 
-        private void getInfoEvent()
+        public void getInfoEvent()
         {
             Main m = this.Owner as Main;
+
             if (m != null)
             {
-                label_id_event.Text = $"ID мероприятия: {m.listView_event.FocusedItem.SubItems[0].Text}";
+                label_id_event.Text = $"ID мероприятия: {id}";
                 label_name_event.Text = $"Название мероприятия:   {m.listView_event.FocusedItem.SubItems[2].Text}";
                 label_all_event_count.Text = $"Число мероприятий в базе данных: {m.countEvent.ToString()}";
                 label_date_event.Text = $"Дата проведения: {m.listView_event.FocusedItem.SubItems[4].Text}";
@@ -42,7 +51,7 @@ namespace kyrsovik
                 label_age.Text = $"Возрастное ограничение: {m.listView_event.FocusedItem.SubItems[5].Text}";
 
                 label_rate_event.Text = $"Средний рейтинг мероприятия: {avgRateEvent}";
-                label_feedback_count.Text = $"";
+                label_feedback_count.Text = $"Число отзывов: {countFeedBack}";
             }
             else { MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }       // информация об ивенте
@@ -64,27 +73,31 @@ namespace kyrsovik
 
         private void getAVGRateEvent()
         {
-            Main m = this.Owner as Main;
             SqlConnection connect = new SqlConnection(connection);
 
-            string sql_avg_event = $"select CAST(AVG(rating_event*1.0) AS NUMERIC(4,1)) from feedback_event where id_event = '{m.listView_event.FocusedItem.SubItems[0].Text}'";
-            string sql_count_feedback = $"select count(rating_event) from feedback_event where id_event = '{m.listView_event.FocusedItem.SubItems[0].Text}'";
+            string sql_avg_event = $"select CAST(AVG(rating_event*1.0) AS NUMERIC(4,1)) from feedback_event where id_event = {id}";
+            string sql_count_feedback = $"select count(*) from feedback_event where id_event = {id}";
 
-            int tmp = 0;
             try
             {
                 connect.Open();
                 SqlCommand cmd_count = new SqlCommand(sql_count_feedback, connect);
-                tmp = (int)cmd_count.ExecuteScalar();
+                if ((int)cmd_count.ExecuteScalar() != 0)
+                {
+                    countFeedBack = (int)cmd_count.ExecuteScalar();
+                }
+                else
+                {
+                    countFeedBack = 0;
+                }
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
 
-            if (tmp != 0)
+            if (countFeedBack != 0)
             {
                 try
                 {
-
                     connect.Open();
                     SqlCommand cmd = new SqlCommand(sql_avg_event, connect);
                     avgRateEvent = (decimal)cmd.ExecuteScalar();
@@ -93,9 +106,23 @@ namespace kyrsovik
                 finally { connect.Close(); }
             }
             else { avgRateEvent = 0; }
-        }       // Средний рейтинг ивента
+        }       // Средний рейтинг ивента и количество отзывов
 
-        private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)
+        private void linkLabel_feedback_event_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "FeedBackEvent")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            FeedBackEvent fb = new FeedBackEvent();
+            fb.Owner = this;
+            fb.Show();
+        }
+        private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)     // обновляем данные при закрытии формы
         {
             Main m = this.Owner as Main;
             m.refreshAllData();

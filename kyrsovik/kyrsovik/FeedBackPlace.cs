@@ -129,10 +129,7 @@ namespace kyrsovik
             }
 
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                connect.Close();
-            }
+            finally { connect.Close(); }
         }       // максимальное значение id в таблице
 
         private void button_add_feedback_Click(object sender, EventArgs e)
