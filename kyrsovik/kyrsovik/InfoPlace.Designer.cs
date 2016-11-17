@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoPlace));
             this.label_id = new System.Windows.Forms.Label();
             this.label_count = new System.Windows.Forms.Label();
             this.label_pay_card = new System.Windows.Forms.Label();
@@ -46,6 +47,7 @@
             this.linkLabel_feedback_place = new System.Windows.Forms.LinkLabel();
             this.label_count_feedback = new System.Windows.Forms.Label();
             this.label_avg_rate = new System.Windows.Forms.Label();
+            this.linkLabel_deletePlace = new System.Windows.Forms.LinkLabel();
             this.groupBox_address_place.SuspendLayout();
             this.groupBox_info.SuspendLayout();
             this.SuspendLayout();
@@ -111,6 +113,7 @@
             this.groupBox_address_place.Controls.Add(this.label_city);
             this.groupBox_address_place.Controls.Add(this.label_house);
             this.groupBox_address_place.Controls.Add(this.label_street);
+            this.groupBox_address_place.Controls.Add(this.label_tel);
             this.groupBox_address_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox_address_place.Location = new System.Drawing.Point(283, 65);
             this.groupBox_address_place.Name = "groupBox_address_place";
@@ -159,7 +162,7 @@
             // label_tel
             // 
             this.label_tel.AutoSize = true;
-            this.label_tel.Location = new System.Drawing.Point(289, 197);
+            this.label_tel.Location = new System.Drawing.Point(6, 132);
             this.label_tel.Name = "label_tel";
             this.label_tel.Size = new System.Drawing.Size(52, 13);
             this.label_tel.TabIndex = 5;
@@ -191,7 +194,7 @@
             // linkLabel_events_here
             // 
             this.linkLabel_events_here.AutoSize = true;
-            this.linkLabel_events_here.Location = new System.Drawing.Point(280, 245);
+            this.linkLabel_events_here.Location = new System.Drawing.Point(280, 243);
             this.linkLabel_events_here.Name = "linkLabel_events_here";
             this.linkLabel_events_here.Size = new System.Drawing.Size(169, 13);
             this.linkLabel_events_here.TabIndex = 8;
@@ -203,7 +206,7 @@
             // 
             this.linkLabel_feedback_place.AutoSize = true;
             this.linkLabel_feedback_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel_feedback_place.Location = new System.Drawing.Point(506, 243);
+            this.linkLabel_feedback_place.Location = new System.Drawing.Point(506, 241);
             this.linkLabel_feedback_place.Name = "linkLabel_feedback_place";
             this.linkLabel_feedback_place.Size = new System.Drawing.Size(45, 15);
             this.linkLabel_feedback_place.TabIndex = 9;
@@ -223,28 +226,41 @@
             // label_avg_rate
             // 
             this.label_avg_rate.AutoSize = true;
-            this.label_avg_rate.Location = new System.Drawing.Point(411, 40);
+            this.label_avg_rate.Location = new System.Drawing.Point(411, 39);
             this.label_avg_rate.Name = "label_avg_rate";
             this.label_avg_rate.Size = new System.Drawing.Size(72, 13);
             this.label_avg_rate.TabIndex = 12;
             this.label_avg_rate.Text = "AVG рейтинг";
+            // 
+            // linkLabel_deletePlace
+            // 
+            this.linkLabel_deletePlace.AutoSize = true;
+            this.linkLabel_deletePlace.Location = new System.Drawing.Point(506, 228);
+            this.linkLabel_deletePlace.Name = "linkLabel_deletePlace";
+            this.linkLabel_deletePlace.Size = new System.Drawing.Size(50, 13);
+            this.linkLabel_deletePlace.TabIndex = 13;
+            this.linkLabel_deletePlace.TabStop = true;
+            this.linkLabel_deletePlace.Text = "Удалить";
+            this.linkLabel_deletePlace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_deletePlace_LinkClicked);
             // 
             // InfoPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 265);
+            this.Controls.Add(this.linkLabel_deletePlace);
             this.Controls.Add(this.label_avg_rate);
             this.Controls.Add(this.label_count_feedback);
             this.Controls.Add(this.linkLabel_feedback_place);
             this.Controls.Add(this.linkLabel_events_here);
-            this.Controls.Add(this.label_tel);
             this.Controls.Add(this.groupBox_info);
             this.Controls.Add(this.groupBox_address_place);
             this.Controls.Add(this.label_name_place);
             this.Controls.Add(this.label_count);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InfoPlace";
             this.Text = "InfoPlace";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InfoPlace_FormClosed);
             this.Load += new System.EventHandler(this.InfoPlace_Load);
             this.groupBox_address_place.ResumeLayout(false);
             this.groupBox_address_place.PerformLayout();
@@ -274,5 +290,6 @@
         public System.Windows.Forms.Label label_name_place;
         public System.Windows.Forms.Label label_type_place;
         private System.Windows.Forms.Label label_avg_rate;
+        private System.Windows.Forms.LinkLabel linkLabel_deletePlace;
     }
 }

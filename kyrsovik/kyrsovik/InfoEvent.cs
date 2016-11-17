@@ -94,5 +94,11 @@ namespace kyrsovik
             }
             else { avgRateEvent = 0; }
         }       // Средний рейтинг ивента
+
+        private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Main m = this.Owner as Main;
+            m.refreshAllData();
+        }
     }
 }

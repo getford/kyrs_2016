@@ -42,12 +42,13 @@ namespace kyrsovik
                 label_id.Text = $"ID места: {m.listView_place.FocusedItem.SubItems[0].Text}";
                 label_name_place.Text = $"Название места проведения:\n{m.listView_place.FocusedItem.SubItems[2].Text}";
 
-                //if (m.listView_place.FocusedItem.SubItems[4].Text == "true") { label_pay_card.Text = $"Оплата картой: Есть"; }
-                //if (m.listView_place.FocusedItem.SubItems[4].Text == "false") { label_pay_card.Text = $"Оплата картой: Нет"; }
+                if (m.listView_place.FocusedItem.SubItems[4].Text == "True") { label_pay_card.Text = $"Оплата картой: Есть"; }
+                if (m.listView_place.FocusedItem.SubItems[4].Text == "False") { label_pay_card.Text = $"Оплата картой: Нет"; }
+
+                if (m.listView_place.FocusedItem.SubItems[5].Text == "True") { label_parking.Text = $"Парковка: Есть"; }
+                if (m.listView_place.FocusedItem.SubItems[5].Text == "False") { label_parking.Text = $"Парковка: Нет"; }
 
                 label_type_place.Text = $"Тип места: {typePlace}";
-                label_pay_card.Text = $"Оплата картой: {m.listView_place.FocusedItem.SubItems[4].Text}";
-                label_parking.Text = $"Парковка: {m.listView_place.FocusedItem.SubItems[5].Text}";
                 label_working_time.Text = $"Время работы: {m.listView_place.FocusedItem.SubItems[6].Text}";
                 label_avg_rate.Text = $"Рейтинг: {avgRatePlace.ToString()}";
                 selectAddress();
@@ -175,12 +176,57 @@ namespace kyrsovik
                 catch (SqlException ex) { MessageBox.Show(ex.Message); }
                 finally { connect.Close(); }
             }
-            else { avgRatePlace = 0; }
-        }       // средний рейтинг места
+            else
+            {
+                avgRatePlace = 0;
+            }       // средний рейтинг места
+        }
 
         private void linkLabel_events_here_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "EventInPlace")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            EventInPlace ip = new EventInPlace();
+            ip.Owner = this;
+            ip.Show();
         }       // мероприятия в выбранном месте
+
+        private void linkLabel_deletePlace_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SqlConnection connect = new SqlConnection(connection);
+
+            try
+            {
+                connect.Open();
+                string sql_delete_event = $"delete from event where id_place = {id}";
+                string sql_delete_place = $"delete from place where id = {id}";
+                string sql_delete_address = $"delete from address where id = {id}";
+
+                SqlCommand cmd_e = new SqlCommand(sql_delete_event, connect);
+                SqlCommand cmd_p = new SqlCommand(sql_delete_place, connect);
+                SqlCommand cmd_a = new SqlCommand(sql_delete_address, connect);
+
+                cmd_e.ExecuteNonQuery();
+                cmd_p.ExecuteNonQuery();
+                cmd_a.ExecuteNonQuery();
+
+                MessageBox.Show("Место проведения успешно удалено!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connect.Close(); }
+        }       // удаление места
+
+        private void InfoPlace_FormClosed(object sender, FormClosedEventArgs e)         // перезагружает всю инфу после закрытия формы
+        {
+            Main m = this.Owner as Main;
+            m.refreshAllData();
+        }
     }
 }

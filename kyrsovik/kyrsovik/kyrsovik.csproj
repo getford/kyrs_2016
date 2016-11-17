@@ -74,6 +74,12 @@
     <Compile Include="EditPlace.Designer.cs">
       <DependentUpon>EditPlace.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventInPlace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventInPlace.Designer.cs">
+      <DependentUpon>EventInPlace.cs</DependentUpon>
+    </Compile>
     <Compile Include="FeedBackEvent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,15 @@
     <Compile Include="Start.Designer.cs">
       <DependentUpon>Start.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditEvent.resx">
+      <DependentUpon>EditEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPlace.resx">
+      <DependentUpon>EditPlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventInPlace.resx">
+      <DependentUpon>EventInPlace.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FeedBackPlace.resx">
       <DependentUpon>FeedBackPlace.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

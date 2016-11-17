@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InfoEvent));
             this.label_name_event = new System.Windows.Forms.Label();
             this.label_feedback_count = new System.Windows.Forms.Label();
             this.label_rate_event = new System.Windows.Forms.Label();
@@ -149,8 +150,10 @@
             this.Controls.Add(this.label_rate_event);
             this.Controls.Add(this.label_feedback_count);
             this.Controls.Add(this.label_name_event);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InfoEvent";
             this.Text = "InfoEvent";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InfoEvent_FormClosed);
             this.Load += new System.EventHandler(this.InfoEvent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

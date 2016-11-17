@@ -40,7 +40,6 @@ namespace kyrsovik
             string sql_insert_feedback = string.Format($"insert into feedback_place ([id], [id_place], [topic], [text_feedback], [id_authors], [rating_place], [date_feedback]) values (@id, @id_place, @topic, @text_feedback, @id_authors, @rating_place, @date_feedback)");
 
             InfoPlace ip = this.Owner as InfoPlace;
-            MessageBox.Show(ip.label_id.Text.ToString());
 
             SqlConnection connect = new SqlConnection(connection);
 
