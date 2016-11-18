@@ -298,6 +298,7 @@ namespace kyrsovik
             comboBox_pay_card.ResetText();
             comboBox_type_event.ResetText();
             comboBox_type_place.ResetText();
+            comboBox_type_event.ResetText();
 
         }       // очистка полей ввода
 
@@ -364,7 +365,7 @@ namespace kyrsovik
 
         }       // просмотр инфы о мероприятии
 
-        public void refreshAllData()        // перезагрузка всей инфы
+        public void refreshAllData()        // загрузка всей инфы (перезагрузка всеё инфы)
         {
             comboBox_event_place.Items.Clear();
             comboBox_type_event.Items.Clear();
@@ -399,6 +400,107 @@ namespace kyrsovik
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
+        }
+
+        private void getEventForType()      // отбор мероприятий по типу
+        {
+            string type = comboBox_type_for_select.SelectedItem.ToString();
+            int id_type_event = 0;
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+                string sql_select_type = $"select id from type_event where name_type = '{type}'";
+                SqlCommand cmd_select_type = new SqlCommand(sql_select_type, connect);
+                id_type_event = (int)cmd_select_type.ExecuteScalar();
+
+                string sql_query = $"select * from event where id_type = {id_type_event}";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        if (j == 3)
+                        {
+                            lvi.SubItems.Add(type);
+                        }
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+
+        }
+
+        private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3)
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+
+                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+
+        }
+
+        private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
+        {
+            getEventForType();
+        }
+
+        private void button_refresh_Click(object sender, EventArgs e)       // обновление данных
+        {
+            refreshAllData();
+        }
+
+        private void button_selectBestEvent_Click(object sender, EventArgs e)
+        {
+            string output = $"Выберите праметр '{radioButton_bestEvent.Text.ToString()}'";
+
+            if (radioButton_bestEvent.Checked == true)
+                getEventForRate();
+            else
+                MessageBox.Show(output, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

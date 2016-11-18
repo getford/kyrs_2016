@@ -64,8 +64,11 @@
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
             this.groupBox_select_event = new System.Windows.Forms.GroupBox();
-            this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
             this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
+            this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
+            this.button_select = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
+            this.button_selectBestEvent = new System.Windows.Forms.Button();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -371,9 +374,9 @@
             this.label_tel.AutoSize = true;
             this.label_tel.Location = new System.Drawing.Point(306, 72);
             this.label_tel.Name = "label_tel";
-            this.label_tel.Size = new System.Drawing.Size(52, 13);
+            this.label_tel.Size = new System.Drawing.Size(58, 13);
             this.label_tel.TabIndex = 4;
-            this.label_tel.Text = "Telphone";
+            this.label_tel.Text = "Telephone";
             // 
             // textBox_street
             // 
@@ -398,6 +401,9 @@
             // 
             // groupBox_select_event
             // 
+            this.groupBox_select_event.Controls.Add(this.button_selectBestEvent);
+            this.groupBox_select_event.Controls.Add(this.button_refresh);
+            this.groupBox_select_event.Controls.Add(this.button_select);
             this.groupBox_select_event.Controls.Add(this.comboBox_type_for_select);
             this.groupBox_select_event.Controls.Add(this.radioButton_bestEvent);
             this.groupBox_select_event.Location = new System.Drawing.Point(798, 13);
@@ -407,10 +413,18 @@
             this.groupBox_select_event.TabStop = false;
             this.groupBox_select_event.Text = "Выборка";
             // 
+            // comboBox_type_for_select
+            // 
+            this.comboBox_type_for_select.FormattingEnabled = true;
+            this.comboBox_type_for_select.Location = new System.Drawing.Point(6, 47);
+            this.comboBox_type_for_select.Name = "comboBox_type_for_select";
+            this.comboBox_type_for_select.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_type_for_select.TabIndex = 11;
+            // 
             // radioButton_bestEvent
             // 
             this.radioButton_bestEvent.AutoSize = true;
-            this.radioButton_bestEvent.Location = new System.Drawing.Point(7, 20);
+            this.radioButton_bestEvent.Location = new System.Drawing.Point(6, 19);
             this.radioButton_bestEvent.Name = "radioButton_bestEvent";
             this.radioButton_bestEvent.Size = new System.Drawing.Size(133, 17);
             this.radioButton_bestEvent.TabIndex = 0;
@@ -418,13 +432,35 @@
             this.radioButton_bestEvent.Text = "Лучшие мероприятия";
             this.radioButton_bestEvent.UseVisualStyleBackColor = true;
             // 
-            // comboBox_type_for_select
+            // button_select
             // 
-            this.comboBox_type_for_select.FormattingEnabled = true;
-            this.comboBox_type_for_select.Location = new System.Drawing.Point(6, 60);
-            this.comboBox_type_for_select.Name = "comboBox_type_for_select";
-            this.comboBox_type_for_select.Size = new System.Drawing.Size(143, 21);
-            this.comboBox_type_for_select.TabIndex = 11;
+            this.button_select.Location = new System.Drawing.Point(237, 45);
+            this.button_select.Name = "button_select";
+            this.button_select.Size = new System.Drawing.Size(143, 23);
+            this.button_select.TabIndex = 12;
+            this.button_select.Text = "Показать";
+            this.button_select.UseVisualStyleBackColor = true;
+            this.button_select.Click += new System.EventHandler(this.button_select_Click);
+            // 
+            // button_refresh
+            // 
+            this.button_refresh.Location = new System.Drawing.Point(6, 252);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(374, 23);
+            this.button_refresh.TabIndex = 13;
+            this.button_refresh.Text = "Обновить";
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
+            // 
+            // button_selectBestEvent
+            // 
+            this.button_selectBestEvent.Location = new System.Drawing.Point(237, 16);
+            this.button_selectBestEvent.Name = "button_selectBestEvent";
+            this.button_selectBestEvent.Size = new System.Drawing.Size(143, 23);
+            this.button_selectBestEvent.TabIndex = 14;
+            this.button_selectBestEvent.Text = "Показать лучшие ";
+            this.button_selectBestEvent.UseVisualStyleBackColor = true;
+            this.button_selectBestEvent.Click += new System.EventHandler(this.button_selectBestEvent_Click);
             // 
             // Main
             // 
@@ -490,6 +526,9 @@
         private System.Windows.Forms.GroupBox groupBox_select_event;
         private System.Windows.Forms.RadioButton radioButton_bestEvent;
         public System.Windows.Forms.ComboBox comboBox_type_for_select;
+        private System.Windows.Forms.Button button_select;
+        private System.Windows.Forms.Button button_refresh;
+        private System.Windows.Forms.Button button_selectBestEvent;
     }
 }
 
