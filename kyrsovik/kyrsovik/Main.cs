@@ -46,7 +46,6 @@ namespace kyrsovik
             /*-----------------------------------------------*/
 
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
             refreshAllData();
@@ -449,38 +448,74 @@ namespace kyrsovik
 
         private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3)
         {
-            SqlConnection connect = new SqlConnection(connection);
-            try
+            if (radioButton_bestEvent.Checked == true)
             {
-                connect.Open();
-
-                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
-                SqlCommand cmd = new SqlCommand(sql_query, connect);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-
-                listView_event.Clear();
-                fill_ListView_event();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
+                SqlConnection connect = new SqlConnection(connection);
+                try
                 {
-                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
-                    for (int j = 1; j < dt.Columns.Count; j++)
-                    {
-                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
-                    }
-                    listView_event.Items.Add(lvi);
-                }
-                da.Dispose();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally { connect.Close(); }
+                    connect.Open();
 
+                    string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+                    SqlCommand cmd = new SqlCommand(sql_query, connect);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    da.Fill(dt);
+
+                    listView_event.Clear();
+                    fill_ListView_event();
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                        for (int j = 1; j < dt.Columns.Count; j++)
+                        {
+                            lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                        }
+                        listView_event.Items.Add(lvi);
+                    }
+                    da.Dispose();
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { connect.Close(); }
+            }
+            if(radioButton_for_date.Checked == true)            /// дописать выборку промежутка даты
+            {
+                SqlConnection connect = new SqlConnection(connection);
+                try
+                {
+                    connect.Open();
+
+                    string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+                    SqlCommand cmd = new SqlCommand(sql_query, connect);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    da.Fill(dt);
+
+                    listView_event.Clear();
+                    fill_ListView_event();
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                        for (int j = 1; j < dt.Columns.Count; j++)
+                        {
+                            lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                        }
+                        listView_event.Items.Add(lvi);
+                    }
+                    da.Dispose();
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally { connect.Close(); }
+            }
         }
 
         private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
@@ -493,11 +528,11 @@ namespace kyrsovik
             refreshAllData();
         }
 
-        private void button_selectBestEvent_Click(object sender, EventArgs e)
+        private void button_selectBestEvent_Click(object sender, EventArgs e)       // кнопка показа лучших мероприятий
         {
-            string output = $"Выберите праметр '{radioButton_bestEvent.Text.ToString()}'";
+            string output = $"Выберите праметр '{radioButton_bestEvent.Text.ToString()}'{Environment.NewLine} или '{radioButton_for_date.Text.ToString()}'";
 
-            if (radioButton_bestEvent.Checked == true)
+            if (radioButton_bestEvent.Checked == true || radioButton_for_date.Checked == true)
                 getEventForRate();
             else
                 MessageBox.Show(output, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
