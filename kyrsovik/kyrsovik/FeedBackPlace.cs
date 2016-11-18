@@ -16,7 +16,6 @@ namespace kyrsovik
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
         private int maxIdFeedBack;
-
         public FeedBackPlace()
         {
             InitializeComponent();
@@ -27,14 +26,12 @@ namespace kyrsovik
             comboBox_rate.Items.Add(4);
             comboBox_rate.Items.Add(5);
         }
-
         private void FeedBack_Load(object sender, EventArgs e)
         {
             InfoPlace ip = this.Owner as InfoPlace;
             label_name_place.Text = ip.label_name_place.Text.ToString();
             getAuthors();
         }
-
         private void addFeedBack()
         {
             string sql_insert_feedback = string.Format($"insert into feedback_place ([id], [id_place], [topic], [text_feedback], [id_authors], [rating_place], [date_feedback]) values (@id, @id_place, @topic, @text_feedback, @id_authors, @rating_place, @date_feedback)");
@@ -68,7 +65,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // добавить отзыв
-
         private void getAuthors()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -94,7 +90,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // список авторов
-
         private void getAuthorsId()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -114,7 +109,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // id автора 
-
         private void getMaxIdFeedBack()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -131,7 +125,6 @@ namespace kyrsovik
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }       // максимальное значение id в таблице
-
         private void button_add_feedback_Click(object sender, EventArgs e)
         {
             addFeedBack();

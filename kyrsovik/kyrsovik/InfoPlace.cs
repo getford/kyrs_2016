@@ -22,7 +22,6 @@ namespace kyrsovik
         {
             InitializeComponent();
         }
-
         private void InfoPlace_Load(object sender, EventArgs e)
         {
             getTypePlace();
@@ -30,7 +29,6 @@ namespace kyrsovik
             getInfo();
             getCountFeedBack();
         }
-
         private void getInfo()
         {
             Main m = this.Owner as Main;
@@ -58,7 +56,6 @@ namespace kyrsovik
                 MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }               // информация о заведении
-
         private void selectAddress()
         {
             Main m = this.Owner as Main;
@@ -87,7 +84,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }       // адрес заведения
-
         private void linkLabel_feedback_place_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
@@ -102,7 +98,6 @@ namespace kyrsovik
             fb.Owner = this;
             fb.Show();
         }       // отзыв
-
         private void getCountFeedBack()
         {
             Main m = this.Owner as Main;
@@ -123,7 +118,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // число отзывов
-
         private void getTypePlace()
         {
             Main m = this.Owner as Main;
@@ -145,7 +139,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }           // тип места
-
         private void getAVGRatePlace()
         {
             Main m = this.Owner as Main;
@@ -181,7 +174,6 @@ namespace kyrsovik
                 avgRatePlace = 0;
             }       // средний рейтинг места
         }
-
         private void linkLabel_events_here_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
@@ -196,7 +188,6 @@ namespace kyrsovik
             ip.Owner = this;
             ip.Show();
         }       // мероприятия в выбранном месте
-
         private void linkLabel_deletePlace_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -222,7 +213,6 @@ namespace kyrsovik
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }       // удаление места
-
         private void InfoPlace_FormClosed(object sender, FormClosedEventArgs e)         // перезагружает всю инфу после закрытия формы
         {
             Main m = this.Owner as Main;

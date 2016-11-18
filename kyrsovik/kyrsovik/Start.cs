@@ -16,13 +16,11 @@ namespace kyrsovik
         {
             InitializeComponent();
         }
-
         private void Start_Load(object sender, EventArgs e)
         {
             timer.Interval = 3000;
             timer.Enabled = true;
         }
-
         private void timer_Tick(object sender, EventArgs e)
         {
             timer.Enabled = false;

@@ -80,7 +80,6 @@ namespace kyrsovik
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }           // инициализация listview (колонки)
-
         private void fill_ListView_place()
         {
             Initialize_List_place();
@@ -96,7 +95,6 @@ namespace kyrsovik
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }              // инициализация listview (колонки)
-
         private void getDataPlace()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -131,7 +129,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }               // выборка из Place
-
         private void getDataEvent()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -166,7 +163,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }               // выборка из Event
-
         private void button_add_place_Click(object sender, EventArgs e)
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -233,7 +229,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }           // добавление места
-
         private void button_add_event_Click(object sender, EventArgs e)             // добавление ивента
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -280,7 +275,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }
-
         public void clearInput()
         {
             textBox_house.Clear();
@@ -300,7 +294,6 @@ namespace kyrsovik
             comboBox_type_event.ResetText();
 
         }       // очистка полей ввода
-
         private void getCount()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -331,7 +324,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }       // count из таблиц
-
         private void listView_place_MouseClick(object sender, MouseEventArgs e)         // просмотр инфы о месте
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
@@ -347,7 +339,6 @@ namespace kyrsovik
             ip.Show();
 
         }
-
         private void listView_event_MouseClick(object sender, MouseEventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
@@ -363,7 +354,6 @@ namespace kyrsovik
             ie.Show();
 
         }       // просмотр инфы о мероприятии
-
         public void refreshAllData()        // загрузка всей инфы (перезагрузка всеё инфы)
         {
             comboBox_event_place.Items.Clear();
@@ -379,7 +369,6 @@ namespace kyrsovik
 
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
-
         private void getTypeEvent()     // заполняем список тип мероприятия
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -400,7 +389,6 @@ namespace kyrsovik
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }
-
         private void getEventForType()      // отбор мероприятий по типу
         {
             string type = comboBox_type_for_select.SelectedItem.ToString();
@@ -445,7 +433,6 @@ namespace kyrsovik
             finally { connect.Close(); }
 
         }
-
         private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3)
         {
             if (radioButton_bestEvent.Checked == true)
@@ -482,7 +469,8 @@ namespace kyrsovik
                 }
                 finally { connect.Close(); }
             }
-            if(radioButton_for_date.Checked == true)            /// дописать выборку промежутка даты
+
+            if (radioButton_for_date.Checked == true)            /// дописать выборку промежутка даты
             {
                 SqlConnection connect = new SqlConnection(connection);
                 try
@@ -516,18 +504,15 @@ namespace kyrsovik
                 }
                 finally { connect.Close(); }
             }
-        }
-
+        }                           // дописать
         private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
         {
             getEventForType();
         }
-
         private void button_refresh_Click(object sender, EventArgs e)       // обновление данных
         {
             refreshAllData();
         }
-
         private void button_selectBestEvent_Click(object sender, EventArgs e)       // кнопка показа лучших мероприятий
         {
             string output = $"Выберите праметр '{radioButton_bestEvent.Text.ToString()}'{Environment.NewLine} или '{radioButton_for_date.Text.ToString()}'";

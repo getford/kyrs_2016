@@ -27,7 +27,6 @@ namespace kyrsovik
             comboBox_rate.Items.Add(4);
             comboBox_rate.Items.Add(5);
         }
-
         private void FeedBackEvent_Load(object sender, EventArgs e)
         {
             InfoEvent ie = this.Owner as InfoEvent;
@@ -67,7 +66,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // добавить отзыв
-
         private void getAuthors()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -93,7 +91,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // список авторов
-
         private void getAuthorsId()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -113,7 +110,6 @@ namespace kyrsovik
                 connect.Close();
             }
         }       // id автора 
-
         private void getMaxIdFeedBack()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -130,15 +126,13 @@ namespace kyrsovik
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }       // максимальное значение id в таблице
-
         private void button_add_feedback_Click(object sender, EventArgs e)
         {
             addFeedBack();
-        }
-
+        }           // кнопка добавить отзыв
         private void FeedBackEvent_FormClosed(object sender, FormClosedEventArgs e)
         {
             InfoEvent ie = this.Owner as InfoEvent;
-        }
+        }       // обновляем инфу после закрытия формы
     }
 }

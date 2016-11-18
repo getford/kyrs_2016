@@ -23,7 +23,6 @@ namespace kyrsovik
         {
             InitializeComponent();
         }
-
         private void InfoEvent_Load(object sender, EventArgs e)
         {
             Main m = this.Owner as Main;
@@ -36,7 +35,6 @@ namespace kyrsovik
             getInfoEvent();
 
         }
-
         public void getInfoEvent()
         {
             Main m = this.Owner as Main;
@@ -55,7 +53,6 @@ namespace kyrsovik
             }
             else { MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }       // информация об ивенте
-
         private void getTypeEvent()
         {
             Main m = this.Owner as Main;
@@ -70,7 +67,6 @@ namespace kyrsovik
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }           // получаем тип ивента
-
         private void getAVGRateEvent()
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -107,7 +103,6 @@ namespace kyrsovik
             }
             else { avgRateEvent = 0; }
         }       // Средний рейтинг ивента и количество отзывов
-
         private void linkLabel_feedback_event_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму

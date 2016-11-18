@@ -19,12 +19,10 @@ namespace kyrsovik
         {
             InitializeComponent();
         }
-
         private void EventInPlace_Load(object sender, EventArgs e)
         {
             getEventInPlace();
         }
-
         private void Initialize_List()
         {
             listView_evantInPlace.GridLines = true;
@@ -47,7 +45,6 @@ namespace kyrsovik
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }           // инициализация listview (колонки)
-
         private void getEventInPlace()
         {
             InfoPlace ip = this.Owner as InfoPlace;

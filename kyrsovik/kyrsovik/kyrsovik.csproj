@@ -68,12 +68,6 @@
     <Compile Include="EditEvent.Designer.cs">
       <DependentUpon>EditEvent.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditPlace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditPlace.Designer.cs">
-      <DependentUpon>EditPlace.cs</DependentUpon>
-    </Compile>
     <Compile Include="EventInPlace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,9 +119,6 @@
     </Compile>
     <EmbeddedResource Include="EditEvent.resx">
       <DependentUpon>EditEvent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditPlace.resx">
-      <DependentUpon>EditPlace.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventInPlace.resx">
       <DependentUpon>EventInPlace.cs</DependentUpon>
