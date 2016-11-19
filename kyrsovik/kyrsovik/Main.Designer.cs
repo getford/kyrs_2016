@@ -64,23 +64,24 @@
             this.textBox_house = new System.Windows.Forms.TextBox();
             this.textBox_tel = new System.Windows.Forms.TextBox();
             this.groupBox_select_event = new System.Windows.Forms.GroupBox();
-            this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
-            this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
-            this.button_select = new System.Windows.Forms.Button();
-            this.button_refresh = new System.Windows.Forms.Button();
-            this.button_selectBestEvent = new System.Windows.Forms.Button();
-            this.groupBox_bestEvent = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker_start = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker_end = new System.Windows.Forms.DateTimePicker();
-            this.radioButton_for_date = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
+            this.button_select = new System.Windows.Forms.Button();
+            this.groupBox_bestEvent = new System.Windows.Forms.GroupBox();
+            this.radioButton_start_to_end_date_event = new System.Windows.Forms.RadioButton();
+            this.radioButton_for_date = new System.Windows.Forms.RadioButton();
+            this.dateTimePicker_end = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_start = new System.Windows.Forms.DateTimePicker();
+            this.button_selectBestEvent = new System.Windows.Forms.Button();
+            this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
             this.groupBox_add_place.SuspendLayout();
             this.groupBox_select_event.SuspendLayout();
-            this.groupBox_bestEvent.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox_bestEvent.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView_event
@@ -418,6 +419,17 @@
             this.groupBox_select_event.TabStop = false;
             this.groupBox_select_event.Text = "Выборка";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBox_type_for_select);
+            this.groupBox1.Controls.Add(this.button_select);
+            this.groupBox1.Location = new System.Drawing.Point(6, 190);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(368, 56);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "По типу мероприятия";
+            // 
             // comboBox_type_for_select
             // 
             this.comboBox_type_for_select.FormattingEnabled = true;
@@ -425,17 +437,6 @@
             this.comboBox_type_for_select.Name = "comboBox_type_for_select";
             this.comboBox_type_for_select.Size = new System.Drawing.Size(143, 21);
             this.comboBox_type_for_select.TabIndex = 11;
-            // 
-            // radioButton_bestEvent
-            // 
-            this.radioButton_bestEvent.AutoSize = true;
-            this.radioButton_bestEvent.Location = new System.Drawing.Point(6, 25);
-            this.radioButton_bestEvent.Name = "radioButton_bestEvent";
-            this.radioButton_bestEvent.Size = new System.Drawing.Size(153, 17);
-            this.radioButton_bestEvent.TabIndex = 0;
-            this.radioButton_bestEvent.TabStop = true;
-            this.radioButton_bestEvent.Text = "Все лучшие мероприятия";
-            this.radioButton_bestEvent.UseVisualStyleBackColor = true;
             // 
             // button_select
             // 
@@ -447,59 +448,31 @@
             this.button_select.UseVisualStyleBackColor = true;
             this.button_select.Click += new System.EventHandler(this.button_select_Click);
             // 
-            // button_refresh
-            // 
-            this.button_refresh.Location = new System.Drawing.Point(6, 252);
-            this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(374, 23);
-            this.button_refresh.TabIndex = 13;
-            this.button_refresh.Text = "Обновить";
-            this.button_refresh.UseVisualStyleBackColor = true;
-            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
-            // 
-            // button_selectBestEvent
-            // 
-            this.button_selectBestEvent.Location = new System.Drawing.Point(6, 74);
-            this.button_selectBestEvent.Name = "button_selectBestEvent";
-            this.button_selectBestEvent.Size = new System.Drawing.Size(355, 23);
-            this.button_selectBestEvent.TabIndex = 14;
-            this.button_selectBestEvent.Text = "Показать лучшие ";
-            this.button_selectBestEvent.UseVisualStyleBackColor = true;
-            this.button_selectBestEvent.Click += new System.EventHandler(this.button_selectBestEvent_Click);
-            // 
             // groupBox_bestEvent
             // 
+            this.groupBox_bestEvent.Controls.Add(this.radioButton_start_to_end_date_event);
             this.groupBox_bestEvent.Controls.Add(this.radioButton_for_date);
             this.groupBox_bestEvent.Controls.Add(this.dateTimePicker_end);
             this.groupBox_bestEvent.Controls.Add(this.dateTimePicker_start);
             this.groupBox_bestEvent.Controls.Add(this.button_selectBestEvent);
             this.groupBox_bestEvent.Controls.Add(this.radioButton_bestEvent);
-            this.groupBox_bestEvent.Location = new System.Drawing.Point(13, 19);
+            this.groupBox_bestEvent.Location = new System.Drawing.Point(12, 19);
             this.groupBox_bestEvent.Name = "groupBox_bestEvent";
-            this.groupBox_bestEvent.Size = new System.Drawing.Size(367, 107);
+            this.groupBox_bestEvent.Size = new System.Drawing.Size(368, 165);
             this.groupBox_bestEvent.TabIndex = 15;
             this.groupBox_bestEvent.TabStop = false;
             this.groupBox_bestEvent.Text = "Лучшие мероприятия";
             // 
-            // dateTimePicker_start
+            // radioButton_start_to_end_date_event
             // 
-            this.dateTimePicker_start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker_start.Location = new System.Drawing.Point(6, 48);
-            this.dateTimePicker_start.Name = "dateTimePicker_start";
-            this.dateTimePicker_start.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dateTimePicker_start.Size = new System.Drawing.Size(143, 20);
-            this.dateTimePicker_start.TabIndex = 19;
-            this.dateTimePicker_start.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
-            // 
-            // dateTimePicker_end
-            // 
-            this.dateTimePicker_end.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker_end.Location = new System.Drawing.Point(218, 48);
-            this.dateTimePicker_end.Name = "dateTimePicker_end";
-            this.dateTimePicker_end.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dateTimePicker_end.Size = new System.Drawing.Size(143, 20);
-            this.dateTimePicker_end.TabIndex = 20;
-            this.dateTimePicker_end.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            this.radioButton_start_to_end_date_event.AutoSize = true;
+            this.radioButton_start_to_end_date_event.Location = new System.Drawing.Point(93, 48);
+            this.radioButton_start_to_end_date_event.Name = "radioButton_start_to_end_date_event";
+            this.radioButton_start_to_end_date_event.Size = new System.Drawing.Size(220, 17);
+            this.radioButton_start_to_end_date_event.TabIndex = 22;
+            this.radioButton_start_to_end_date_event.TabStop = true;
+            this.radioButton_start_to_end_date_event.Text = "Мероприятия за промежуток времени";
+            this.radioButton_start_to_end_date_event.UseVisualStyleBackColor = true;
             // 
             // radioButton_for_date
             // 
@@ -512,16 +485,56 @@
             this.radioButton_for_date.Text = "Лучшие мероприятия по дате";
             this.radioButton_for_date.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // dateTimePicker_end
             // 
-            this.groupBox1.Controls.Add(this.comboBox_type_for_select);
-            this.groupBox1.Controls.Add(this.button_select);
-            this.groupBox1.Location = new System.Drawing.Point(13, 132);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(361, 56);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "По типу мероприятия";
+            this.dateTimePicker_end.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_end.Location = new System.Drawing.Point(218, 87);
+            this.dateTimePicker_end.Name = "dateTimePicker_end";
+            this.dateTimePicker_end.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dateTimePicker_end.Size = new System.Drawing.Size(143, 20);
+            this.dateTimePicker_end.TabIndex = 20;
+            this.dateTimePicker_end.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            // 
+            // dateTimePicker_start
+            // 
+            this.dateTimePicker_start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_start.Location = new System.Drawing.Point(6, 87);
+            this.dateTimePicker_start.Name = "dateTimePicker_start";
+            this.dateTimePicker_start.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dateTimePicker_start.Size = new System.Drawing.Size(143, 20);
+            this.dateTimePicker_start.TabIndex = 19;
+            this.dateTimePicker_start.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            // 
+            // button_selectBestEvent
+            // 
+            this.button_selectBestEvent.Location = new System.Drawing.Point(6, 136);
+            this.button_selectBestEvent.Name = "button_selectBestEvent";
+            this.button_selectBestEvent.Size = new System.Drawing.Size(355, 23);
+            this.button_selectBestEvent.TabIndex = 14;
+            this.button_selectBestEvent.Text = "Показать";
+            this.button_selectBestEvent.UseVisualStyleBackColor = true;
+            this.button_selectBestEvent.Click += new System.EventHandler(this.button_selectBestEvent_Click);
+            // 
+            // radioButton_bestEvent
+            // 
+            this.radioButton_bestEvent.AutoSize = true;
+            this.radioButton_bestEvent.Location = new System.Drawing.Point(6, 25);
+            this.radioButton_bestEvent.Name = "radioButton_bestEvent";
+            this.radioButton_bestEvent.Size = new System.Drawing.Size(153, 17);
+            this.radioButton_bestEvent.TabIndex = 0;
+            this.radioButton_bestEvent.TabStop = true;
+            this.radioButton_bestEvent.Text = "Все лучшие мероприятия";
+            this.radioButton_bestEvent.UseVisualStyleBackColor = true;
+            // 
+            // button_refresh
+            // 
+            this.button_refresh.Location = new System.Drawing.Point(6, 252);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(374, 23);
+            this.button_refresh.TabIndex = 13;
+            this.button_refresh.Text = "Обновить";
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
             // Main
             // 
@@ -544,9 +557,9 @@
             this.groupBox_add_place.ResumeLayout(false);
             this.groupBox_add_place.PerformLayout();
             this.groupBox_select_event.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox_bestEvent.ResumeLayout(false);
             this.groupBox_bestEvent.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -597,6 +610,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_end;
         private System.Windows.Forms.DateTimePicker dateTimePicker_start;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton_start_to_end_date_event;
     }
 }
 

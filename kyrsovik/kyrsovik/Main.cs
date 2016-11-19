@@ -57,7 +57,7 @@ namespace kyrsovik
             listView_place.LabelEdit = false;
             listView_place.FullRowSelect = true;
             listView_place.View = View.Details;// стиль вывода в таблицу
-        }// инициализация listview
+        }   // инициализация listview
         private void Initialize_List_event()
         {
             listView_event.GridLines = true;
@@ -433,78 +433,18 @@ namespace kyrsovik
             finally { connect.Close(); }
 
         }
-        private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3)
+        private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3) по дате        выборка за промежуток времени
         {
-            if (radioButton_bestEvent.Checked == true)
-            {
-                SqlConnection connect = new SqlConnection(connection);
-                try
-                {
-                    connect.Open();
+            // отбор с рейтингом > 3
+            if (radioButton_bestEvent.Checked == true) { selectBestRate(); }
 
-                    string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
-                    SqlCommand cmd = new SqlCommand(sql_query, connect);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
+            // выборка с промежутком даты и лучшими мероприятиями
+            if (radioButton_for_date.Checked == true) { selectBestRateAndDate(); }
 
-                    da.Fill(dt);
+            // выборка с промежутком даты
+            if (radioButton_start_to_end_date_event.Checked == true) { selectForDate(); }
 
-                    listView_event.Clear();
-                    fill_ListView_event();
-
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
-                        for (int j = 1; j < dt.Columns.Count; j++)
-                        {
-                            lvi.SubItems.Add(dt.Rows[i][j].ToString());
-                        }
-                        listView_event.Items.Add(lvi);
-                    }
-                    da.Dispose();
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { connect.Close(); }
-            }
-
-            if (radioButton_for_date.Checked == true)            /// дописать выборку промежутка даты
-            {
-                SqlConnection connect = new SqlConnection(connection);
-                try
-                {
-                    connect.Open();
-
-                    string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
-                    SqlCommand cmd = new SqlCommand(sql_query, connect);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-
-                    da.Fill(dt);
-
-                    listView_event.Clear();
-                    fill_ListView_event();
-
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
-                        for (int j = 1; j < dt.Columns.Count; j++)
-                        {
-                            lvi.SubItems.Add(dt.Rows[i][j].ToString());
-                        }
-                        listView_event.Items.Add(lvi);
-                    }
-                    da.Dispose();
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally { connect.Close(); }
-            }
-        }                           // дописать
+        }
         private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
         {
             getEventForType();
@@ -517,10 +457,118 @@ namespace kyrsovik
         {
             string output = $"Выберите праметр '{radioButton_bestEvent.Text.ToString()}'{Environment.NewLine} или '{radioButton_for_date.Text.ToString()}'";
 
-            if (radioButton_bestEvent.Checked == true || radioButton_for_date.Checked == true)
+            if (radioButton_bestEvent.Checked == true || radioButton_for_date.Checked == true || radioButton_start_to_end_date_event.Created == true)
                 getEventForRate();
             else
                 MessageBox.Show(output, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void selectBestRate()       // лучший рейтинг
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+
+                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }
+        private void selectBestRateAndDate()
+        {
+            DateTime date_start = DateTime.Parse(dateTimePicker_start.Value.ToString());     // дата для начала отсчета
+            DateTime date_end = DateTime.Parse(dateTimePicker_end.Value.ToString());        // дата для окончания выборки
+
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+
+                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3 and date_event between '{date_start}' and '{date_end}'";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }       // лучший рейтинг и по дате
+        private void selectForDate()        // выборка с промежутком даты
+        {
+            DateTime date_start = DateTime.Parse(dateTimePicker_start.Value.ToString());     // дата для начала отсчета
+            DateTime date_end = DateTime.Parse(dateTimePicker_end.Value.ToString());        // дата для окончания выборки
+
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+
+                string sql_query = $"select * from event where date_event between '{date_start}' and '{date_end}'";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
         }
     }
 }

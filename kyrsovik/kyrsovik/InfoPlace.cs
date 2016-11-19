@@ -84,20 +84,6 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }       // адрес заведения
-        private void linkLabel_feedback_place_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
-            {
-                if (f.Name == "FeedBack")
-                {
-                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-            }
-            FeedBackPlace fb = new FeedBackPlace();
-            fb.Owner = this;
-            fb.Show();
-        }       // отзыв
         private void getCountFeedBack()
         {
             Main m = this.Owner as Main;
@@ -173,7 +159,7 @@ namespace kyrsovik
             {
                 avgRatePlace = 0;
             }       // средний рейтинг места
-        }
+        }       // средний рейтинг места
         private void linkLabel_events_here_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
@@ -188,7 +174,12 @@ namespace kyrsovik
             ip.Owner = this;
             ip.Show();
         }       // мероприятия в выбранном месте
-        private void linkLabel_deletePlace_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void InfoPlace_FormClosed(object sender, FormClosedEventArgs e)         // перезагружает всю инфу после закрытия формы
+        {
+            Main m = this.Owner as Main;
+            m.refreshAllData();
+        }
+        private void pictureBox_deletePlace_Click(object sender, EventArgs e)
         {
             SqlConnection connect = new SqlConnection(connection);
 
@@ -212,11 +203,20 @@ namespace kyrsovik
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
-        }       // удаление места
-        private void InfoPlace_FormClosed(object sender, FormClosedEventArgs e)         // перезагружает всю инфу после закрытия формы
+        }       // кнопка удаления
+        private void pictureBox_feedBack_place_Click(object sender, EventArgs e)        // кнопка отзыва
         {
-            Main m = this.Owner as Main;
-            m.refreshAllData();
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "FeedBack")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            FeedBackPlace fb = new FeedBackPlace();
+            fb.Owner = this;
+            fb.Show();
         }
     }
 }

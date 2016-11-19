@@ -32,7 +32,6 @@
             this.label_name_event = new System.Windows.Forms.Label();
             this.label_feedback_count = new System.Windows.Forms.Label();
             this.label_rate_event = new System.Windows.Forms.Label();
-            this.linkLabel_feedback_event = new System.Windows.Forms.LinkLabel();
             this.label_type_event = new System.Windows.Forms.Label();
             this.label_date_event = new System.Windows.Forms.Label();
             this.label_age = new System.Windows.Forms.Label();
@@ -40,8 +39,12 @@
             this.label_id_event = new System.Windows.Forms.Label();
             this.groupBox_infoEvent = new System.Windows.Forms.GroupBox();
             this.groupBox_statistic = new System.Windows.Forms.GroupBox();
+            this.pictureBox_editEvent = new System.Windows.Forms.PictureBox();
+            this.pictureBox_feedbackEvent = new System.Windows.Forms.PictureBox();
             this.groupBox_infoEvent.SuspendLayout();
             this.groupBox_statistic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_editEvent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_feedbackEvent)).BeginInit();
             this.SuspendLayout();
             // 
             // label_name_event
@@ -71,18 +74,6 @@
             this.label_rate_event.Size = new System.Drawing.Size(48, 13);
             this.label_rate_event.TabIndex = 2;
             this.label_rate_event.Text = "Рейтинг";
-            // 
-            // linkLabel_feedback_event
-            // 
-            this.linkLabel_feedback_event.AutoSize = true;
-            this.linkLabel_feedback_event.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Italic);
-            this.linkLabel_feedback_event.Location = new System.Drawing.Point(418, 12);
-            this.linkLabel_feedback_event.Name = "linkLabel_feedback_event";
-            this.linkLabel_feedback_event.Size = new System.Drawing.Size(50, 16);
-            this.linkLabel_feedback_event.TabIndex = 3;
-            this.linkLabel_feedback_event.TabStop = true;
-            this.linkLabel_feedback_event.Text = "Отзыв";
-            this.linkLabel_feedback_event.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_feedback_event_LinkClicked);
             // 
             // label_type_event
             // 
@@ -154,14 +145,41 @@
             this.groupBox_statistic.TabStop = false;
             this.groupBox_statistic.Text = "Статистика";
             // 
+            // pictureBox_editEvent
+            // 
+            this.pictureBox_editEvent.ErrorImage = global::kyrsovik.Properties.Resources.edit;
+            this.pictureBox_editEvent.Image = global::kyrsovik.Properties.Resources.edit;
+            this.pictureBox_editEvent.InitialImage = global::kyrsovik.Properties.Resources.edit;
+            this.pictureBox_editEvent.Location = new System.Drawing.Point(400, 9);
+            this.pictureBox_editEvent.Name = "pictureBox_editEvent";
+            this.pictureBox_editEvent.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox_editEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_editEvent.TabIndex = 13;
+            this.pictureBox_editEvent.TabStop = false;
+            this.pictureBox_editEvent.Click += new System.EventHandler(this.pictureBox_editEvent_Click);
+            // 
+            // pictureBox_feedbackEvent
+            // 
+            this.pictureBox_feedbackEvent.ErrorImage = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedbackEvent.Image = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedbackEvent.InitialImage = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedbackEvent.Location = new System.Drawing.Point(438, 9);
+            this.pictureBox_feedbackEvent.Name = "pictureBox_feedbackEvent";
+            this.pictureBox_feedbackEvent.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox_feedbackEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_feedbackEvent.TabIndex = 12;
+            this.pictureBox_feedbackEvent.TabStop = false;
+            this.pictureBox_feedbackEvent.Click += new System.EventHandler(this.pictureBox_feedback_Click);
+            // 
             // InfoEvent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 203);
+            this.Controls.Add(this.pictureBox_editEvent);
+            this.Controls.Add(this.pictureBox_feedbackEvent);
             this.Controls.Add(this.groupBox_statistic);
             this.Controls.Add(this.groupBox_infoEvent);
-            this.Controls.Add(this.linkLabel_feedback_event);
             this.Controls.Add(this.label_name_event);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InfoEvent";
@@ -172,6 +190,8 @@
             this.groupBox_infoEvent.PerformLayout();
             this.groupBox_statistic.ResumeLayout(false);
             this.groupBox_statistic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_editEvent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_feedbackEvent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +200,6 @@
         #endregion
         private System.Windows.Forms.Label label_feedback_count;
         private System.Windows.Forms.Label label_rate_event;
-        private System.Windows.Forms.LinkLabel linkLabel_feedback_event;
         private System.Windows.Forms.Label label_type_event;
         private System.Windows.Forms.Label label_date_event;
         private System.Windows.Forms.Label label_age;
@@ -189,5 +208,7 @@
         private System.Windows.Forms.GroupBox groupBox_statistic;
         public System.Windows.Forms.Label label_name_event;
         public System.Windows.Forms.Label label_id_event;
+        private System.Windows.Forms.PictureBox pictureBox_feedbackEvent;
+        private System.Windows.Forms.PictureBox pictureBox_editEvent;
     }
 }

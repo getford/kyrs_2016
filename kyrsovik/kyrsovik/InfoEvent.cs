@@ -103,7 +103,12 @@ namespace kyrsovik
             }
             else { avgRateEvent = 0; }
         }       // Средний рейтинг ивента и количество отзывов
-        private void linkLabel_feedback_event_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)     // обновляем данные при закрытии формы
+        {
+            Main m = this.Owner as Main;
+            m.refreshAllData();
+        }
+        private void pictureBox_feedback_Click(object sender, EventArgs e)
         {
             foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
             {
@@ -116,11 +121,20 @@ namespace kyrsovik
             FeedBackEvent fb = new FeedBackEvent();
             fb.Owner = this;
             fb.Show();
-        }
-        private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)     // обновляем данные при закрытии формы
+        }       // кнопка отзыва
+        private void pictureBox_editEvent_Click(object sender, EventArgs e)         // кнопка редактирования мероприятия
         {
-            Main m = this.Owner as Main;
-            m.refreshAllData();
+            foreach (Form f in Application.OpenForms)            // не разрешаем открыть еще одну форму
+            {
+                if (f.Name == "EditEvent")
+                {
+                    MessageBox.Show("Форма уже открыта", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            EditEvent ee = new EditEvent();
+            ee.Owner = this;
+            ee.Show();
         }
     }
 }

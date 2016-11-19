@@ -44,12 +44,14 @@
             this.groupBox_info = new System.Windows.Forms.GroupBox();
             this.label_type_place = new System.Windows.Forms.Label();
             this.linkLabel_events_here = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_feedback_place = new System.Windows.Forms.LinkLabel();
             this.label_count_feedback = new System.Windows.Forms.Label();
             this.label_avg_rate = new System.Windows.Forms.Label();
-            this.linkLabel_deletePlace = new System.Windows.Forms.LinkLabel();
+            this.pictureBox_deletePlace = new System.Windows.Forms.PictureBox();
+            this.pictureBox_feedBack_place = new System.Windows.Forms.PictureBox();
             this.groupBox_address_place.SuspendLayout();
             this.groupBox_info.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_deletePlace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_feedBack_place)).BeginInit();
             this.SuspendLayout();
             // 
             // label_id
@@ -202,22 +204,10 @@
             this.linkLabel_events_here.Text = "Мероприятия в этом заведении";
             this.linkLabel_events_here.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_events_here_LinkClicked);
             // 
-            // linkLabel_feedback_place
-            // 
-            this.linkLabel_feedback_place.AutoSize = true;
-            this.linkLabel_feedback_place.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel_feedback_place.Location = new System.Drawing.Point(506, 241);
-            this.linkLabel_feedback_place.Name = "linkLabel_feedback_place";
-            this.linkLabel_feedback_place.Size = new System.Drawing.Size(45, 15);
-            this.linkLabel_feedback_place.TabIndex = 9;
-            this.linkLabel_feedback_place.TabStop = true;
-            this.linkLabel_feedback_place.Text = "Отзыв";
-            this.linkLabel_feedback_place.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_feedback_place_LinkClicked);
-            // 
             // label_count_feedback
             // 
             this.label_count_feedback.AutoSize = true;
-            this.label_count_feedback.Location = new System.Drawing.Point(411, 14);
+            this.label_count_feedback.Location = new System.Drawing.Point(385, 14);
             this.label_count_feedback.Name = "label_count_feedback";
             this.label_count_feedback.Size = new System.Drawing.Size(112, 13);
             this.label_count_feedback.TabIndex = 10;
@@ -226,32 +216,47 @@
             // label_avg_rate
             // 
             this.label_avg_rate.AutoSize = true;
-            this.label_avg_rate.Location = new System.Drawing.Point(411, 39);
+            this.label_avg_rate.Location = new System.Drawing.Point(385, 39);
             this.label_avg_rate.Name = "label_avg_rate";
             this.label_avg_rate.Size = new System.Drawing.Size(72, 13);
             this.label_avg_rate.TabIndex = 12;
             this.label_avg_rate.Text = "AVG рейтинг";
             // 
-            // linkLabel_deletePlace
+            // pictureBox_deletePlace
             // 
-            this.linkLabel_deletePlace.AutoSize = true;
-            this.linkLabel_deletePlace.Location = new System.Drawing.Point(506, 228);
-            this.linkLabel_deletePlace.Name = "linkLabel_deletePlace";
-            this.linkLabel_deletePlace.Size = new System.Drawing.Size(50, 13);
-            this.linkLabel_deletePlace.TabIndex = 13;
-            this.linkLabel_deletePlace.TabStop = true;
-            this.linkLabel_deletePlace.Text = "Удалить";
-            this.linkLabel_deletePlace.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_deletePlace_LinkClicked);
+            this.pictureBox_deletePlace.ErrorImage = global::kyrsovik.Properties.Resources.delete;
+            this.pictureBox_deletePlace.Image = global::kyrsovik.Properties.Resources.delete;
+            this.pictureBox_deletePlace.InitialImage = global::kyrsovik.Properties.Resources.delete;
+            this.pictureBox_deletePlace.Location = new System.Drawing.Point(503, 194);
+            this.pictureBox_deletePlace.Name = "pictureBox_deletePlace";
+            this.pictureBox_deletePlace.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox_deletePlace.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_deletePlace.TabIndex = 15;
+            this.pictureBox_deletePlace.TabStop = false;
+            this.pictureBox_deletePlace.Click += new System.EventHandler(this.pictureBox_deletePlace_Click);
+            // 
+            // pictureBox_feedBack_place
+            // 
+            this.pictureBox_feedBack_place.ErrorImage = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedBack_place.Image = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedBack_place.InitialImage = global::kyrsovik.Properties.Resources.feedback;
+            this.pictureBox_feedBack_place.Location = new System.Drawing.Point(503, 147);
+            this.pictureBox_feedBack_place.Name = "pictureBox_feedBack_place";
+            this.pictureBox_feedBack_place.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox_feedBack_place.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_feedBack_place.TabIndex = 14;
+            this.pictureBox_feedBack_place.TabStop = false;
+            this.pictureBox_feedBack_place.Click += new System.EventHandler(this.pictureBox_feedBack_place_Click);
             // 
             // InfoPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(563, 265);
-            this.Controls.Add(this.linkLabel_deletePlace);
+            this.ClientSize = new System.Drawing.Size(548, 265);
+            this.Controls.Add(this.pictureBox_deletePlace);
+            this.Controls.Add(this.pictureBox_feedBack_place);
             this.Controls.Add(this.label_avg_rate);
             this.Controls.Add(this.label_count_feedback);
-            this.Controls.Add(this.linkLabel_feedback_place);
             this.Controls.Add(this.linkLabel_events_here);
             this.Controls.Add(this.groupBox_info);
             this.Controls.Add(this.groupBox_address_place);
@@ -266,6 +271,8 @@
             this.groupBox_address_place.PerformLayout();
             this.groupBox_info.ResumeLayout(false);
             this.groupBox_info.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_deletePlace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_feedBack_place)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,12 +291,12 @@
         private System.Windows.Forms.Label label_street;
         private System.Windows.Forms.GroupBox groupBox_info;
         private System.Windows.Forms.LinkLabel linkLabel_events_here;
-        private System.Windows.Forms.LinkLabel linkLabel_feedback_place;
         public System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_count_feedback;
         public System.Windows.Forms.Label label_name_place;
         public System.Windows.Forms.Label label_type_place;
         private System.Windows.Forms.Label label_avg_rate;
-        private System.Windows.Forms.LinkLabel linkLabel_deletePlace;
+        private System.Windows.Forms.PictureBox pictureBox_feedBack_place;
+        private System.Windows.Forms.PictureBox pictureBox_deletePlace;
     }
 }
