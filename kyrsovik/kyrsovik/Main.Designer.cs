@@ -75,6 +75,9 @@
             this.button_selectBestEvent = new System.Windows.Forms.Button();
             this.radioButton_bestEvent = new System.Windows.Forms.RadioButton();
             this.button_refresh = new System.Windows.Forms.Button();
+            this.label_info = new System.Windows.Forms.Label();
+            this.label_count_event = new System.Windows.Forms.Label();
+            this.label_count_place = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -536,11 +539,41 @@
             this.button_refresh.UseVisualStyleBackColor = true;
             this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
+            // label_info
+            // 
+            this.label_info.AutoSize = true;
+            this.label_info.Location = new System.Drawing.Point(12, 597);
+            this.label_info.Name = "label_info";
+            this.label_info.Size = new System.Drawing.Size(87, 13);
+            this.label_info.TabIndex = 7;
+            this.label_info.Text = "Инфо о курсаче";
+            // 
+            // label_count_event
+            // 
+            this.label_count_event.AutoSize = true;
+            this.label_count_event.Location = new System.Drawing.Point(795, 597);
+            this.label_count_event.Name = "label_count_event";
+            this.label_count_event.Size = new System.Drawing.Size(109, 13);
+            this.label_count_event.TabIndex = 8;
+            this.label_count_event.Text = "Число мероприятий";
+            // 
+            // label_count_place
+            // 
+            this.label_count_place.AutoSize = true;
+            this.label_count_place.Location = new System.Drawing.Point(1013, 597);
+            this.label_count_place.Name = "label_count_place";
+            this.label_count_place.Size = new System.Drawing.Size(67, 13);
+            this.label_count_place.TabIndex = 9;
+            this.label_count_place.Text = "Число мест";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 610);
+            this.ClientSize = new System.Drawing.Size(1203, 677);
+            this.Controls.Add(this.label_count_place);
+            this.Controls.Add(this.label_count_event);
+            this.Controls.Add(this.label_info);
             this.Controls.Add(this.groupBox_select_event);
             this.Controls.Add(this.groupBox_place);
             this.Controls.Add(this.groupBox_event);
@@ -561,6 +594,7 @@
             this.groupBox_bestEvent.ResumeLayout(false);
             this.groupBox_bestEvent.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -611,6 +645,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_start;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButton_start_to_end_date_event;
+        private System.Windows.Forms.Label label_info;
+        private System.Windows.Forms.Label label_count_event;
+        private System.Windows.Forms.Label label_count_place;
     }
 }
 

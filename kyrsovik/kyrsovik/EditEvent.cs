@@ -29,21 +29,36 @@ namespace kyrsovik
 
         private void button_editEvent_Click(object sender, EventArgs e)     // изменение инфы
         {
-            //название
-            if (checkBox_editName.Checked == true && checkBox_editType.Checked == false &&
-                checkBox_editDate.Checked == false && checkBox_editAge.Checked == false) { editName(); }
-
-            // тип
-            if (checkBox_editName.Checked == false && checkBox_editType.Checked == true &&
-                checkBox_editDate.Checked == false && checkBox_editAge.Checked == false) { editType(); }
-
-            // дата
             if (checkBox_editName.Checked == false && checkBox_editType.Checked == false &&
-                checkBox_editDate.Checked == true && checkBox_editAge.Checked == false) { editDate(); }
-
-            // возраст
-            if (checkBox_editName.Checked == false && checkBox_editType.Checked == false &&
-                checkBox_editDate.Checked == false && checkBox_editAge.Checked == true) { editAge(); }
+                checkBox_editDate.Checked == false && checkBox_editAge.Checked == false)
+                MessageBox.Show("Необходим выбрать параметр для изменения", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                //название
+                if (checkBox_editName.Checked == true && checkBox_editType.Checked == false &&
+                    checkBox_editDate.Checked == false && checkBox_editAge.Checked == false)
+                {
+                    if (textBox_name.Text.ToString() != "") editName();
+                    else MessageBox.Show("Поле заполнено некорректно!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                // тип
+                if (checkBox_editName.Checked == false && checkBox_editType.Checked == true &&
+                    checkBox_editDate.Checked == false && checkBox_editAge.Checked == false)
+                {
+                    if (comboBox_type.Text.ToString() != "") editType();
+                    else MessageBox.Show("Поле заполнено некорректно!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                // дата
+                if (checkBox_editName.Checked == false && checkBox_editType.Checked == false &&
+                    checkBox_editDate.Checked == true && checkBox_editAge.Checked == false) { editDate(); }
+                // возраст
+                if (checkBox_editName.Checked == false && checkBox_editType.Checked == false &&
+                    checkBox_editDate.Checked == false && checkBox_editAge.Checked == true)
+                {
+                    if (comboBox_age.Text.ToString() != "") editAge();
+                    else MessageBox.Show("Поле заполнено некорректно!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void editName()     // изменить название    

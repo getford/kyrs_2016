@@ -18,8 +18,8 @@ namespace kyrsovik
         private int maxIdPlaceAddress = 0;         // Максимальный id place == id addres
         private int maxIdEvent = 0;
 
-        public int countPlace;
-        public int countEvent;
+        public int countPlace;          // число мест првоедения
+        public int countEvent;          // число ивентов
 
         public Main()
         {
@@ -49,7 +49,10 @@ namespace kyrsovik
         private void Main_Load(object sender, EventArgs e)
         {
             refreshAllData();
+
+
         }
+
         private void Initialize_List_place()
         {
             listView_place.GridLines = true;
@@ -366,7 +369,7 @@ namespace kyrsovik
             getDataEvent();
             getDataPlace();
             getTypeEvent();
-
+            statDB();
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
@@ -569,6 +572,13 @@ namespace kyrsovik
                 MessageBox.Show(ex.Message);
             }
             finally { connect.Close(); }
+        }
+
+        public void statDB()        // инфа в footer
+        {
+            label_info.Text = $"-------------- Курсовой проект 'Городская афиша'.       Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------";
+            label_count_event.Text = $"Число мероприятий: {countEvent}";
+            label_count_place.Text = $"Число мест проведения: {countPlace}";
         }
     }
 }
