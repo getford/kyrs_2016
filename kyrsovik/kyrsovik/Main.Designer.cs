@@ -78,6 +78,7 @@
             this.label_info = new System.Windows.Forms.Label();
             this.label_count_event = new System.Windows.Forms.Label();
             this.label_count_place = new System.Windows.Forms.Label();
+            this.label_count_feedback = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -560,17 +561,27 @@
             // label_count_place
             // 
             this.label_count_place.AutoSize = true;
-            this.label_count_place.Location = new System.Drawing.Point(1013, 597);
+            this.label_count_place.Location = new System.Drawing.Point(975, 597);
             this.label_count_place.Name = "label_count_place";
             this.label_count_place.Size = new System.Drawing.Size(67, 13);
             this.label_count_place.TabIndex = 9;
             this.label_count_place.Text = "Число мест";
+            // 
+            // label_count_feedback
+            // 
+            this.label_count_feedback.AutoSize = true;
+            this.label_count_feedback.Location = new System.Drawing.Point(795, 619);
+            this.label_count_feedback.Name = "label_count_feedback";
+            this.label_count_feedback.Size = new System.Drawing.Size(85, 13);
+            this.label_count_feedback.TabIndex = 10;
+            this.label_count_feedback.Text = "Число отзывов";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 677);
+            this.Controls.Add(this.label_count_feedback);
             this.Controls.Add(this.label_count_place);
             this.Controls.Add(this.label_count_event);
             this.Controls.Add(this.label_info);
@@ -648,6 +659,7 @@
         private System.Windows.Forms.Label label_info;
         private System.Windows.Forms.Label label_count_event;
         private System.Windows.Forms.Label label_count_place;
+        private System.Windows.Forms.Label label_count_feedback;
     }
 }
 

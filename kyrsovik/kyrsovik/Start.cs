@@ -27,7 +27,7 @@ namespace kyrsovik
 
             Main m = new Main();
             m.Show();
-            this.Hide();
+            Hide();
         }
     }
 }

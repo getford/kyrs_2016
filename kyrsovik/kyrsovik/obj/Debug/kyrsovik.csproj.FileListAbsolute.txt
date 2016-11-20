@@ -24,3 +24,4 @@ C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Sta
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EditEvent.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EventInPlace.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackEvent.resources
+C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Wait.resources

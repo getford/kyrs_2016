@@ -47,7 +47,7 @@
             this.pictureBox.InitialImage = global::kyrsovik.Properties.Resources.start;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(220, 226);
+            this.pictureBox.Size = new System.Drawing.Size(141, 159);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
@@ -57,7 +57,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(220, 226);
+            this.ClientSize = new System.Drawing.Size(141, 159);
             this.Controls.Add(this.pictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Start";

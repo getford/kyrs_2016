@@ -20,6 +20,10 @@ namespace kyrsovik
 
         public int countPlace;          // число мест првоедения
         public int countEvent;          // число ивентов
+        public int countBestFeedbackEvent; // число отзывов с рейтингом > 3
+
+        public int countFBEvent;    // число отзывов ивент
+        public int countFBPlace;    // число отзывов места
 
         public Main()
         {
@@ -49,10 +53,7 @@ namespace kyrsovik
         private void Main_Load(object sender, EventArgs e)
         {
             refreshAllData();
-
-
         }
-
         private void Initialize_List_place()
         {
             listView_place.GridLines = true;
@@ -359,6 +360,8 @@ namespace kyrsovik
         }       // просмотр инфы о мероприятии
         public void refreshAllData()        // загрузка всей инфы (перезагрузка всеё инфы)
         {
+
+
             comboBox_event_place.Items.Clear();
             comboBox_type_event.Items.Clear();
             comboBox_type_for_select.Items.Clear();
@@ -366,11 +369,13 @@ namespace kyrsovik
             clearInput();
 
             getCount();
+            selectCountFeedback();
             getDataEvent();
             getDataPlace();
             getTypeEvent();
             statDB();
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
+
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
         {
@@ -465,14 +470,35 @@ namespace kyrsovik
             else
                 MessageBox.Show(output, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void selectBestRate()       // лучший рейтинг
+        private void selectBestCountFeedbackEvent()
         {
             SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
+                string sql_count = $"select count(*) from feedback_event where rating_event > 3";
 
+                SqlCommand cmd = new SqlCommand(sql_count, connect);
+                countBestFeedbackEvent = (int)cmd.ExecuteScalar();
+                if (countBestFeedbackEvent == 0)
+                    MessageBox.Show("Нет мероприятий с лучшим рейтингом", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }       // число мероприятий с лучшим рейтингом
+        private void selectBestRate()       // лучший рейтинг
+        {
+            selectBestCountFeedbackEvent();     // число мероприятий с лучшим рейтингом
+
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
                 string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -501,6 +527,8 @@ namespace kyrsovik
         }
         private void selectBestRateAndDate()
         {
+            selectBestCountFeedbackEvent();     // число мероприятий с лучшим рейтингом
+
             DateTime date_start = DateTime.Parse(dateTimePicker_start.Value.ToString());     // дата для начала отсчета
             DateTime date_end = DateTime.Parse(dateTimePicker_end.Value.ToString());        // дата для окончания выборки
 
@@ -508,8 +536,8 @@ namespace kyrsovik
             try
             {
                 connect.Open();
-
                 string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3 and date_event between '{date_start}' and '{date_end}'";
+
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -573,12 +601,33 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }
+        private void selectCountFeedback()      // число отзывов
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+                string sql_count_fb_event = $"select count(*) from feedback_event where rating_event > 3";
+                string sql_count_fb_place = $"select count(*) from feedback_event where rating_event > 3";
 
+                SqlCommand cmd_fb_event = new SqlCommand(sql_count_fb_event, connect);
+                SqlCommand cmd_fb_place = new SqlCommand(sql_count_fb_place, connect);
+
+                countFBEvent = (int)cmd_fb_event.ExecuteScalar();
+                countFBPlace = (int)cmd_fb_place.ExecuteScalar();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }
         public void statDB()        // инфа в footer
         {
             label_info.Text = $"-------------- Курсовой проект 'Городская афиша'.       Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------";
             label_count_event.Text = $"Число мероприятий: {countEvent}";
             label_count_place.Text = $"Число мест проведения: {countPlace}";
+            label_count_feedback.Text = $"Число отзывов. Мероприятия: {countFBEvent}        Места: {countFBPlace}.";
         }
     }
 }
