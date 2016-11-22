@@ -48,7 +48,18 @@ namespace kyrsovik
             comboBox_age.Items.Add("16");
             comboBox_age.Items.Add("18");
             /*-----------------------------------------------*/
-
+            comboBox_show_n_event.Items.Add("0");
+            comboBox_show_n_event.Items.Add("500");
+            comboBox_show_n_event.Items.Add("10000");
+            comboBox_show_n_event.Items.Add("20000");
+            comboBox_show_n_event.Items.Add("30000");
+            comboBox_show_n_event.Items.Add("40000");
+            comboBox_show_n_event.Items.Add("50000");
+            comboBox_show_n_event.Items.Add("60000");
+            comboBox_show_n_event.Items.Add("70000");
+            comboBox_show_n_event.Items.Add("80000");
+            comboBox_show_n_event.Items.Add("90000");
+            comboBox_show_n_event.Items.Add("100000");
         }
         private void Main_Load(object sender, EventArgs e)
         {
@@ -135,11 +146,12 @@ namespace kyrsovik
         }               // выборка из Place
         private void getDataEvent()
         {
+            int N = 500;        // выводим 500 записей по умолчанию
             SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
-                string sql_query = $"select * from event";
+                string sql_query = $"select top({N}) * from event";
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -360,8 +372,6 @@ namespace kyrsovik
         }       // просмотр инфы о мероприятии
         public void refreshAllData()        // загрузка всей инфы (перезагрузка всеё инфы)
         {
-
-
             comboBox_event_place.Items.Clear();
             comboBox_type_event.Items.Clear();
             comboBox_type_for_select.Items.Clear();
@@ -629,5 +639,40 @@ namespace kyrsovik
             label_count_place.Text = $"Число мест проведения: {countPlace}";
             label_count_feedback.Text = $"Число отзывов. Мероприятия: {countFBEvent}        Места: {countFBPlace}.";
         }
+        private void button_show_n_event_Click(object sender, EventArgs e)
+        {
+            string tmp = comboBox_show_n_event.SelectedItem.ToString();
+            SqlConnection connect = new SqlConnection(connection);
+            try
+            {
+                connect.Open();
+                string sql_query = $"select top({tmp}) * from event";
+                SqlCommand cmd = new SqlCommand(sql_query, connect);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+
+                listView_event.Clear();
+                fill_ListView_event();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                    for (int j = 1; j < dt.Columns.Count; j++)
+                    {
+                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                    }
+                    listView_event.Items.Add(lvi);
+                }
+                da.Dispose();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { connect.Close(); }
+        }       // показать число мероприятий по запросу
     }
 }

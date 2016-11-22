@@ -140,7 +140,7 @@
             this.groupBox_statistic.Controls.Add(this.label_all_event_count);
             this.groupBox_statistic.Location = new System.Drawing.Point(252, 58);
             this.groupBox_statistic.Name = "groupBox_statistic";
-            this.groupBox_statistic.Size = new System.Drawing.Size(216, 132);
+            this.groupBox_statistic.Size = new System.Drawing.Size(270, 132);
             this.groupBox_statistic.TabIndex = 11;
             this.groupBox_statistic.TabStop = false;
             this.groupBox_statistic.Text = "Статистика";
@@ -150,7 +150,7 @@
             this.pictureBox_editEvent.ErrorImage = global::kyrsovik.Properties.Resources.edit;
             this.pictureBox_editEvent.Image = global::kyrsovik.Properties.Resources.edit;
             this.pictureBox_editEvent.InitialImage = global::kyrsovik.Properties.Resources.edit;
-            this.pictureBox_editEvent.Location = new System.Drawing.Point(400, 9);
+            this.pictureBox_editEvent.Location = new System.Drawing.Point(456, 9);
             this.pictureBox_editEvent.Name = "pictureBox_editEvent";
             this.pictureBox_editEvent.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_editEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -163,7 +163,7 @@
             this.pictureBox_feedbackEvent.ErrorImage = global::kyrsovik.Properties.Resources.feedback;
             this.pictureBox_feedbackEvent.Image = global::kyrsovik.Properties.Resources.feedback;
             this.pictureBox_feedbackEvent.InitialImage = global::kyrsovik.Properties.Resources.feedback;
-            this.pictureBox_feedbackEvent.Location = new System.Drawing.Point(438, 9);
+            this.pictureBox_feedbackEvent.Location = new System.Drawing.Point(492, 9);
             this.pictureBox_feedbackEvent.Name = "pictureBox_feedbackEvent";
             this.pictureBox_feedbackEvent.Size = new System.Drawing.Size(30, 30);
             this.pictureBox_feedbackEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -175,7 +175,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 203);
+            this.ClientSize = new System.Drawing.Size(534, 203);
             this.Controls.Add(this.pictureBox_editEvent);
             this.Controls.Add(this.pictureBox_feedbackEvent);
             this.Controls.Add(this.groupBox_statistic);

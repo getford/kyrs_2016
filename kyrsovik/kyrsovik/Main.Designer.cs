@@ -79,6 +79,9 @@
             this.label_count_event = new System.Windows.Forms.Label();
             this.label_count_place = new System.Windows.Forms.Label();
             this.label_count_feedback = new System.Windows.Forms.Label();
+            this.label_n_select_count = new System.Windows.Forms.Label();
+            this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
+            this.button_show_n_event = new System.Windows.Forms.Button();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -543,7 +546,7 @@
             // label_info
             // 
             this.label_info.AutoSize = true;
-            this.label_info.Location = new System.Drawing.Point(12, 597);
+            this.label_info.Location = new System.Drawing.Point(12, 619);
             this.label_info.Name = "label_info";
             this.label_info.Size = new System.Drawing.Size(87, 13);
             this.label_info.TabIndex = 7;
@@ -576,11 +579,41 @@
             this.label_count_feedback.TabIndex = 10;
             this.label_count_feedback.Text = "Число отзывов";
             // 
+            // label_n_select_count
+            // 
+            this.label_n_select_count.AutoSize = true;
+            this.label_n_select_count.Location = new System.Drawing.Point(12, 597);
+            this.label_n_select_count.Name = "label_n_select_count";
+            this.label_n_select_count.Size = new System.Drawing.Size(95, 13);
+            this.label_n_select_count.TabIndex = 11;
+            this.label_n_select_count.Text = "Показать записи";
+            // 
+            // comboBox_show_n_event
+            // 
+            this.comboBox_show_n_event.FormattingEnabled = true;
+            this.comboBox_show_n_event.Location = new System.Drawing.Point(113, 597);
+            this.comboBox_show_n_event.Name = "comboBox_show_n_event";
+            this.comboBox_show_n_event.Size = new System.Drawing.Size(93, 21);
+            this.comboBox_show_n_event.TabIndex = 19;
+            // 
+            // button_show_n_event
+            // 
+            this.button_show_n_event.Location = new System.Drawing.Point(212, 598);
+            this.button_show_n_event.Name = "button_show_n_event";
+            this.button_show_n_event.Size = new System.Drawing.Size(89, 20);
+            this.button_show_n_event.TabIndex = 19;
+            this.button_show_n_event.Text = "Показать";
+            this.button_show_n_event.UseVisualStyleBackColor = true;
+            this.button_show_n_event.Click += new System.EventHandler(this.button_show_n_event_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 677);
+            this.Controls.Add(this.button_show_n_event);
+            this.Controls.Add(this.comboBox_show_n_event);
+            this.Controls.Add(this.label_n_select_count);
             this.Controls.Add(this.label_count_feedback);
             this.Controls.Add(this.label_count_place);
             this.Controls.Add(this.label_count_event);
@@ -591,6 +624,7 @@
             this.Controls.Add(this.listView_place);
             this.Controls.Add(this.listView_event);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Main";
             this.Load += new System.EventHandler(this.Main_Load);
@@ -660,6 +694,9 @@
         private System.Windows.Forms.Label label_count_event;
         private System.Windows.Forms.Label label_count_place;
         private System.Windows.Forms.Label label_count_feedback;
+        private System.Windows.Forms.Label label_n_select_count;
+        public System.Windows.Forms.ComboBox comboBox_show_n_event;
+        public System.Windows.Forms.Button button_show_n_event;
     }
 }
 
