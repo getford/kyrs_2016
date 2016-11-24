@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace kyrsovik
 {
@@ -24,6 +25,9 @@ namespace kyrsovik
 
         public int countFBEvent;    // число отзывов ивент
         public int countFBPlace;    // число отзывов места
+
+        Stopwatch sw = new Stopwatch();     // подсчет времени выполнения
+        TimeSpan ts = new TimeSpan();       // для работы с временем выполнения
 
         public Main()
         {
@@ -144,9 +148,8 @@ namespace kyrsovik
             }
             finally { connect.Close(); }
         }               // выборка из Place
-        private void getDataEvent()
+        private void getDataEvent(string N)
         {
-            int N = 500;        // выводим 500 записей по умолчанию
             SqlConnection connect = new SqlConnection(connection);
             try
             {
@@ -377,15 +380,22 @@ namespace kyrsovik
             comboBox_type_for_select.Items.Clear();
 
             clearInput();
+            //-------------------------------------------
+
+            sw.Reset();
+            sw.Start();
 
             getCount();
             selectCountFeedback();
-            getDataEvent();
+            getDataEvent("500");  // выводим 500 записей по умолчанию
             getDataPlace();
             getTypeEvent();
             statDB();
-            for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
+            sw.Stop();
 
+            ts = sw.Elapsed;
+            _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+            for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
         {
@@ -411,16 +421,30 @@ namespace kyrsovik
         {
             string type = comboBox_type_for_select.SelectedItem.ToString();
             int id_type_event = 0;
+            int count = 0;
             SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
+                // получаем id типа мероприятия из type_event
                 string sql_select_type = $"select id from type_event where name_type = '{type}'";
                 SqlCommand cmd_select_type = new SqlCommand(sql_select_type, connect);
                 id_type_event = (int)cmd_select_type.ExecuteScalar();
 
+                // количиство мероприятий запрашиваемого типа
+                string sql_count = $"select count(*) from event where id_type = {id_type_event}";
+                SqlCommand cmd_count = new SqlCommand(sql_count, connect);
+                count = (int)cmd_count.ExecuteScalar();
+                label_count_eft.Text = $"Число мероприятий: {count.ToString()}";
+
+                // выборка запрашиваемых мероприятий
                 string sql_query = $"select * from event where id_type = {id_type_event}";
+
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
+
+                sw.Reset();         // сброс счетчика
+                sw.Start();         // старт отсчета
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
@@ -442,6 +466,11 @@ namespace kyrsovik
                     }
                     listView_event.Items.Add(lvi);
                 }
+
+                sw.Stop();          // стоп счетчика
+                ts = sw.Elapsed;
+                _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+
                 da.Dispose();
             }
             catch (SqlException ex)
@@ -453,14 +482,24 @@ namespace kyrsovik
         }
         private void getEventForRate()          // отбор лучших мероприятий (где оценка > 3) по дате        выборка за промежуток времени
         {
-            // отбор с рейтингом > 3
-            if (radioButton_bestEvent.Checked == true) { selectBestRate(); }
+            sw.Reset();         // сброс счетчика
+            sw.Start();         // старт отсчета
+            if (radioButton_bestEvent.Checked == true || radioButton_for_date.Checked == true || radioButton_start_to_end_date_event.Checked == true)
+            {
+                // отбор с рейтингом > 3
+                if (radioButton_bestEvent.Checked == true) { selectBestRate(); }
 
-            // выборка с промежутком даты и лучшими мероприятиями
-            if (radioButton_for_date.Checked == true) { selectBestRateAndDate(); }
+                // выборка с промежутком даты и лучшими мероприятиями
+                if (radioButton_for_date.Checked == true) { selectBestRateAndDate(); }
 
-            // выборка с промежутком даты
-            if (radioButton_start_to_end_date_event.Checked == true) { selectForDate(); }
+                // выборка с промежутком даты
+                if (radioButton_start_to_end_date_event.Checked == true) { selectForDate(); }
+
+                sw.Stop();
+                ts = sw.Elapsed;
+                _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+            }
+            else { sw.Stop(); MessageBox.Show("Не выбраны условия поиска мероприятия", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
         private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
@@ -491,7 +530,10 @@ namespace kyrsovik
                 SqlCommand cmd = new SqlCommand(sql_count, connect);
                 countBestFeedbackEvent = (int)cmd.ExecuteScalar();
                 if (countBestFeedbackEvent == 0)
-                    MessageBox.Show("Нет мероприятий с лучшим рейтингом", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    sw.Stop();
+                    MessageBox.Show("Нет мероприятий с лучшим рейтингом", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (SqlException ex)
             {
@@ -642,37 +684,19 @@ namespace kyrsovik
         private void button_show_n_event_Click(object sender, EventArgs e)
         {
             string tmp = comboBox_show_n_event.SelectedItem.ToString();
-            SqlConnection connect = new SqlConnection(connection);
-            try
+            if (tmp != "")
             {
-                connect.Open();
-                string sql_query = $"select top({tmp}) * from event";
-                SqlCommand cmd = new SqlCommand(sql_query, connect);
+                //-------------------------------------------
+                sw.Reset();         // сброс счетчика
+                sw.Start();         // старт отсчета
+                getDataEvent(tmp);
+                sw.Stop();          // стоп счетчика
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-                da.Fill(dt);
-
-                listView_event.Clear();
-                fill_ListView_event();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
-                    for (int j = 1; j < dt.Columns.Count; j++)
-                    {
-                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
-                    }
-                    listView_event.Items.Add(lvi);
-                }
-                da.Dispose();
+                ts = sw.Elapsed;
+                _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally { connect.Close(); }
+            else
+                MessageBox.Show("Число записей на выбрано!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }       // показать число мероприятий по запросу
     }
 }

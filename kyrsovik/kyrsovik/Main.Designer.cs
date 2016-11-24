@@ -82,6 +82,8 @@
             this.label_n_select_count = new System.Windows.Forms.Label();
             this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
             this.button_show_n_event = new System.Windows.Forms.Button();
+            this._label_time = new System.Windows.Forms.Label();
+            this.label_count_eft = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -428,6 +430,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label_count_eft);
             this.groupBox1.Controls.Add(this.comboBox_type_for_select);
             this.groupBox1.Controls.Add(this.button_select);
             this.groupBox1.Location = new System.Drawing.Point(6, 190);
@@ -442,14 +445,14 @@
             this.comboBox_type_for_select.FormattingEnabled = true;
             this.comboBox_type_for_select.Location = new System.Drawing.Point(6, 23);
             this.comboBox_type_for_select.Name = "comboBox_type_for_select";
-            this.comboBox_type_for_select.Size = new System.Drawing.Size(143, 21);
+            this.comboBox_type_for_select.Size = new System.Drawing.Size(111, 21);
             this.comboBox_type_for_select.TabIndex = 11;
             // 
             // button_select
             // 
-            this.button_select.Location = new System.Drawing.Point(212, 21);
+            this.button_select.Location = new System.Drawing.Point(286, 21);
             this.button_select.Name = "button_select";
-            this.button_select.Size = new System.Drawing.Size(143, 23);
+            this.button_select.Size = new System.Drawing.Size(76, 23);
             this.button_select.TabIndex = 12;
             this.button_select.Text = "Показать";
             this.button_select.UseVisualStyleBackColor = true;
@@ -546,7 +549,7 @@
             // label_info
             // 
             this.label_info.AutoSize = true;
-            this.label_info.Location = new System.Drawing.Point(12, 619);
+            this.label_info.Location = new System.Drawing.Point(237, 655);
             this.label_info.Name = "label_info";
             this.label_info.Size = new System.Drawing.Size(87, 13);
             this.label_info.TabIndex = 7;
@@ -606,11 +609,30 @@
             this.button_show_n_event.UseVisualStyleBackColor = true;
             this.button_show_n_event.Click += new System.EventHandler(this.button_show_n_event_Click);
             // 
+            // _label_time
+            // 
+            this._label_time.AutoSize = true;
+            this._label_time.Location = new System.Drawing.Point(324, 602);
+            this._label_time.Name = "_label_time";
+            this._label_time.Size = new System.Drawing.Size(105, 13);
+            this._label_time.TabIndex = 20;
+            this._label_time.Text = "Время выполнения";
+            // 
+            // label_count_eft
+            // 
+            this.label_count_eft.AutoSize = true;
+            this.label_count_eft.Location = new System.Drawing.Point(123, 26);
+            this.label_count_eft.Name = "label_count_eft";
+            this.label_count_eft.Size = new System.Drawing.Size(112, 13);
+            this.label_count_eft.TabIndex = 13;
+            this.label_count_eft.Text = "Число мероприятий:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1203, 677);
+            this.Controls.Add(this._label_time);
             this.Controls.Add(this.button_show_n_event);
             this.Controls.Add(this.comboBox_show_n_event);
             this.Controls.Add(this.label_n_select_count);
@@ -636,6 +658,7 @@
             this.groupBox_add_place.PerformLayout();
             this.groupBox_select_event.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox_bestEvent.ResumeLayout(false);
             this.groupBox_bestEvent.PerformLayout();
             this.ResumeLayout(false);
@@ -697,6 +720,8 @@
         private System.Windows.Forms.Label label_n_select_count;
         public System.Windows.Forms.ComboBox comboBox_show_n_event;
         public System.Windows.Forms.Button button_show_n_event;
+        private System.Windows.Forms.Label _label_time;
+        private System.Windows.Forms.Label label_count_eft;
     }
 }
 
