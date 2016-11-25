@@ -15,7 +15,7 @@ namespace kyrsovik
 {
     public partial class Main : Form
     {
-        public static Logger log = LogManager.GetCurrentClassLogger();
+        public static Logger log = LogManager.GetCurrentClassLogger();                  // логирование
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
 
         private int maxIdPlaceAddress = 0;         // Максимальный id place == id addres
@@ -33,7 +33,7 @@ namespace kyrsovik
 
         public Main()
         {
-            log.Info($"-------------- Курсовой проект 'Городская афиша'.       Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------");
+            log.Info($"-------------- Курсовой проект 'Городская афиша'        Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------");
             log.Info($"Host name:\t\t {Environment.MachineName.ToString()}");
             log.Info($"User name:\t\t {Environment.UserName.ToString()}");
             log.Info($"Version:\t\t\t {Environment.Version.ToString()}");
@@ -387,6 +387,7 @@ namespace kyrsovik
         }       // просмотр инфы о мероприятии
         public void refreshAllData()        // загрузка всей инфы (перезагрузка всей инфы)
         {
+            const int N = 500;
             comboBox_event_place.Items.Clear();
             comboBox_type_event.Items.Clear();
             comboBox_type_for_select.Items.Clear();
@@ -399,8 +400,7 @@ namespace kyrsovik
 
             getCount();
             selectCountFeedback();
-            getDataEvent("500");  // выводим 500 записей по умолчанию
-            log.Info("Выполнена выгрузка данных из БД (500)");
+            getDataEvent(N.ToString());  // выводим 500 записей по умолчанию
             getDataPlace();
             getTypeEvent();
             statDB();
@@ -408,7 +408,7 @@ namespace kyrsovik
 
             ts = sw.Elapsed;
             _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
-            log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
+            log.Info($"Выполнена выгрузка данных из БД ({N}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
@@ -719,7 +719,6 @@ namespace kyrsovik
                 MessageBox.Show("Число записей на выбрано!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }       // показать число мероприятий по запросу
-
         private void Main_FormClosed(object sender, FormClosedEventArgs e)          // действие при закрытии формы
         {
             log.Info("******************************************************************* END *******************************************************************");
