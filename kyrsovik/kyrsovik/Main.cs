@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using NLog;
 
 namespace kyrsovik
 {
     public partial class Main : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
 
         private int maxIdPlaceAddress = 0;         // Максимальный id place == id addres
@@ -31,6 +33,12 @@ namespace kyrsovik
 
         public Main()
         {
+            log.Info($"Version: {Environment.Version.ToString()}");
+            log.Info($"OS: { Environment.OSVersion.ToString()}");
+            log.Info($"Command: {Environment.CommandLine.ToString()}");
+
+            log.Info("---------------------------------------------------------------------------------");
+
             InitializeComponent();
 
             comboBox_parking.Items.Add("true");
@@ -239,7 +247,7 @@ namespace kyrsovik
                 string output = $"Запись успешно добавлена. id: {maxIdPlaceAddress + 1}";
 
                 refreshAllData();
-
+                log.Info($"Запись успешно добавлена. id: {maxIdPlaceAddress + 1}");
                 MessageBox.Show(output, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex)
@@ -285,7 +293,7 @@ namespace kyrsovik
                 string output = $"Запись успешно добавлена. id: {maxIdEvent + 1}";
 
                 MessageBox.Show(output, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                log.Info($"Запись успешно добавлена. id: {maxIdEvent + 1}");
                 refreshAllData();
             }
             catch (SqlException ex)
@@ -373,7 +381,7 @@ namespace kyrsovik
             ie.Show();
 
         }       // просмотр инфы о мероприятии
-        public void refreshAllData()        // загрузка всей инфы (перезагрузка всеё инфы)
+        public void refreshAllData()        // загрузка всей инфы (перезагрузка всей инфы)
         {
             comboBox_event_place.Items.Clear();
             comboBox_type_event.Items.Clear();
@@ -388,6 +396,7 @@ namespace kyrsovik
             getCount();
             selectCountFeedback();
             getDataEvent("500");  // выводим 500 записей по умолчанию
+            log.Info("Выполнена выгрузка данных из БД (500)");
             getDataPlace();
             getTypeEvent();
             statDB();
@@ -395,6 +404,7 @@ namespace kyrsovik
 
             ts = sw.Elapsed;
             _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+            log.Debug($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
@@ -470,7 +480,8 @@ namespace kyrsovik
                 sw.Stop();          // стоп счетчика
                 ts = sw.Elapsed;
                 _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
-
+                log.Info($"Все мероприятия '{type}' успешно загружены. Число мероприятий: {count.ToString()}.");
+                log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
                 da.Dispose();
             }
             catch (SqlException ex)
@@ -502,13 +513,14 @@ namespace kyrsovik
             else { sw.Stop(); MessageBox.Show("Не выбраны условия поиска мероприятия", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
-        private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по запросу
+        private void button_select_Click(object sender, EventArgs e)        // кнопка показа мероприятий по типу
         {
             getEventForType();
         }
         private void button_refresh_Click(object sender, EventArgs e)       // обновление данных
         {
             refreshAllData();
+            log.Info("Данные перезагружены");
         }
         private void button_selectBestEvent_Click(object sender, EventArgs e)       // кнопка показа лучших мероприятий
         {
@@ -693,10 +705,15 @@ namespace kyrsovik
                 sw.Stop();          // стоп счетчика
 
                 ts = sw.Elapsed;
+                log.Info($"Выполнена выгрузка данных из БД({tmp})");
+                log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
                 _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
             }
             else
+            {
+                log.Error("Число записей на выбрано.");
                 MessageBox.Show("Число записей на выбрано!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }       // показать число мероприятий по запросу
     }
 }
