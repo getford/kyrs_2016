@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace kyrsovik
 {
     public partial class InfoPlace : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private string typePlace;       // тип места
         private decimal avgRatePlace;   //ср значение рейтинга
@@ -24,6 +26,7 @@ namespace kyrsovik
         }
         private void InfoPlace_Load(object sender, EventArgs e)
         {
+            log.Info("************************************************************ Info Place Start *************************************************************");
             getTypePlace();
             getAVGRatePlace();
             getInfo();
@@ -50,9 +53,11 @@ namespace kyrsovik
                 label_working_time.Text = $"Время работы: {m.listView_place.FocusedItem.SubItems[6].Text}";
                 label_avg_rate.Text = $"Рейтинг: {avgRatePlace.ToString()}";
                 selectAddress();
+                log.Info($"Загрузка информации прошла успешно. id {id}");
             }
             else
             {
+                log.Info("ERROR!\t Ошибка загрузки информации о месте проведения!");
                 MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }               // информация о заведении
@@ -176,6 +181,8 @@ namespace kyrsovik
         }       // мероприятия в выбранном месте
         private void InfoPlace_FormClosed(object sender, FormClosedEventArgs e)         // перезагружает всю инфу после закрытия формы
         {
+            log.Info("************************************************************ Info Place Close *************************************************************");
+
             Main m = this.Owner as Main;
             m.refreshAllData();
         }

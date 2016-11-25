@@ -144,6 +144,7 @@
             this.Controls.Add(this.label_author);
             this.Name = "FeedBackPlace";
             this.Text = "FeedBackPlace";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FeedBackPlace_FormClosed);
             this.Load += new System.EventHandler(this.FeedBack_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

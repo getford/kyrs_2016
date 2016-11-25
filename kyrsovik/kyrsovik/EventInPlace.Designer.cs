@@ -50,6 +50,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EventInPlace";
             this.Text = "EventInPlace";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EventInPlace_FormClosed);
             this.Load += new System.EventHandler(this.EventInPlace_Load);
             this.ResumeLayout(false);
 

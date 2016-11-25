@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace kyrsovik
 {
     public partial class FeedBackPlace : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
         private int maxIdFeedBack;
@@ -28,6 +30,7 @@ namespace kyrsovik
         }
         private void FeedBack_Load(object sender, EventArgs e)
         {
+            log.Info("********************************************************** Feedback Place Start ***********************************************************");
             InfoPlace ip = this.Owner as InfoPlace;
             label_name_place.Text = ip.label_name_place.Text.ToString();
             getAuthors();
@@ -37,7 +40,6 @@ namespace kyrsovik
             string sql_insert_feedback = string.Format($"insert into feedback_place ([id], [id_place], [topic], [text_feedback], [id_authors], [rating_place], [date_feedback]) values (@id, @id_place, @topic, @text_feedback, @id_authors, @rating_place, @date_feedback)");
 
             InfoPlace ip = this.Owner as InfoPlace;
-
             SqlConnection connect = new SqlConnection(connection);
 
             try
@@ -57,6 +59,7 @@ namespace kyrsovik
                 cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
                 cmd_insert.ExecuteNonQuery();
 
+                log.Info($"Отзыв успешно добавлен! id места: {ip.id.ToString()}, id автора: {idAuthor.ToString()}.");
                 MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
@@ -68,27 +71,17 @@ namespace kyrsovik
         private void getAuthors()
         {
             SqlConnection connect = new SqlConnection(connection);
-
             string sql_select_authors = $"select surname_author from authors";
-
             try
             {
                 connect.Open();
                 SqlCommand cmd = new SqlCommand(sql_select_authors, connect);
                 SqlDataReader dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    comboBox_author.Items.Add(dr.GetString(0));
-                }
+                while (dr.Read()) { comboBox_author.Items.Add(dr.GetString(0)); }
                 dr.Close();
             }
-
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                connect.Close();
-            }
+            finally { connect.Close(); }
         }       // список авторов
         private void getAuthorsId()
         {
@@ -128,6 +121,10 @@ namespace kyrsovik
         private void button_add_feedback_Click(object sender, EventArgs e)
         {
             addFeedBack();
+        }       // add feedback
+        private void FeedBackPlace_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            log.Info("********************************************************** Feedback Place Close ***********************************************************");
         }
     }
 }

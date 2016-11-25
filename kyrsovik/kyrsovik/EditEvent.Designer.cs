@@ -205,6 +205,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "EditEvent";
             this.Text = "EditEvent";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditEvent_FormClosed);
             this.Load += new System.EventHandler(this.EditEvent_Load);
             this.groupBox_EditEvent.ResumeLayout(false);
             this.groupBox_EditEvent.PerformLayout();

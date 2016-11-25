@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace kyrsovik
 {
     public partial class InfoEvent : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private string typeEvent = string.Empty;       // тип ивента
         private decimal avgRateEvent;   // ср значение
@@ -27,7 +29,7 @@ namespace kyrsovik
         {
             Main m = this.Owner as Main;
             id = m.listView_event.FocusedItem.SubItems[0].Text;
-
+            log.Info("************************************************************ Info Event Start *************************************************************");
             /*-------------------------------*/
 
             getTypeEvent();
@@ -50,8 +52,13 @@ namespace kyrsovik
 
                 label_rate_event.Text = $"Средний рейтинг мероприятия: {avgRateEvent}";
                 label_feedback_count.Text = $"Число отзывов: {countFeedBack}";
+                log.Info($"Загрузка информации прошла успешно. id {id}");
             }
-            else { MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else
+            {
+                log.Info("ERROR!\t Ошибка загрузки информации о мероприятии!");
+                MessageBox.Show("Неизвестная ошибка #1", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }       // информация об ивенте
         private void getTypeEvent()
         {
@@ -105,6 +112,7 @@ namespace kyrsovik
         }       // Средний рейтинг ивента и количество отзывов
         private void InfoEvent_FormClosed(object sender, FormClosedEventArgs e)     // обновляем данные при закрытии формы
         {
+            log.Info("************************************************************ Info Event Close *************************************************************");
             Main m = this.Owner as Main;
             m.refreshAllData();
         }

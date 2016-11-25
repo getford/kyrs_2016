@@ -38,9 +38,8 @@ namespace kyrsovik
             log.Info($"User name:\t\t {Environment.UserName.ToString()}");
             log.Info($"Version:\t\t\t {Environment.Version.ToString()}");
             log.Info($"OS:\t\t\t\t {Environment.OSVersion.ToString()}");
-            log.Info($"Command:\t\t\t {Environment.CommandLine.ToString()}");
+            log.Info($"Command:\t\t\t {Environment.CommandLine.ToString() + Environment.NewLine}");
             log.Info("****************************************************************** START ******************************************************************");
-
             InitializeComponent();
 
             comboBox_parking.Items.Add("true");
@@ -153,6 +152,7 @@ namespace kyrsovik
                     listView_place.Items.Add(lvi);
                 }
                 da.Dispose();
+                log.Info($"В БД {countPlace.ToString()} мест(о) проведения.");
             }
             catch (SqlException ex)
             {
@@ -187,6 +187,7 @@ namespace kyrsovik
                     listView_event.Items.Add(lvi);
                 }
                 da.Dispose();
+                log.Info($"В БД {countEvent.ToString()} мероприятие.");
             }
             catch (SqlException ex)
             {
@@ -560,14 +561,19 @@ namespace kyrsovik
         private void selectBestRate()       // лучший рейтинг
         {
             selectBestCountFeedbackEvent();     // число мероприятий с лучшим рейтингом
+            int count = 0;
 
             SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
-                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
+                string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event >= 3";
+                string sql_query_count = $"select count(*) from event inner join feedback_event on event.id = feedback_event.id_event where rating_event >= 3";
+                SqlCommand cmd_count = new SqlCommand(sql_query_count, connect);
+                count = (int)cmd_count.ExecuteScalar();
 
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
@@ -586,6 +592,7 @@ namespace kyrsovik
                     listView_event.Items.Add(lvi);
                 }
                 da.Dispose();
+                log.Info($"В БД найдено {count.ToString()} мероприятия с рейтингом больше либо равным 3.");
             }
             catch (SqlException ex)
             {
@@ -597,6 +604,7 @@ namespace kyrsovik
         {
             selectBestCountFeedbackEvent();     // число мероприятий с лучшим рейтингом
 
+            int count = 0;
             DateTime date_start = DateTime.Parse(dateTimePicker_start.Value.ToString());     // дата для начала отсчета
             DateTime date_end = DateTime.Parse(dateTimePicker_end.Value.ToString());        // дата для окончания выборки
 
@@ -605,6 +613,9 @@ namespace kyrsovik
             {
                 connect.Open();
                 string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3 and date_event between '{date_start}' and '{date_end}'";
+                string sql_query_count = $"select count(*) from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3 and date_event between '{date_start}' and '{date_end}'";
+                SqlCommand cmd_count = new SqlCommand(sql_query_count, connect);
+                count = (int)cmd_count.ExecuteScalar();
 
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -625,6 +636,7 @@ namespace kyrsovik
                     listView_event.Items.Add(lvi);
                 }
                 da.Dispose();
+                log.Info($"В БД {count} мероприятий с рейтингом больше либо раным 3, за промежуток времени {date_start.ToString()} - {date_end.ToString()}.");
             }
             catch (SqlException ex)
             {
@@ -636,14 +648,18 @@ namespace kyrsovik
         {
             DateTime date_start = DateTime.Parse(dateTimePicker_start.Value.ToString());     // дата для начала отсчета
             DateTime date_end = DateTime.Parse(dateTimePicker_end.Value.ToString());        // дата для окончания выборки
-
+            int count = 0;
             SqlConnection connect = new SqlConnection(connection);
             try
             {
                 connect.Open();
 
                 string sql_query = $"select * from event where date_event between '{date_start}' and '{date_end}'";
+                string sql_query_count = $"select count(*) from event where date_event between '{date_start}' and '{date_end}'";
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
+                SqlCommand cmd_count = new SqlCommand(sql_query_count, connect);
+                count = (int)cmd_count.ExecuteScalar();
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
@@ -662,6 +678,7 @@ namespace kyrsovik
                     listView_event.Items.Add(lvi);
                 }
                 da.Dispose();
+                log.Info($"В БД {count} мероприятий, за промежуток времени {date_start.ToString()} - {date_end.ToString()}.");
             }
             catch (SqlException ex)
             {
@@ -709,8 +726,7 @@ namespace kyrsovik
                 sw.Stop();          // стоп счетчика
 
                 ts = sw.Elapsed;
-                log.Info($"Выполнена выгрузка данных из БД ({tmp})");
-                log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
+                log.Info($"Выполнена выгрузка данных из БД ({tmp}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
                 _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
             }
             else

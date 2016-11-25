@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +14,10 @@ namespace kyrsovik
 {
     public partial class FeedBackEvent : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
-        private int maxIdFeedBack;
+        private int maxIdFeedBack = 0;
 
         public FeedBackEvent()
         {
@@ -29,6 +31,7 @@ namespace kyrsovik
         }
         private void FeedBackEvent_Load(object sender, EventArgs e)
         {
+            log.Info("********************************************************** Feedback Event Start ***********************************************************");
             InfoEvent ie = this.Owner as InfoEvent;
             label_name_event.Text = ie.label_name_event.Text.ToString();
             getAuthors();
@@ -58,13 +61,11 @@ namespace kyrsovik
                 cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
                 cmd_insert.ExecuteNonQuery();
 
+                log.Info($"Отзыв успешно добавлен! id мероприятия: {ie.id.ToString()}, id автора: {idAuthor.ToString()}.");
                 MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                connect.Close();
-            }
+            finally { connect.Close(); }
         }       // добавить отзыв
         private void getAuthors()
         {
@@ -94,35 +95,26 @@ namespace kyrsovik
         private void getAuthorsId()
         {
             SqlConnection connect = new SqlConnection(connection);
-
             string sql_select_authors_id = $"select id from authors where surname_author = '{comboBox_author.Text.ToString()}'";
-
             try
             {
                 connect.Open();
                 SqlCommand cmd = new SqlCommand(sql_select_authors_id, connect);
                 idAuthor = (int)cmd.ExecuteScalar();
             }
-
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                connect.Close();
-            }
+            finally { connect.Close(); }
         }       // id автора 
         private void getMaxIdFeedBack()
         {
             SqlConnection connect = new SqlConnection(connection);
-
             string sql_max_id = $"select MAX(id) from feedback_event";
-
             try
             {
                 connect.Open();
                 SqlCommand cmd = new SqlCommand(sql_max_id, connect);
                 maxIdFeedBack = (int)cmd.ExecuteScalar();
             }
-
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
         }       // максимальное значение id в таблице
@@ -132,7 +124,7 @@ namespace kyrsovik
         }           // кнопка добавить отзыв
         private void FeedBackEvent_FormClosed(object sender, FormClosedEventArgs e)
         {
-            InfoEvent ie = this.Owner as InfoEvent;
+            log.Info("********************************************************** Feedback Event Close ***********************************************************");
         }       // обновляем инфу после закрытия формы
     }
 }

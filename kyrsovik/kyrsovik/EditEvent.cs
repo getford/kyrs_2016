@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,7 @@ namespace kyrsovik
 {
     public partial class EditEvent : Form
     {
+        public static Logger log = LogManager.GetCurrentClassLogger();                  // логирование
         public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private string id;
 
@@ -20,18 +22,20 @@ namespace kyrsovik
         {
             InitializeComponent();
         }
-
         private void EditEvent_Load(object sender, EventArgs e)
         {
+            log.Info("************************************************************ Edit Event Start *************************************************************");
             InfoEvent ie = this.Owner as InfoEvent;
             id = ie.id;
         }
-
         private void button_editEvent_Click(object sender, EventArgs e)     // изменение инфы
         {
             if (checkBox_editName.Checked == false && checkBox_editType.Checked == false &&
                 checkBox_editDate.Checked == false && checkBox_editAge.Checked == false)
+            {
+                log.Info("Необходим выбрать параметр для изменения");
                 MessageBox.Show("Необходим выбрать параметр для изменения", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 //название
@@ -60,7 +64,6 @@ namespace kyrsovik
                 }
             }
         }
-
         private void editName()     // изменить название    
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -70,7 +73,7 @@ namespace kyrsovik
                 string sql_query = $"update event set name_event = '{textBox_name.Text.ToString()}' where id = {id}";
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 cmd.ExecuteNonQuery();
-
+                log.Info($"Название мероприятия id: {id.ToString()} успешно изменено на '{textBox_name.Text.ToString()}'.");
                 MessageBox.Show("Название успешно изменнено.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
@@ -86,6 +89,7 @@ namespace kyrsovik
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 cmd.ExecuteNonQuery();
 
+                log.Info($"Тип мероприятия id: {id.ToString()} успешно изменен на '{comboBox_type.Text.ToString()}'.");
                 MessageBox.Show("Тип мероприятия успешно изменнен.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
@@ -102,6 +106,7 @@ namespace kyrsovik
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 cmd.ExecuteNonQuery();
 
+                log.Info($"Дата мероприятия id: {id.ToString()} успешно изменена на '{date.ToString()}'.");
                 MessageBox.Show("Дата мероприятия успешно изменнена.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
@@ -117,10 +122,16 @@ namespace kyrsovik
                 SqlCommand cmd = new SqlCommand(sql_query, connect);
                 cmd.ExecuteNonQuery();
 
+                log.Info($"Возрастное ограничение мероприятия id: {id.ToString()} успешно изменено на '{comboBox_age.Text.ToString()}'.");
                 MessageBox.Show("Возрастное ограничение успешно изменнено.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
+        }
+        private void EditEvent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            log.Info("************************************************************ Edit Event Close *************************************************************");
+
         }
     }
 }
