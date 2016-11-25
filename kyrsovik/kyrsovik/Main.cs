@@ -33,11 +33,13 @@ namespace kyrsovik
 
         public Main()
         {
-            log.Info($"Version: {Environment.Version.ToString()}");
-            log.Info($"OS: { Environment.OSVersion.ToString()}");
-            log.Info($"Command: {Environment.CommandLine.ToString()}");
-
-            log.Info("---------------------------------------------------------------------------------");
+            log.Info($"-------------- Курсовой проект 'Городская афиша'.       Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------");
+            log.Info($"Host name:\t\t {Environment.MachineName.ToString()}");
+            log.Info($"User name:\t\t {Environment.UserName.ToString()}");
+            log.Info($"Version:\t\t\t {Environment.Version.ToString()}");
+            log.Info($"OS:\t\t\t\t {Environment.OSVersion.ToString()}");
+            log.Info($"Command:\t\t\t {Environment.CommandLine.ToString()}");
+            log.Info("****************************************************************** START ******************************************************************");
 
             InitializeComponent();
 
@@ -62,6 +64,8 @@ namespace kyrsovik
             /*-----------------------------------------------*/
             comboBox_show_n_event.Items.Add("0");
             comboBox_show_n_event.Items.Add("500");
+            comboBox_show_n_event.Items.Add("1000");
+            comboBox_show_n_event.Items.Add("5000");
             comboBox_show_n_event.Items.Add("10000");
             comboBox_show_n_event.Items.Add("20000");
             comboBox_show_n_event.Items.Add("30000");
@@ -404,7 +408,7 @@ namespace kyrsovik
 
             ts = sw.Elapsed;
             _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
-            log.Debug($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
+            log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
             for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void getTypeEvent()     // заполняем список тип мероприятия
@@ -705,7 +709,7 @@ namespace kyrsovik
                 sw.Stop();          // стоп счетчика
 
                 ts = sw.Elapsed;
-                log.Info($"Выполнена выгрузка данных из БД({tmp})");
+                log.Info($"Выполнена выгрузка данных из БД ({tmp})");
                 log.Info($"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
                 _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
             }
@@ -715,5 +719,10 @@ namespace kyrsovik
                 MessageBox.Show("Число записей на выбрано!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }       // показать число мероприятий по запросу
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)          // действие при закрытии формы
+        {
+            log.Info("******************************************************************* END *******************************************************************");
+        }
     }
 }

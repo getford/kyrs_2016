@@ -65,6 +65,7 @@
             this.textBox_tel = new System.Windows.Forms.TextBox();
             this.groupBox_select_event = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_count_eft = new System.Windows.Forms.Label();
             this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
             this.button_select = new System.Windows.Forms.Button();
             this.groupBox_bestEvent = new System.Windows.Forms.GroupBox();
@@ -83,7 +84,6 @@
             this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
             this.button_show_n_event = new System.Windows.Forms.Button();
             this._label_time = new System.Windows.Forms.Label();
-            this.label_count_eft = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -440,6 +440,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "По типу мероприятия";
             // 
+            // label_count_eft
+            // 
+            this.label_count_eft.AutoSize = true;
+            this.label_count_eft.Location = new System.Drawing.Point(123, 26);
+            this.label_count_eft.Name = "label_count_eft";
+            this.label_count_eft.Size = new System.Drawing.Size(112, 13);
+            this.label_count_eft.TabIndex = 13;
+            this.label_count_eft.Text = "Число мероприятий:";
+            // 
             // comboBox_type_for_select
             // 
             this.comboBox_type_for_select.FormattingEnabled = true;
@@ -618,15 +627,6 @@
             this._label_time.TabIndex = 20;
             this._label_time.Text = "Время выполнения";
             // 
-            // label_count_eft
-            // 
-            this.label_count_eft.AutoSize = true;
-            this.label_count_eft.Location = new System.Drawing.Point(123, 26);
-            this.label_count_eft.Name = "label_count_eft";
-            this.label_count_eft.Size = new System.Drawing.Size(112, 13);
-            this.label_count_eft.TabIndex = 13;
-            this.label_count_eft.Text = "Число мероприятий:";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -649,6 +649,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Main";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.groupBox_event.ResumeLayout(false);
             this.groupBox_add_event.ResumeLayout(false);
