@@ -446,7 +446,7 @@ public class Main {
         //arrTypeEvent[2] = "Вечеринки";
         //arrTypeEvent[3] = "Спектакли";
         //arrTypeEvent[4] = "Выставки";
-
+/*
         String[] arrNameEvent = new String[10];
         arrNameEvent[0] = "Вечеринка";
         arrNameEvent[1] = "Поэтический вечер";
@@ -458,7 +458,7 @@ public class Main {
         arrNameEvent[7] = "Студенческий вечер";
         arrNameEvent[8] = "Презентация нового альбома";
         arrNameEvent[9] = "Вечер кино";
-/*
+
         int num = 0;
 
         int[] arrAge = new int[5];
@@ -492,7 +492,7 @@ public class Main {
                 file.createNewFile();
             }
             try (PrintWriter printWriter = new PrintWriter(file.getAbsoluteFile())) {
-                for (int i = 0; i < 50000; i++) {
+                for (int i = 0; i < 10000; i++) {
                     long randomDay = minDay + random.nextInt(maxDay - minDay);
 
                     LocalDate localDate = LocalDate.ofEpochDay(randomDay);
@@ -502,18 +502,36 @@ public class Main {
             }
         } catch (IOException ex) {
             throw new RuntimeException();
-        }
-*/
+        }*/
+
+        String[] arrTopic = new String[7];
+        arrTopic[0] = "Понравилось";
+        arrTopic[1] = "Великолепно";
+        arrTopic[2] = "Не очень";
+        arrTopic[3] = "Скучно";
+        arrTopic[4] = "Пойду еще";
+        arrTopic[5] = "Рекомендую всем";
+        arrTopic[6] = "Интересная задумка";
+
+        String[] arrTextFeedback = new String[7];
+        arrTextFeedback[0] = "Очень понравилось, все было на высоте";
+        arrTextFeedback[1] = "Схожу еще раз, не плохо";
+        arrTextFeedback[2] = "Скучно, зря потратил(а) время";
+        arrTextFeedback[3] = "Ушел(а) раньше";
+        arrTextFeedback[4] = "Буду рекомендовать друзьям";
+        arrTextFeedback[5] = "Отличная задумка и реализаия";
+        arrTextFeedback[6] = "На один раз, не очень";
 
         int tmp = 0;
+        String s = "";
         try {
             if (!file.exists()) { // проверяем, что если файл не существует, создаем его
                 file.createNewFile();
             }
             try (PrintWriter printWriter = new PrintWriter(file.getAbsoluteFile())) {
-                for (int i = 0; i < 50000; i++) {
-                    tmp = random.nextInt(5);
-                    printWriter.println(tmp + "\n");
+                for (int i = 0; i < 10000; i++) {
+                    s = arrTextFeedback[random.nextInt(7)];
+                    printWriter.println(s + "\n");
                 }
             }
         } catch (IOException ex) {
