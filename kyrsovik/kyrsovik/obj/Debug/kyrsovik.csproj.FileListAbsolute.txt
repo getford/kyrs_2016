@@ -24,7 +24,6 @@ C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Sta
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EditEvent.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EventInPlace.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackEvent.resources
-C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Wait.resources
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\NLog.config
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\NLog.dll
 C:\Users\getford\Source\Repos\kyrs_2016\kyrsovik\kyrsovik\bin\Debug\NLog.Windows.Forms.dll

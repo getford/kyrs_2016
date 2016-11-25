@@ -84,6 +84,7 @@
             this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
             this.button_show_n_event = new System.Windows.Forms.Button();
             this._label_time = new System.Windows.Forms.Label();
+            this.label_check_db_connect = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -95,7 +96,7 @@
             // 
             // listView_event
             // 
-            this.listView_event.Location = new System.Drawing.Point(12, 300);
+            this.listView_event.Location = new System.Drawing.Point(12, 315);
             this.listView_event.Name = "listView_event";
             this.listView_event.Size = new System.Drawing.Size(779, 294);
             this.listView_event.TabIndex = 2;
@@ -105,7 +106,7 @@
             // 
             // listView_place
             // 
-            this.listView_place.Location = new System.Drawing.Point(797, 300);
+            this.listView_place.Location = new System.Drawing.Point(797, 315);
             this.listView_place.Name = "listView_place";
             this.listView_place.Size = new System.Drawing.Size(387, 294);
             this.listView_place.TabIndex = 3;
@@ -116,7 +117,7 @@
             // groupBox_event
             // 
             this.groupBox_event.Controls.Add(this.groupBox_add_event);
-            this.groupBox_event.Location = new System.Drawing.Point(12, 173);
+            this.groupBox_event.Location = new System.Drawing.Point(12, 188);
             this.groupBox_event.Name = "groupBox_event";
             this.groupBox_event.Size = new System.Drawing.Size(779, 121);
             this.groupBox_event.TabIndex = 4;
@@ -242,7 +243,7 @@
             // groupBox_place
             // 
             this.groupBox_place.Controls.Add(this.groupBox_add_place);
-            this.groupBox_place.Location = new System.Drawing.Point(12, 12);
+            this.groupBox_place.Location = new System.Drawing.Point(12, 27);
             this.groupBox_place.Name = "groupBox_place";
             this.groupBox_place.Size = new System.Drawing.Size(779, 155);
             this.groupBox_place.TabIndex = 5;
@@ -421,7 +422,7 @@
             this.groupBox_select_event.Controls.Add(this.groupBox1);
             this.groupBox_select_event.Controls.Add(this.groupBox_bestEvent);
             this.groupBox_select_event.Controls.Add(this.button_refresh);
-            this.groupBox_select_event.Location = new System.Drawing.Point(798, 13);
+            this.groupBox_select_event.Location = new System.Drawing.Point(798, 28);
             this.groupBox_select_event.Name = "groupBox_select_event";
             this.groupBox_select_event.Size = new System.Drawing.Size(386, 281);
             this.groupBox_select_event.TabIndex = 6;
@@ -558,7 +559,8 @@
             // label_info
             // 
             this.label_info.AutoSize = true;
-            this.label_info.Location = new System.Drawing.Point(237, 655);
+            this.label_info.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label_info.Location = new System.Drawing.Point(237, 670);
             this.label_info.Name = "label_info";
             this.label_info.Size = new System.Drawing.Size(87, 13);
             this.label_info.TabIndex = 7;
@@ -567,7 +569,7 @@
             // label_count_event
             // 
             this.label_count_event.AutoSize = true;
-            this.label_count_event.Location = new System.Drawing.Point(795, 597);
+            this.label_count_event.Location = new System.Drawing.Point(795, 612);
             this.label_count_event.Name = "label_count_event";
             this.label_count_event.Size = new System.Drawing.Size(109, 13);
             this.label_count_event.TabIndex = 8;
@@ -576,7 +578,7 @@
             // label_count_place
             // 
             this.label_count_place.AutoSize = true;
-            this.label_count_place.Location = new System.Drawing.Point(975, 597);
+            this.label_count_place.Location = new System.Drawing.Point(975, 612);
             this.label_count_place.Name = "label_count_place";
             this.label_count_place.Size = new System.Drawing.Size(67, 13);
             this.label_count_place.TabIndex = 9;
@@ -585,7 +587,7 @@
             // label_count_feedback
             // 
             this.label_count_feedback.AutoSize = true;
-            this.label_count_feedback.Location = new System.Drawing.Point(795, 619);
+            this.label_count_feedback.Location = new System.Drawing.Point(795, 634);
             this.label_count_feedback.Name = "label_count_feedback";
             this.label_count_feedback.Size = new System.Drawing.Size(85, 13);
             this.label_count_feedback.TabIndex = 10;
@@ -594,7 +596,7 @@
             // label_n_select_count
             // 
             this.label_n_select_count.AutoSize = true;
-            this.label_n_select_count.Location = new System.Drawing.Point(12, 597);
+            this.label_n_select_count.Location = new System.Drawing.Point(12, 612);
             this.label_n_select_count.Name = "label_n_select_count";
             this.label_n_select_count.Size = new System.Drawing.Size(95, 13);
             this.label_n_select_count.TabIndex = 11;
@@ -603,14 +605,14 @@
             // comboBox_show_n_event
             // 
             this.comboBox_show_n_event.FormattingEnabled = true;
-            this.comboBox_show_n_event.Location = new System.Drawing.Point(113, 597);
+            this.comboBox_show_n_event.Location = new System.Drawing.Point(113, 612);
             this.comboBox_show_n_event.Name = "comboBox_show_n_event";
             this.comboBox_show_n_event.Size = new System.Drawing.Size(93, 21);
             this.comboBox_show_n_event.TabIndex = 19;
             // 
             // button_show_n_event
             // 
-            this.button_show_n_event.Location = new System.Drawing.Point(212, 598);
+            this.button_show_n_event.Location = new System.Drawing.Point(212, 613);
             this.button_show_n_event.Name = "button_show_n_event";
             this.button_show_n_event.Size = new System.Drawing.Size(89, 20);
             this.button_show_n_event.TabIndex = 19;
@@ -621,17 +623,27 @@
             // _label_time
             // 
             this._label_time.AutoSize = true;
-            this._label_time.Location = new System.Drawing.Point(324, 602);
+            this._label_time.Location = new System.Drawing.Point(324, 617);
             this._label_time.Name = "_label_time";
             this._label_time.Size = new System.Drawing.Size(105, 13);
             this._label_time.TabIndex = 20;
             this._label_time.Text = "Время выполнения";
             // 
+            // label_check_db_connect
+            // 
+            this.label_check_db_connect.AutoSize = true;
+            this.label_check_db_connect.Location = new System.Drawing.Point(9, 9);
+            this.label_check_db_connect.Name = "label_check_db_connect";
+            this.label_check_db_connect.Size = new System.Drawing.Size(92, 13);
+            this.label_check_db_connect.TabIndex = 21;
+            this.label_check_db_connect.Text = "Соединение с бд";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 677);
+            this.ClientSize = new System.Drawing.Size(1202, 693);
+            this.Controls.Add(this.label_check_db_connect);
             this.Controls.Add(this._label_time);
             this.Controls.Add(this.button_show_n_event);
             this.Controls.Add(this.comboBox_show_n_event);
@@ -723,6 +735,7 @@
         public System.Windows.Forms.Button button_show_n_event;
         private System.Windows.Forms.Label _label_time;
         private System.Windows.Forms.Label label_count_eft;
+        private System.Windows.Forms.Label label_check_db_connect;
     }
 }
 

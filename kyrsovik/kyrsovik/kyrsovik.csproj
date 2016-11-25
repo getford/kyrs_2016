@@ -132,12 +132,6 @@
     <Compile Include="Start.Designer.cs">
       <DependentUpon>Start.cs</DependentUpon>
     </Compile>
-    <Compile Include="Wait.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Wait.Designer.cs">
-      <DependentUpon>Wait.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="EditEvent.resx">
       <DependentUpon>EditEvent.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,9 +160,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Start.resx">
       <DependentUpon>Start.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Wait.resx">
-      <DependentUpon>Wait.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="main.ico" />
     <Content Include="NLog.config">

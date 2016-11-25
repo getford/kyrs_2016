@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using NLog;
+using System.IO;
 
 namespace kyrsovik
 {
@@ -36,9 +37,10 @@ namespace kyrsovik
             log.Info($"-------------- Курсовой проект 'Городская афиша'        Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------");
             log.Info($"Host name:\t\t {Environment.MachineName.ToString()}");
             log.Info($"User name:\t\t {Environment.UserName.ToString()}");
-            log.Info($"Version:\t\t\t {Environment.Version.ToString()}");
             log.Info($"OS:\t\t\t\t {Environment.OSVersion.ToString()}");
-            log.Info($"Command:\t\t\t {Environment.CommandLine.ToString() + Environment.NewLine}");
+            log.Info($"Exe file:\t\t {Environment.CommandLine.ToString()}");
+            log.Info($"Log file:\t\t  {Application.StartupPath + @"\log.txt" + Environment.NewLine}");
+
             log.Info("****************************************************************** START ******************************************************************");
             InitializeComponent();
 
@@ -78,7 +80,54 @@ namespace kyrsovik
         }
         private void Main_Load(object sender, EventArgs e)
         {
-            refreshAllData();
+            checkConnection();          // проверка соединения с бд
+        }
+        private void checkConnection()              // проверка соединения с бд
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            connect.Open();
+            if (connect.State == ConnectionState.Open)
+            {
+                label_check_db_connect.Text = $"Соединение с базой данных установленно!";
+                label_check_db_connect.ForeColor = Color.Green;
+                log.Info("Соединение с базой данных установленно!");
+                refreshAllData();
+            }
+            else
+            {
+                label_check_db_connect.Text = $"ERROR --> Соединение с базой данных НЕ установленно!";
+                label_check_db_connect.ForeColor = Color.Red;
+                log.Info("ERROR --> Соединение с базой данных НЕ установленно!");
+            }
+            connect.Close();
+        }
+        public void refreshAllData()        // загрузка всей инфы (перезагрузка всей инфы)
+        {
+            const int N = 500;
+            comboBox_event_place.Items.Clear();
+            comboBox_type_event.Items.Clear();
+            comboBox_type_for_select.Items.Clear();
+
+            clearInput();
+            //-------------------------------------------
+
+            sw.Reset();
+            sw.Start();
+
+            getCount();
+            selectCountFeedback();
+            getDataEvent(N.ToString());  // выводим 500 записей по умолчанию
+            getDataPlace();
+            getTypeEvent();
+            statDB();
+            sw.Stop();
+
+            ts = sw.Elapsed;
+            _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+            log.Info($"Выполнена выгрузка данных из БД ({N}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
+            log.Info($"В БД: {countEvent.ToString()} мероприятие. {countPlace.ToString()} мест(о) проведения. {countFBEvent.ToString()} отзыв(ов) о мероприятии. {countFBPlace.ToString()} отзыв(ов) о месте проведения.");
+
+            for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
         }
         private void Initialize_List_place()
         {
@@ -152,7 +201,6 @@ namespace kyrsovik
                     listView_place.Items.Add(lvi);
                 }
                 da.Dispose();
-                log.Info($"В БД {countPlace.ToString()} мест(о) проведения.");
             }
             catch (SqlException ex)
             {
@@ -187,7 +235,6 @@ namespace kyrsovik
                     listView_event.Items.Add(lvi);
                 }
                 da.Dispose();
-                log.Info($"В БД {countEvent.ToString()} мероприятие.");
             }
             catch (SqlException ex)
             {
@@ -386,32 +433,6 @@ namespace kyrsovik
             ie.Show();
 
         }       // просмотр инфы о мероприятии
-        public void refreshAllData()        // загрузка всей инфы (перезагрузка всей инфы)
-        {
-            const int N = 500;
-            comboBox_event_place.Items.Clear();
-            comboBox_type_event.Items.Clear();
-            comboBox_type_for_select.Items.Clear();
-
-            clearInput();
-            //-------------------------------------------
-
-            sw.Reset();
-            sw.Start();
-
-            getCount();
-            selectCountFeedback();
-            getDataEvent(N.ToString());  // выводим 500 записей по умолчанию
-            getDataPlace();
-            getTypeEvent();
-            statDB();
-            sw.Stop();
-
-            ts = sw.Elapsed;
-            _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
-            log.Info($"Выполнена выгрузка данных из БД ({N}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
-            for (int i = 0; i < countPlace; i++) { comboBox_event_place.Items.Add(i); }
-        }
         private void getTypeEvent()     // заполняем список тип мероприятия
         {
             SqlConnection connect = new SqlConnection(connection);
@@ -692,8 +713,8 @@ namespace kyrsovik
             try
             {
                 connect.Open();
-                string sql_count_fb_event = $"select count(*) from feedback_event where rating_event > 3";
-                string sql_count_fb_place = $"select count(*) from feedback_event where rating_event > 3";
+                string sql_count_fb_event = $"select count(*) from feedback_event";
+                string sql_count_fb_place = $"select count(*) from feedback_event";
 
                 SqlCommand cmd_fb_event = new SqlCommand(sql_count_fb_event, connect);
                 SqlCommand cmd_fb_place = new SqlCommand(sql_count_fb_place, connect);
