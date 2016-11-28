@@ -233,6 +233,12 @@ namespace kyrsovik
                         lvi.SubItems.Add(dt.Rows[i][j].ToString());
                     }
                     listView_event.Items.Add(lvi);
+
+                    DateTime _dateToday = DateTime.Parse((string)DateTime.Today.ToString());
+                    DateTime _dateEvent = DateTime.Parse((string)dt.Rows[i][4].ToString());
+                    if (_dateEvent < _dateToday) { lvi.ForeColor = Color.Red; }         // если ммероприятие прошло - красный цвет
+                    if (_dateToday.ToString() == _dateEvent.ToString()) { lvi.ForeColor = Color.Green; }        // мероприятие сегодня - зеленый
+
                 }
                 da.Dispose();
             }
