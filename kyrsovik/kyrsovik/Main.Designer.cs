@@ -147,13 +147,12 @@
             // 
             // dateTimePicker_event
             // 
-            this.dateTimePicker_event.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_event.Location = new System.Drawing.Point(459, 40);
             this.dateTimePicker_event.Name = "dateTimePicker_event";
             this.dateTimePicker_event.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dateTimePicker_event.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker_event.TabIndex = 18;
-            this.dateTimePicker_event.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            this.dateTimePicker_event.Value = new System.DateTime(2016, 11, 28, 0, 0, 0, 0);
             // 
             // button_add_event
             // 
@@ -518,7 +517,6 @@
             // 
             // dateTimePicker_end
             // 
-            this.dateTimePicker_end.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_end.Location = new System.Drawing.Point(218, 87);
             this.dateTimePicker_end.Name = "dateTimePicker_end";
             this.dateTimePicker_end.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -528,7 +526,6 @@
             // 
             // dateTimePicker_start
             // 
-            this.dateTimePicker_start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_start.Location = new System.Drawing.Point(6, 87);
             this.dateTimePicker_start.Name = "dateTimePicker_start";
             this.dateTimePicker_start.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -668,9 +665,11 @@
             this.Controls.Add(this.groupBox_event);
             this.Controls.Add(this.listView_place);
             this.Controls.Add(this.listView_event);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);

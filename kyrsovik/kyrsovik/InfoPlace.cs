@@ -19,6 +19,7 @@ namespace kyrsovik
         private string typePlace;       // тип места
         private decimal avgRatePlace;   //ср значение рейтинга
         public string id;           // id места
+        public int countEIP;    // число мероприятий в данном месте
 
         public InfoPlace()
         {
@@ -31,6 +32,7 @@ namespace kyrsovik
             getAVGRatePlace();
             getInfo();
             getCountFeedBack();
+            getCountEventInPlace();
         }
         private void getInfo()
         {
@@ -224,6 +226,20 @@ namespace kyrsovik
             FeedBackPlace fb = new FeedBackPlace();
             fb.Owner = this;
             fb.Show();
+        }
+        private void getCountEventInPlace()            // число мероприятий в данном месте
+        {
+            SqlConnection connect = new SqlConnection(connection);
+            string sql_count = $"select count(*) from event where id_place = '{id}'";
+            try
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(sql_count, connect);
+                countEIP = (int)cmd.ExecuteScalar();
+                linkLabel_events_here.Text = $"Мероприятия в этом заведении: {countEIP.ToString()}";
+            }
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally { connect.Close(); }
         }
     }
 }
