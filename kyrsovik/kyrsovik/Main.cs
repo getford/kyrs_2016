@@ -614,6 +614,7 @@ namespace kyrsovik
                 }
                 da.Dispose();
                 log.Info($"В БД найдено {count.ToString()} мероприятия с рейтингом больше либо равным 3.");
+                label_count_event_date_rate.Text = $"Число мероприятий: {count}";
             }
             catch (SqlException ex)
             {
@@ -658,6 +659,7 @@ namespace kyrsovik
                 }
                 da.Dispose();
                 log.Info($"В БД {count} мероприятий с рейтингом больше либо раным 3, за промежуток времени {date_start.ToString()} - {date_end.ToString()}.");
+                label_count_event_date_rate.Text = $"Число мероприятий: {count}";
             }
             catch (SqlException ex)
             {
@@ -700,6 +702,7 @@ namespace kyrsovik
                 }
                 da.Dispose();
                 log.Info($"В БД {count} мероприятий, за промежуток времени {date_start.ToString()} - {date_end.ToString()}.");
+                label_count_event_date_rate.Text = $"Число мероприятий: {count}";
             }
             catch (SqlException ex)
             {

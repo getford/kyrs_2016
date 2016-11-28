@@ -44,6 +44,7 @@
             this.comboBox_type_event = new System.Windows.Forms.ComboBox();
             this.textBox_name_event = new System.Windows.Forms.TextBox();
             this.label_name_event = new System.Windows.Forms.Label();
+            this.label_check_db_connect = new System.Windows.Forms.Label();
             this.groupBox_place = new System.Windows.Forms.GroupBox();
             this.groupBox_add_place = new System.Windows.Forms.GroupBox();
             this.label_street = new System.Windows.Forms.Label();
@@ -84,7 +85,7 @@
             this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
             this.button_show_n_event = new System.Windows.Forms.Button();
             this._label_time = new System.Windows.Forms.Label();
-            this.label_check_db_connect = new System.Windows.Forms.Label();
+            this.label_count_event_date_rate = new System.Windows.Forms.Label();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -240,6 +241,15 @@
             this.label_name_event.TabIndex = 8;
             this.label_name_event.Text = "Name";
             // 
+            // label_check_db_connect
+            // 
+            this.label_check_db_connect.AutoSize = true;
+            this.label_check_db_connect.Location = new System.Drawing.Point(12, 9);
+            this.label_check_db_connect.Name = "label_check_db_connect";
+            this.label_check_db_connect.Size = new System.Drawing.Size(92, 13);
+            this.label_check_db_connect.TabIndex = 21;
+            this.label_check_db_connect.Text = "Соединение с бд";
+            // 
             // groupBox_place
             // 
             this.groupBox_place.Controls.Add(this.groupBox_add_place);
@@ -373,7 +383,7 @@
             // label_name_place
             // 
             this.label_name_place.AutoSize = true;
-            this.label_name_place.Location = new System.Drawing.Point(8, 26);
+            this.label_name_place.Location = new System.Drawing.Point(6, 26);
             this.label_name_place.Name = "label_name_place";
             this.label_name_place.Size = new System.Drawing.Size(35, 13);
             this.label_name_place.TabIndex = 3;
@@ -422,9 +432,9 @@
             this.groupBox_select_event.Controls.Add(this.groupBox1);
             this.groupBox_select_event.Controls.Add(this.groupBox_bestEvent);
             this.groupBox_select_event.Controls.Add(this.button_refresh);
-            this.groupBox_select_event.Location = new System.Drawing.Point(798, 28);
+            this.groupBox_select_event.Location = new System.Drawing.Point(798, 27);
             this.groupBox_select_event.Name = "groupBox_select_event";
-            this.groupBox_select_event.Size = new System.Drawing.Size(386, 281);
+            this.groupBox_select_event.Size = new System.Drawing.Size(386, 282);
             this.groupBox_select_event.TabIndex = 6;
             this.groupBox_select_event.TabStop = false;
             this.groupBox_select_event.Text = "Выборка";
@@ -470,6 +480,7 @@
             // 
             // groupBox_bestEvent
             // 
+            this.groupBox_bestEvent.Controls.Add(this.label_count_event_date_rate);
             this.groupBox_bestEvent.Controls.Add(this.radioButton_start_to_end_date_event);
             this.groupBox_bestEvent.Controls.Add(this.radioButton_for_date);
             this.groupBox_bestEvent.Controls.Add(this.dateTimePicker_end);
@@ -513,7 +524,7 @@
             this.dateTimePicker_end.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dateTimePicker_end.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker_end.TabIndex = 20;
-            this.dateTimePicker_end.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            this.dateTimePicker_end.Value = new System.DateTime(2016, 11, 28, 0, 0, 0, 0);
             // 
             // dateTimePicker_start
             // 
@@ -523,7 +534,7 @@
             this.dateTimePicker_start.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dateTimePicker_start.Size = new System.Drawing.Size(143, 20);
             this.dateTimePicker_start.TabIndex = 19;
-            this.dateTimePicker_start.Value = new System.DateTime(2016, 11, 10, 10, 42, 38, 0);
+            this.dateTimePicker_start.Value = new System.DateTime(2016, 11, 28, 0, 0, 0, 0);
             // 
             // button_selectBestEvent
             // 
@@ -560,7 +571,7 @@
             // 
             this.label_info.AutoSize = true;
             this.label_info.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label_info.Location = new System.Drawing.Point(237, 670);
+            this.label_info.Location = new System.Drawing.Point(26, 636);
             this.label_info.Name = "label_info";
             this.label_info.Size = new System.Drawing.Size(87, 13);
             this.label_info.TabIndex = 7;
@@ -587,7 +598,7 @@
             // label_count_feedback
             // 
             this.label_count_feedback.AutoSize = true;
-            this.label_count_feedback.Location = new System.Drawing.Point(795, 634);
+            this.label_count_feedback.Location = new System.Drawing.Point(795, 636);
             this.label_count_feedback.Name = "label_count_feedback";
             this.label_count_feedback.Size = new System.Drawing.Size(85, 13);
             this.label_count_feedback.TabIndex = 10;
@@ -629,20 +640,20 @@
             this._label_time.TabIndex = 20;
             this._label_time.Text = "Время выполнения";
             // 
-            // label_check_db_connect
+            // label_count_event_date_rate
             // 
-            this.label_check_db_connect.AutoSize = true;
-            this.label_check_db_connect.Location = new System.Drawing.Point(9, 9);
-            this.label_check_db_connect.Name = "label_check_db_connect";
-            this.label_check_db_connect.Size = new System.Drawing.Size(92, 13);
-            this.label_check_db_connect.TabIndex = 21;
-            this.label_check_db_connect.Text = "Соединение с бд";
+            this.label_count_event_date_rate.AutoSize = true;
+            this.label_count_event_date_rate.Location = new System.Drawing.Point(90, 117);
+            this.label_count_event_date_rate.Name = "label_count_event_date_rate";
+            this.label_count_event_date_rate.Size = new System.Drawing.Size(112, 13);
+            this.label_count_event_date_rate.TabIndex = 23;
+            this.label_count_event_date_rate.Text = "Число мероприятий:";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1202, 693);
+            this.ClientSize = new System.Drawing.Size(1202, 660);
             this.Controls.Add(this.label_check_db_connect);
             this.Controls.Add(this._label_time);
             this.Controls.Add(this.button_show_n_event);
@@ -736,6 +747,7 @@
         private System.Windows.Forms.Label _label_time;
         private System.Windows.Forms.Label label_count_eft;
         private System.Windows.Forms.Label label_check_db_connect;
+        private System.Windows.Forms.Label label_count_event_date_rate;
     }
 }
 
