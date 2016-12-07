@@ -604,10 +604,11 @@ namespace kyrsovik
             try
             {
                 connect.Open();
-                string sql_count = $"select count(*) from feedback_event where rating_event >= 3";
+                string sql_count = $"select count(id) from feedback_event where rating_event > 3";
 
                 SqlCommand cmd = new SqlCommand(sql_count, connect);
                 countBestFeedbackEvent = (int)cmd.ExecuteScalar();
+
                 if (countBestFeedbackEvent == 0)
                 {
                     sw.Stop();
