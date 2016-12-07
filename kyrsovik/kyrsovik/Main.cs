@@ -29,10 +29,10 @@ namespace kyrsovik
         public int countFBEvent;    // число отзывов ивент
         public int countFBPlace;    // число отзывов места
 
+        private int flagEvent = 0;      // В дальнейшем для лога (с прошедшими / без прошедших мероприятий)
+
         Stopwatch sw = new Stopwatch();     // подсчет времени выполнения
         TimeSpan ts = new TimeSpan();       // для работы с временем выполнения
-
-        private bool flag_event = false;        // показывать или не показывать прошедшие мероприятия
 
         public Main()
         {
@@ -86,6 +86,7 @@ namespace kyrsovik
         }
         private void Main_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "kyrsProjectDataSet._event". При необходимости она может быть перемещена или удалена.
             checkConnection();          // проверка соединения с бд
         }
         private void checkConnection()              // проверка соединения с бд
@@ -130,6 +131,11 @@ namespace kyrsovik
 
             ts = sw.Elapsed;
             _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
+            switch (flagEvent)
+            {
+                case 0: log.Info($"Без прошедших мероприятий"); break;
+                case 1: log.Info($"С прошедшими мероприятиями"); break;
+            }
             log.Info($"Выполнена выгрузка данных из БД ({N}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
             log.Info($"В БД: {countEvent.ToString()} мероприятие. {countPlace.ToString()} мест(о) проведения. {countFBEvent.ToString()} отзыв(ов) о мероприятии. {countFBPlace.ToString()} отзыв(ов) о месте проведения.");
 
@@ -239,23 +245,22 @@ namespace kyrsovik
 
                     if (checkBox_flag_event.Checked == false)           // не показывать прошедшие мероприятия по умолчанию
                     {
+                        flagEvent = 0;
                         if (_dateEvent >= _dateToday)           // проверка даты мероприятия
                         {
                             ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
                             for (int j = 1; j < dt.Columns.Count; j++)
-                            {
                                 lvi.SubItems.Add(dt.Rows[i][j].ToString());
-                            }
+
                             listView_event.Items.Add(lvi);
 
-                            if (_dateToday.ToString() == _dateEvent.ToString())
-                            {
+                            if (_dateToday.ToString() == _dateEvent.ToString())     // мероприятие сегодня - зеленый
                                 lvi.ForeColor = Color.Green;
-                            } // мероприятие сегодня - зеленый
                         }
                     }
                     else
                     {
+                        flagEvent = 1;
                         ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
                         for (int j = 1; j < dt.Columns.Count; j++)
                             lvi.SubItems.Add(dt.Rows[i][j].ToString());
@@ -263,9 +268,9 @@ namespace kyrsovik
                         listView_event.Items.Add(lvi);
                         if (_dateEvent < _dateToday)        // если ммероприятие прошло - красный цвет
                             lvi.ForeColor = Color.Red;
-                        
+
                         if (_dateToday.ToString() == _dateEvent.ToString())     // мероприятие сегодня - зеленый
-                            lvi.ForeColor = Color.Green;                      
+                            lvi.ForeColor = Color.Green;
                     }
                 }
                 da.Dispose();
@@ -625,7 +630,7 @@ namespace kyrsovik
             {
                 connect.Open();
                 string sql_query = $"select event.id, id_place, name_event, id_type, date_event, age_control from event inner join feedback_event on event.id = feedback_event.id_event where rating_event >= 3";
-                string sql_query_count = $"select count(*) from event inner join feedback_event on event.id = feedback_event.id_event where rating_event >= 3";
+                string sql_query_count = $"select count(*) from event inner join feedback_event on event.id = feedback_event.id_event where rating_event > 3";
                 SqlCommand cmd_count = new SqlCommand(sql_query_count, connect);
                 count = (int)cmd_count.ExecuteScalar();
 
@@ -786,6 +791,11 @@ namespace kyrsovik
                 sw.Stop();          // стоп счетчика
 
                 ts = sw.Elapsed;
+                switch (flagEvent)
+                {
+                    case 0: log.Info($"Без прошедших мероприятий"); break;
+                    case 1: log.Info($"С прошедшими мероприятиями"); break;
+                }
                 log.Info($"Выполнена выгрузка данных из БД ({tmp}).\tВыгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)");
                 _label_time.Text = $"Выгрузка из базы завершена за: {ts.ToString()}         ({sw.ElapsedMilliseconds.ToString()} миллисекунд)";
             }
