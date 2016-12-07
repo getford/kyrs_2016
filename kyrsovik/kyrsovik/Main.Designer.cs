@@ -70,6 +70,7 @@
             this.comboBox_type_for_select = new System.Windows.Forms.ComboBox();
             this.button_select = new System.Windows.Forms.Button();
             this.groupBox_bestEvent = new System.Windows.Forms.GroupBox();
+            this.label_count_event_date_rate = new System.Windows.Forms.Label();
             this.radioButton_start_to_end_date_event = new System.Windows.Forms.RadioButton();
             this.radioButton_for_date = new System.Windows.Forms.RadioButton();
             this.dateTimePicker_end = new System.Windows.Forms.DateTimePicker();
@@ -85,7 +86,7 @@
             this.comboBox_show_n_event = new System.Windows.Forms.ComboBox();
             this.button_show_n_event = new System.Windows.Forms.Button();
             this._label_time = new System.Windows.Forms.Label();
-            this.label_count_event_date_rate = new System.Windows.Forms.Label();
+            this.checkBox_flag_event = new System.Windows.Forms.CheckBox();
             this.groupBox_event.SuspendLayout();
             this.groupBox_add_event.SuspendLayout();
             this.groupBox_place.SuspendLayout();
@@ -493,6 +494,15 @@
             this.groupBox_bestEvent.TabStop = false;
             this.groupBox_bestEvent.Text = "Лучшие мероприятия";
             // 
+            // label_count_event_date_rate
+            // 
+            this.label_count_event_date_rate.AutoSize = true;
+            this.label_count_event_date_rate.Location = new System.Drawing.Point(90, 117);
+            this.label_count_event_date_rate.Name = "label_count_event_date_rate";
+            this.label_count_event_date_rate.Size = new System.Drawing.Size(112, 13);
+            this.label_count_event_date_rate.TabIndex = 23;
+            this.label_count_event_date_rate.Text = "Число мероприятий:";
+            // 
             // radioButton_start_to_end_date_event
             // 
             this.radioButton_start_to_end_date_event.AutoSize = true;
@@ -637,20 +647,22 @@
             this._label_time.TabIndex = 20;
             this._label_time.Text = "Время выполнения";
             // 
-            // label_count_event_date_rate
+            // checkBox_flag_event
             // 
-            this.label_count_event_date_rate.AutoSize = true;
-            this.label_count_event_date_rate.Location = new System.Drawing.Point(90, 117);
-            this.label_count_event_date_rate.Name = "label_count_event_date_rate";
-            this.label_count_event_date_rate.Size = new System.Drawing.Size(112, 13);
-            this.label_count_event_date_rate.TabIndex = 23;
-            this.label_count_event_date_rate.Text = "Число мероприятий:";
+            this.checkBox_flag_event.AutoSize = true;
+            this.checkBox_flag_event.Location = new System.Drawing.Point(797, 8);
+            this.checkBox_flag_event.Name = "checkBox_flag_event";
+            this.checkBox_flag_event.Size = new System.Drawing.Size(206, 17);
+            this.checkBox_flag_event.TabIndex = 22;
+            this.checkBox_flag_event.Text = "Показать прошедшие мероприятия";
+            this.checkBox_flag_event.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1202, 660);
+            this.Controls.Add(this.checkBox_flag_event);
             this.Controls.Add(this.label_check_db_connect);
             this.Controls.Add(this._label_time);
             this.Controls.Add(this.button_show_n_event);
@@ -747,6 +759,7 @@
         private System.Windows.Forms.Label label_count_eft;
         private System.Windows.Forms.Label label_check_db_connect;
         private System.Windows.Forms.Label label_count_event_date_rate;
+        private System.Windows.Forms.CheckBox checkBox_flag_event;
     }
 }
 

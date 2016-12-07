@@ -32,6 +32,8 @@ namespace kyrsovik
         Stopwatch sw = new Stopwatch();     // подсчет времени выполнения
         TimeSpan ts = new TimeSpan();       // для работы с временем выполнения
 
+        private bool flag_event = false;        // показывать или не показывать прошедшие мероприятия
+
         public Main()
         {
             log.Info($"-------------- Курсовой проект 'Городская афиша'        Жигало Владимир Юрьевич       ФИТ 3 курс           БГТУ 2016 Минск --------------");
@@ -77,6 +79,10 @@ namespace kyrsovik
             comboBox_show_n_event.Items.Add("80000");
             comboBox_show_n_event.Items.Add("90000");
             comboBox_show_n_event.Items.Add("100000");
+
+            /*------------------------------------------------*/
+
+
         }
         private void Main_Load(object sender, EventArgs e)
         {
@@ -210,6 +216,8 @@ namespace kyrsovik
         }               // выборка из Place
         private void getDataEvent(string N)
         {
+            DateTime _dateToday = DateTime.Parse((string)DateTime.Today.ToString());            // дата сегодня
+
             SqlConnection connect = new SqlConnection(connection);
             try
             {
@@ -227,18 +235,38 @@ namespace kyrsovik
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
-                    for (int j = 1; j < dt.Columns.Count; j++)
+                    DateTime _dateEvent = DateTime.Parse((string)dt.Rows[i][4].ToString());     // дата мероприятия
+
+                    if (checkBox_flag_event.Checked == false)           // не показывать прошедшие мероприятия по умолчанию
                     {
-                        lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                        if (_dateEvent >= _dateToday)           // проверка даты мероприятия
+                        {
+                            ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                            for (int j = 1; j < dt.Columns.Count; j++)
+                            {
+                                lvi.SubItems.Add(dt.Rows[i][j].ToString());
+                            }
+                            listView_event.Items.Add(lvi);
+
+                            if (_dateToday.ToString() == _dateEvent.ToString())
+                            {
+                                lvi.ForeColor = Color.Green;
+                            } // мероприятие сегодня - зеленый
+                        }
                     }
-                    listView_event.Items.Add(lvi);
+                    else
+                    {
+                        ListViewItem lvi = new ListViewItem(dt.Rows[i][0].ToString());
+                        for (int j = 1; j < dt.Columns.Count; j++)
+                            lvi.SubItems.Add(dt.Rows[i][j].ToString());
 
-                    DateTime _dateToday = DateTime.Parse((string)DateTime.Today.ToString());
-                    DateTime _dateEvent = DateTime.Parse((string)dt.Rows[i][4].ToString());
-                    if (_dateEvent < _dateToday) { lvi.ForeColor = Color.Red; }         // если ммероприятие прошло - красный цвет
-                    if (_dateToday.ToString() == _dateEvent.ToString()) { lvi.ForeColor = Color.Green; }        // мероприятие сегодня - зеленый
-
+                        listView_event.Items.Add(lvi);
+                        if (_dateEvent < _dateToday)        // если ммероприятие прошло - красный цвет
+                            lvi.ForeColor = Color.Red;
+                        
+                        if (_dateToday.ToString() == _dateEvent.ToString())     // мероприятие сегодня - зеленый
+                            lvi.ForeColor = Color.Green;                      
+                    }
                 }
                 da.Dispose();
             }
@@ -369,6 +397,8 @@ namespace kyrsovik
             textBox_tel.Clear();
             textBox_time_work.Clear();
             dateTimePicker_event.Value = DateTime.Now;
+            dateTimePicker_start.Value = DateTime.Now;
+            dateTimePicker_end.Value = DateTime.Now;
 
             comboBox_age.ResetText();
             comboBox_event_place.ResetText();
@@ -569,7 +599,7 @@ namespace kyrsovik
             try
             {
                 connect.Open();
-                string sql_count = $"select count(*) from feedback_event where rating_event > 3";
+                string sql_count = $"select count(*) from feedback_event where rating_event >= 3";
 
                 SqlCommand cmd = new SqlCommand(sql_count, connect);
                 countBestFeedbackEvent = (int)cmd.ExecuteScalar();
