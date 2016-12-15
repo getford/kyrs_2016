@@ -282,32 +282,28 @@ namespace kyrsovik
         }               // выборка из Event
         private void button_add_place_Click(object sender, EventArgs e)
         {
-            SqlConnection connect = new SqlConnection(connection);
-            try
+            int id_parking = 0;
+            int id_card = 0;
+            int id_type = 0;
+
+            string select_cb_parking = comboBox_parking.SelectedItem.ToString();
+            string select_cb_type = comboBox_type_place.SelectedItem.ToString();
+            string select_cb_card = comboBox_pay_card.SelectedItem.ToString();
+
+            string proc_address = "pr_insert_address";
+            string proc_place = "pr_insert_place";
+
+            using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
 
-                string sql_insert_address = string.Format($"insert into address ([id], [country], [city], [street], [house], [tel]) values (@id, @country, @city, @street, @house, @tel)");
-                string sql_insert = string.Format($"insert into place ([id], [id_address], [name_place], [id_type], [pay_card], [parking], [time_work]) values (@id, @id_address, @name_place, @id_type, @pay_card, @parking, @time_work)");
-
-                SqlCommand cmd_insert = new SqlCommand(sql_insert, connect);
-                SqlCommand cmd_insert_address = new SqlCommand(sql_insert_address, connect);
-
-                string select_cb_parking = comboBox_parking.SelectedItem.ToString();
-                string select_cb_type = comboBox_type_place.SelectedItem.ToString();
-                string select_cb_card = comboBox_pay_card.SelectedItem.ToString();
-
-                int id_parking = 0;
-                int id_card = 0;
-                int id_type = 0;
-
-                if (select_cb_parking.ToString() == "true") { id_parking = 1; }
-                if (select_cb_parking.ToString() == "false") { id_parking = 0; }
+                if (select_cb_parking == "true") { id_parking = 1; }
+                if (select_cb_parking == "false") { id_parking = 0; }
 
                 if (select_cb_card.ToString() == "true") { id_card = 1; }
                 if (select_cb_card.ToString() == "false") { id_card = 0; }
 
-                switch (comboBox_type_place.SelectedItem.ToString())
+                switch (select_cb_type)
                 {
                     case "Кинотеатр": id_type = 0; break;
                     case "Ночной клуб": id_type = 1; break;
@@ -317,22 +313,97 @@ namespace kyrsovik
                     case "Боулинг": id_type = 5; break;
                 }
 
-                cmd_insert_address.Parameters.AddWithValue("@id", maxIdPlaceAddress + 1);
-                cmd_insert_address.Parameters.AddWithValue("@country", "BLR");
-                cmd_insert_address.Parameters.AddWithValue("@city", "Minsk");
-                cmd_insert_address.Parameters.AddWithValue("@street", textBox_street.Text.ToString());
-                cmd_insert_address.Parameters.AddWithValue("@house", textBox_house.Text.ToString());
-                cmd_insert_address.Parameters.AddWithValue("@tel", textBox_tel.Text.ToString());
+                SqlCommand cmd_insert_address = new SqlCommand(proc_address, connect);
+                cmd_insert_address.CommandType = CommandType.StoredProcedure;
+
+                // процедура добавления адреса
+                SqlParameter id = new SqlParameter
+                {
+                    ParameterName = @"id",
+                    Value = maxIdPlaceAddress = maxIdPlaceAddress + 1
+                };
+                cmd_insert_address.Parameters.Add(id);
+                SqlParameter country = new SqlParameter
+                {
+                    ParameterName = @"country",
+                    Value = "BLR"
+                };
+                cmd_insert_address.Parameters.Add(country);
+                SqlParameter city = new SqlParameter
+                {
+                    ParameterName = @"city",
+                    Value = "Minsk"
+                };
+                cmd_insert_address.Parameters.Add(city);
+                SqlParameter street = new SqlParameter
+                {
+                    ParameterName = @"street",
+                    Value = textBox_street.Text.ToString()
+                };
+                cmd_insert_address.Parameters.Add(street);
+                SqlParameter house = new SqlParameter
+                {
+                    ParameterName = @"house",
+                    Value = textBox_house.Text.ToString()
+                };
+                cmd_insert_address.Parameters.Add(house);
+                SqlParameter tel = new SqlParameter
+                {
+                    ParameterName = @"tel",
+                    Value = textBox_tel.Text.ToString()
+                };
+                cmd_insert_address.Parameters.Add(tel);
                 cmd_insert_address.ExecuteNonQuery();
 
-                cmd_insert.Parameters.AddWithValue("@id", (maxIdPlaceAddress + 1).ToString());
-                cmd_insert.Parameters.AddWithValue("@id_address", (maxIdPlaceAddress + 1).ToString());
-                cmd_insert.Parameters.AddWithValue("@name_place", textBox_name_palce.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@id_type", id_type.ToString());
-                cmd_insert.Parameters.AddWithValue("@pay_card", id_card.ToString());
-                cmd_insert.Parameters.AddWithValue("@parking", id_parking.ToString());
-                cmd_insert.Parameters.AddWithValue("@time_work", textBox_time_work.Text.ToString());
-                cmd_insert.ExecuteNonQuery();
+                // процедура добавления места
+
+                SqlCommand cmd_insert_place = new SqlCommand(proc_place, connect);
+                cmd_insert_place.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter id_place = new SqlParameter
+                {
+                    ParameterName = @"id",
+                    Value = maxIdPlaceAddress
+                };
+                cmd_insert_place.Parameters.Add(id_place);
+                SqlParameter id_address = new SqlParameter
+                {
+                    ParameterName = @"id_address",
+                    Value = maxIdPlaceAddress
+                };
+                cmd_insert_place.Parameters.Add(id_address);
+                SqlParameter name_place = new SqlParameter
+                {
+                    ParameterName = @"name_place",
+                    Value = textBox_name_palce.Text.ToString()
+                };
+                cmd_insert_place.Parameters.Add(name_place);
+                SqlParameter id_type_place = new SqlParameter
+                {
+                    ParameterName = @"id_type",
+                    Value = id_type.ToString()
+                };
+                cmd_insert_place.Parameters.Add(id_type_place);
+                SqlParameter payCard = new SqlParameter
+                {
+                    ParameterName = @"pay_card",
+                    Value = id_card.ToString()
+                };
+                cmd_insert_place.Parameters.Add(payCard);
+                SqlParameter parking = new SqlParameter
+                {
+                    ParameterName = @"parking",
+                    Value = id_parking.ToString()
+                };
+                cmd_insert_place.Parameters.Add(parking);
+                SqlParameter timeWork = new SqlParameter
+                {
+                    ParameterName = @"time_work",
+                    Value = textBox_time_work.Text.ToString()
+                };
+                cmd_insert_place.Parameters.Add(timeWork);
+
+                cmd_insert_place.ExecuteNonQuery();
 
                 string output = $"Запись успешно добавлена. id: {maxIdPlaceAddress + 1}";
 
@@ -340,11 +411,6 @@ namespace kyrsovik
                 log.Info($"Запись успешно добавлена. id: {maxIdPlaceAddress + 1}");
                 MessageBox.Show(output, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally { connect.Close(); }
         }           // добавление места
         private void button_add_event_Click(object sender, EventArgs e)             // добавление ивента
         {
