@@ -79,9 +79,8 @@ namespace kyrsovik
             comboBox_show_n_event.Items.Add("80000");
             comboBox_show_n_event.Items.Add("90000");
             comboBox_show_n_event.Items.Add("100000");
-
+            comboBox_show_n_event.Items.Add("200000");
             /*------------------------------------------------*/
-
 
         }
         private void Main_Load(object sender, EventArgs e)
@@ -349,37 +348,75 @@ namespace kyrsovik
         }           // добавление места
         private void button_add_event_Click(object sender, EventArgs e)             // добавление ивента
         {
-            SqlConnection connect = new SqlConnection(connection);
+            string proc = "pr_insert_event";
 
-            try
+            using (SqlConnection connect = new SqlConnection(connection))
             {
-                connect.Open();
-
-                string sql_insert_event = string.Format($"insert into event ([id], [id_place], [name_event], [id_type], [date_event], [age_control]) values (@id, @id_place, @name_event, @id_type, @date_event, @age_control)");
-
-                SqlCommand cmd_insert_event = new SqlCommand(sql_insert_event, connect);
-
                 string select_cb_id_place = comboBox_event_place.SelectedItem.ToString();
                 string select_cb_age = comboBox_age.SelectedItem.ToString();
                 int id_type_event = 0;
 
-
                 switch (comboBox_type_event.SelectedItem.ToString())
                 {
-                    case "Вечеринка": id_type_event = 0; break;
-                    case "Концерт": id_type_event = 1; break;
-                    case "Спектакль": id_type_event = 2; break;
-                    case "Представление": id_type_event = 3; break;
-                    case "Кино": id_type_event = 4; break;
+                    case "Вечеринка":
+                        id_type_event = 0;
+                        break;
+                    case "Концерт":
+                        id_type_event = 1;
+                        break;
+                    case "Спектакль":
+                        id_type_event = 2;
+                        break;
+                    case "Представление":
+                        id_type_event = 3;
+                        break;
+                    case "Кино":
+                        id_type_event = 4;
+                        break;
                 }
 
-                cmd_insert_event.Parameters.AddWithValue("@id", maxIdEvent + 1);
-                cmd_insert_event.Parameters.AddWithValue("@id_place", select_cb_id_place);
-                cmd_insert_event.Parameters.AddWithValue("@name_event", textBox_name_event.Text);
-                cmd_insert_event.Parameters.AddWithValue("@id_type", id_type_event);
-                cmd_insert_event.Parameters.AddWithValue("@date_event", dateTimePicker_event.Value);
-                cmd_insert_event.Parameters.AddWithValue("@age_control", select_cb_age.ToString());
-                cmd_insert_event.ExecuteNonQuery();
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(proc, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter id = new SqlParameter()
+                {
+                    ParameterName = @"id",
+                    Value = maxIdEvent + 1
+                };
+                cmd.Parameters.Add(id);
+                SqlParameter id_place = new SqlParameter
+                {
+                    ParameterName = @"id_place",
+                    Value = select_cb_id_place
+                };
+                cmd.Parameters.Add(id_place);
+                SqlParameter name_event = new SqlParameter
+                {
+                    ParameterName = @"name_event",
+                    Value = textBox_name_event.Text.ToString()
+                };
+                cmd.Parameters.Add(name_event);
+                SqlParameter id_type = new SqlParameter
+                {
+                    ParameterName = @"id_type",
+                    Value = id_type_event
+                };
+                cmd.Parameters.Add(id_type);
+                SqlParameter date_event = new SqlParameter
+                {
+                    ParameterName = @"date_event",
+                    Value = dateTimePicker_event.Value
+                };
+                cmd.Parameters.Add(date_event);
+                SqlParameter age_control = new SqlParameter
+                {
+                    ParameterName = @"age_control",
+                    Value = select_cb_age.ToString()
+                };
+                cmd.Parameters.Add(age_control);
+
+                cmd.ExecuteScalar();
 
                 string output = $"Запись успешно добавлена. id: {maxIdEvent + 1}";
 
@@ -387,11 +424,6 @@ namespace kyrsovik
                 log.Info($"Запись успешно добавлена. id: {maxIdEvent + 1}");
                 refreshAllData();
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally { connect.Close(); }
         }
         public void clearInput()
         {

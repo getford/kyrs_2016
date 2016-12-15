@@ -37,35 +37,65 @@ namespace kyrsovik
         }
         private void addFeedBack()
         {
-            string sql_insert_feedback = string.Format($"insert into feedback_place ([id], [id_place], [topic], [text_feedback], [id_authors], [rating_place], [date_feedback]) values (@id, @id_place, @topic, @text_feedback, @id_authors, @rating_place, @date_feedback)");
+            getAuthorsId();
+            getMaxIdFeedBack();
 
             InfoPlace ip = this.Owner as InfoPlace;
-            SqlConnection connect = new SqlConnection(connection);
 
-            try
+            string proc = "pr_insertFeedback_place";
+            using (SqlConnection connect = new SqlConnection(connection))
             {
                 connect.Open();
-                SqlCommand cmd_insert = new SqlCommand(sql_insert_feedback, connect);
+                SqlCommand cmd = new SqlCommand(proc, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                getAuthorsId();
-                getMaxIdFeedBack();
+                SqlParameter id = new SqlParameter
+                {
+                    ParameterName = @"id",
+                    Value = maxIdFeedBack = maxIdFeedBack + 1
+                };
+                cmd.Parameters.Add(id);
+                SqlParameter id_place = new SqlParameter
+                {
+                    ParameterName = @"id_place",
+                    Value = ip.id.ToString()
+                };
+                cmd.Parameters.Add(id_place);
+                SqlParameter topic = new SqlParameter
+                {
+                    ParameterName = @"topic",
+                    Value = textBox_topic.Text.ToString()
+                };
+                cmd.Parameters.Add(topic);
+                SqlParameter text_feedback = new SqlParameter
+                {
+                    ParameterName = @"text_feedback",
+                    Value = richTextBox_text_feedback.Text.ToString()
+                };
+                cmd.Parameters.Add(text_feedback);
+                SqlParameter id_authors = new SqlParameter
+                {
+                    ParameterName = @"id_authors",
+                    Value = idAuthor.ToString()
+                };
+                cmd.Parameters.Add(id_authors);
+                SqlParameter rating_place = new SqlParameter
+                {
+                    ParameterName = @"rating_place",
+                    Value = comboBox_rate.Text.ToString()
+                };
+                cmd.Parameters.Add(rating_place);
+                SqlParameter date_feedback = new SqlParameter
+                {
+                    ParameterName = @"date_feedback",
+                    Value = System.DateTime.Now.ToString()
+                };
+                cmd.Parameters.Add(date_feedback);
 
-                cmd_insert.Parameters.AddWithValue("@id", (maxIdFeedBack = maxIdFeedBack + 1).ToString());
-                cmd_insert.Parameters.AddWithValue("@id_place", ip.id.ToString());
-                cmd_insert.Parameters.AddWithValue("@topic", textBox_topic.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@text_feedback", richTextBox_text_feedback.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@id_authors", idAuthor.ToString());
-                cmd_insert.Parameters.AddWithValue("@rating_place", comboBox_rate.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
-                cmd_insert.ExecuteNonQuery();
+                cmd.ExecuteScalar();
 
                 log.Info($"Отзыв успешно добавлен! id места: {ip.id.ToString()}, id автора: {idAuthor.ToString()}.");
                 MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally
-            {
-                connect.Close();
             }
         }       // добавить отзыв
         private void getAuthors()
@@ -128,3 +158,37 @@ namespace kyrsovik
         }
     }
 }
+
+/*
+ * string sql_insert_feedback = string.Format($"insert into feedback_place ([id], [id_place], [topic], [text_feedback], [id_authors], [rating_place], [date_feedback]) values (@id, @id_place, @topic, @text_feedback, @id_authors, @rating_place, @date_feedback)");
+
+            InfoPlace ip = this.Owner as InfoPlace;
+            SqlConnection connect = new SqlConnection(connection);
+
+            try
+            {
+                connect.Open();
+                SqlCommand cmd_insert = new SqlCommand(sql_insert_feedback, connect);
+
+                getAuthorsId();
+                getMaxIdFeedBack();
+
+                cmd_insert.Parameters.AddWithValue("@id", (maxIdFeedBack = maxIdFeedBack + 1).ToString());
+                cmd_insert.Parameters.AddWithValue("@id_place", ip.id.ToString());
+                cmd_insert.Parameters.AddWithValue("@topic", textBox_topic.Text.ToString());
+                cmd_insert.Parameters.AddWithValue("@text_feedback", richTextBox_text_feedback.Text.ToString());
+                cmd_insert.Parameters.AddWithValue("@id_authors", idAuthor.ToString());
+                cmd_insert.Parameters.AddWithValue("@rating_place", comboBox_rate.Text.ToString());
+                cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
+                cmd_insert.ExecuteNonQuery();
+
+                log.Info($"Отзыв успешно добавлен! id места: {ip.id.ToString()}, id автора: {idAuthor.ToString()}.");
+                MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (SqlException ex) { MessageBox.Show(ex.Message); }
+            finally
+            {
+                connect.Close();
+            }
+
+    */

@@ -99,38 +99,6 @@ namespace kyrsovik
                 log.Info($"Отзыв успешно добавлен! id мероприятия: {ie.id.ToString()}, id автора: {idAuthor.ToString()}.");
                 MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            /*
-
-            string sql_insert_feedback = string.Format($"insert into feedback_event ([id], [id_event], [topic], [text_feedback], [id_authors], [rating_event], [date_feedback]) values (@id, @id_event, @topic, @text_feedback, @id_authors, @rating_event, @date_feedback)");
-
-            InfoEvent ie = this.Owner as InfoEvent;
-
-            SqlConnection connect = new SqlConnection(connection);
-
-            try
-            {
-                connect.Open();
-                SqlCommand cmd_insert = new SqlCommand(sql_insert_feedback, connect);
-
-                getAuthorsId();
-                getMaxIdFeedBack();
-
-                cmd_insert.Parameters.AddWithValue("@id", (maxIdFeedBack = maxIdFeedBack + 1).ToString());
-                cmd_insert.Parameters.AddWithValue("@id_event", ie.id.ToString());
-                cmd_insert.Parameters.AddWithValue("@topic", textBox_topic.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@text_feedback", richTextBox_text_feedback.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@id_authors", idAuthor.ToString());
-                cmd_insert.Parameters.AddWithValue("@rating_event", comboBox_rate.Text.ToString());
-                cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
-                cmd_insert.ExecuteNonQuery();
-
-                log.Info($"Отзыв успешно добавлен! id мероприятия: {ie.id.ToString()}, id автора: {idAuthor.ToString()}.");
-                MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (SqlException ex) { MessageBox.Show(ex.Message); }
-            finally { connect.Close(); }
-*/
         }       // добавить отзыв
         private void getAuthors()
         {
@@ -193,3 +161,34 @@ namespace kyrsovik
         }       // обновляем инфу после закрытия формы
     }
 }
+
+/*
+string sql_insert_feedback = string.Format($"insert into feedback_event ([id], [id_event], [topic], [text_feedback], [id_authors], [rating_event], [date_feedback]) values (@id, @id_event, @topic, @text_feedback, @id_authors, @rating_event, @date_feedback)");
+
+InfoEvent ie = this.Owner as InfoEvent;
+
+SqlConnection connect = new SqlConnection(connection);
+
+try
+{
+    connect.Open();
+    SqlCommand cmd_insert = new SqlCommand(sql_insert_feedback, connect);
+
+    getAuthorsId();
+    getMaxIdFeedBack();
+
+    cmd_insert.Parameters.AddWithValue("@id", (maxIdFeedBack = maxIdFeedBack + 1).ToString());
+    cmd_insert.Parameters.AddWithValue("@id_event", ie.id.ToString());
+    cmd_insert.Parameters.AddWithValue("@topic", textBox_topic.Text.ToString());
+    cmd_insert.Parameters.AddWithValue("@text_feedback", richTextBox_text_feedback.Text.ToString());
+    cmd_insert.Parameters.AddWithValue("@id_authors", idAuthor.ToString());
+    cmd_insert.Parameters.AddWithValue("@rating_event", comboBox_rate.Text.ToString());
+    cmd_insert.Parameters.AddWithValue("@date_feedback", System.DateTime.Now.ToString());
+    cmd_insert.ExecuteNonQuery();
+
+    log.Info($"Отзыв успешно добавлен! id мероприятия: {ie.id.ToString()}, id автора: {idAuthor.ToString()}.");
+    MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+}
+catch (SqlException ex) { MessageBox.Show(ex.Message); }
+finally { connect.Close(); }
+*/
