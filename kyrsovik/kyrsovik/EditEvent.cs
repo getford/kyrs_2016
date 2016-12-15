@@ -15,7 +15,7 @@ namespace kyrsovik
     public partial class EditEvent : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();                  // логирование
-        public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private string id;
 
         public EditEvent()

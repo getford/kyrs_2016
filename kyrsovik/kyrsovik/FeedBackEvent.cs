@@ -15,7 +15,7 @@ namespace kyrsovik
     public partial class FeedBackEvent : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();
-        public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
         private int maxIdFeedBack = 0;
 
@@ -38,6 +38,70 @@ namespace kyrsovik
         }
         private void addFeedBack()
         {
+            getAuthorsId();
+            getMaxIdFeedBack();
+
+            InfoEvent ie = this.Owner as InfoEvent;
+
+            string proc = "pr_insertFeedback_event";
+
+            using (SqlConnection connect = new SqlConnection(connection))
+            {
+                connect.Open();
+                SqlCommand cmd = new SqlCommand(proc, connect);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter id = new SqlParameter
+                {
+                    ParameterName = @"id",
+                    Value = maxIdFeedBack = maxIdFeedBack + 1
+                };
+                cmd.Parameters.Add(id);
+                SqlParameter id_event = new SqlParameter
+                {
+                    ParameterName = @"id_event",
+                    Value = ie.id.ToString()
+                };
+                cmd.Parameters.Add(id_event);
+                SqlParameter topic = new SqlParameter
+                {
+                    ParameterName = @"topic",
+                    Value = textBox_topic.Text.ToString()
+                };
+                cmd.Parameters.Add(topic);
+                SqlParameter text_feedback = new SqlParameter
+                {
+                    ParameterName = @"text_feedback",
+                    Value = richTextBox_text_feedback.Text.ToString()
+                };
+                cmd.Parameters.Add(text_feedback);
+                SqlParameter id_authors = new SqlParameter
+                {
+                    ParameterName = @"id_authors",
+                    Value = idAuthor.ToString()
+                };
+                cmd.Parameters.Add(id_authors);
+                SqlParameter rating_event = new SqlParameter
+                {
+                    ParameterName = @"rating_event",
+                    Value = comboBox_rate.Text.ToString()
+                };
+                cmd.Parameters.Add(rating_event);
+                SqlParameter date_feedback = new SqlParameter
+                {
+                    ParameterName = @"date_feedback",
+                    Value = System.DateTime.Now.ToString()
+                };
+                cmd.Parameters.Add(date_feedback);
+
+                cmd.ExecuteScalar();
+
+                log.Info($"Отзыв успешно добавлен! id мероприятия: {ie.id.ToString()}, id автора: {idAuthor.ToString()}.");
+                MessageBox.Show("Запись успешно добавлена", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            /*
+
             string sql_insert_feedback = string.Format($"insert into feedback_event ([id], [id_event], [topic], [text_feedback], [id_authors], [rating_event], [date_feedback]) values (@id, @id_event, @topic, @text_feedback, @id_authors, @rating_event, @date_feedback)");
 
             InfoEvent ie = this.Owner as InfoEvent;
@@ -66,6 +130,7 @@ namespace kyrsovik
             }
             catch (SqlException ex) { MessageBox.Show(ex.Message); }
             finally { connect.Close(); }
+*/
         }       // добавить отзыв
         private void getAuthors()
         {

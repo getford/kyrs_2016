@@ -15,7 +15,7 @@ namespace kyrsovik
     public partial class FeedBackPlace : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();
-        public static string connection = $"Data Source=GETFORD-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
         private int idAuthor;
         private int maxIdFeedBack;
         public FeedBackPlace()
