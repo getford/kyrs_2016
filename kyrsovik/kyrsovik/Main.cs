@@ -17,7 +17,7 @@ namespace kyrsovik
     public partial class Main : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();                  // логирование
-        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=Vladimir-pc;Initial Catalog=KyrsProject;Integrated Security=True";
 
         private int maxIdPlaceAddress = 0;         // Максимальный id place == id addres
         private int maxIdEvent = 0;

@@ -43,3 +43,35 @@ C:\Users\getford\Documents\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Main.r
 C:\Users\getford\Documents\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Properties.Resources.resources
 C:\Users\getford\Documents\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Start.resources
 C:\Users\getford\Documents\kyrs_2016\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csproj.GenerateResource.Cache
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\NLog.config
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe.config
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\kyrsovik.exe
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\kyrsovik.pdb
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\NLog.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\NLog.Windows.Forms.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\Microsoft.SqlServer.Types.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\NLog.xml
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\NLog.Windows.Forms.xml
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\de\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\es\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\fr\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\it\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\ja\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\ko\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csprojResolveAssemblyReference.cache
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EditEvent.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.EventInPlace.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackEvent.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.FeedBackPlace.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.InfoEvent.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.InfoPlace.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Main.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Properties.Resources.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.Start.resources
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.csproj.GenerateResource.Cache
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.exe
+D:\3 курс\6 (2 семестр)\allrandom\kyrs_2016_Sity_poster\kyrsovik\kyrsovik\obj\Debug\kyrsovik.pdb

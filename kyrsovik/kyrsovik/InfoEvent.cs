@@ -15,7 +15,7 @@ namespace kyrsovik
     public partial class InfoEvent : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();
-        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=Vladimir-pc;Initial Catalog=KyrsProject;Integrated Security=True";
         private string typeEvent = string.Empty;       // тип ивента
         private decimal avgRateEvent;   // ср значение
         private int countFeedBack = 0;        // количество отзывов

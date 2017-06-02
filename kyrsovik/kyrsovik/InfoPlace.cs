@@ -15,7 +15,7 @@ namespace kyrsovik
     public partial class InfoPlace : Form
     {
         public static Logger log = LogManager.GetCurrentClassLogger();
-        public static string connection = $"Data Source=VOVA-PC;Initial Catalog=KyrsProject;Integrated Security=True";
+        public static string connection = $"Data Source=Vladimir-pc;Initial Catalog=KyrsProject;Integrated Security=True";
         private string typePlace;       // тип места
         private decimal avgRatePlace;   //ср значение рейтинга
         public string id;           // id места
